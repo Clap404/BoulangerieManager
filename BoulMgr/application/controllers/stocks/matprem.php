@@ -1,5 +1,5 @@
 <?php
-class Matprem extends Controller {
+class Matprem extends CI_Controller {
 
     function index()
     {
