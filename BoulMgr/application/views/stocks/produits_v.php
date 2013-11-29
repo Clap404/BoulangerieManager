@@ -20,8 +20,7 @@
         <td><?= $produits[0]['temps_preparation_produit'] ?> min</td>
     </tr>
 </table>
-        
-</table>
+
 <!-- Fin essai -->
 
 <table>
