@@ -13,12 +13,12 @@ DROP TABLE IF EXISTS Produit;
 DROP TABLE IF EXISTS Categorie;
 DROP TABLE IF EXISTS Telephone;
 DROP TABLE IF EXISTS Vendu_par;
-DROP TABLE IF EXISTS A_un;
-DROP TABLE IF EXISTS Dispose;
-DROP TABLE IF EXISTS A_une;
+DROP TABLE IF EXISTS Fournisseur_joignable;
+DROP TABLE IF EXISTS Client_joignable;
+DROP TABLE IF EXISTS A_ete_livre;
 DROP TABLE IF EXISTS Contient;
 DROP TABLE IF EXISTS Passe_une;
-DROP TABLE IF EXISTS Au;
+DROP TABLE IF EXISTS Livre_au;
 DROP TABLE IF EXISTS Livre_depuis;
 DROP TABLE IF EXISTS Est_compose_de;
 DROP TABLE IF EXISTS A_pour_categorie;
@@ -41,14 +41,14 @@ CREATE TABLE Adresse(
     num_voie NUMBER,
     id_type_voie INTEGER,
     nom_voie TEXT,
-    code_postal NUMBER, 
     id_ville INTEGER
 );
 
 -- Ville -- 
 CREATE TABLE Ville(
     id_ville INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom_ville TEXT
+    nom_ville TEXT,
+    code_postal NUMBER
 );
 
 -- Type_voie --
@@ -109,8 +109,8 @@ CREATE TABLE Vendu_par(
     FOREIGN KEY(id_fournisseur) REFERENCES Fournisseur(id_fournisseur)
 );
 
--- A_un (Fournisseur, Telephone) --
-CREATE TABLE A_un(
+-- Fournisseur_joignable (Fournisseur, Telephone) --
+CREATE TABLE Fournisseur_joignable(
     id_fournisseur INTEGER,
     id_telephone INTEGER,
     PRIMARY KEY(id_fournisseur, id_telephone),
@@ -118,8 +118,8 @@ CREATE TABLE A_un(
     FOREIGN KEY(id_telephone) REFERENCES Telephone(id_telephone)
 );
 
--- Dispose (Client, Telephone) --
-CREATE TABLE Dispose(
+-- Client_joignable (Client, Telephone) --
+CREATE TABLE Client_joignable(
     id_client INTEGER,
     id_telephone INTEGER,
     PRIMARY KEY(id_client, id_telephone),
@@ -127,8 +127,8 @@ CREATE TABLE Dispose(
     FOREIGN KEY(id_telephone) REFERENCES Telephone(id_telephone)
 );
 
--- A_une (Client, Adresse) --
-CREATE TABLE A_une(
+-- A_ete_livre (Client, Adresse) --
+CREATE TABLE A_ete_livre(
     id_client INTEGER,
     id_adresse INTEGER,
     PRIMARY KEY(id_client, id_adresse),
@@ -145,8 +145,8 @@ CREATE TABLE Passe_une(
     FOREIGN KEY(id_commande) REFERENCES Commande(id_commande)
 );
 
--- Au (Commande, Adresse) --
-CREATE TABLE Au(
+-- Livre_au (Commande, Adresse) --
+CREATE TABLE Livre_au(
     id_commande INTEGER,
     id_adresse INTEGER,
     PRIMARY KEY(id_commande, id_adresse),
