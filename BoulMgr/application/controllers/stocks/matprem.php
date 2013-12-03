@@ -1,10 +1,12 @@
 <?php
 class Matprem extends CI_Controller {
 
+    public function __construct() {
+        $this->load->model('stocks/matprem_model','model_matprem');
+    }
+
     function index()
     {
-        $this->load->database();
-        $this->load->model('stocks/matprem_model','model_matprem');
 
         $data['matprem'] = $this->model_matprem->print_all();
         $data['title'] = "Matières premières";
