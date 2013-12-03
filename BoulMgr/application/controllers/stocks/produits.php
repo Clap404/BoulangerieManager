@@ -2,9 +2,11 @@
 
 class Produits extends CI_Controller {
 
-    function index() {
-        $this->load->database();
+    public function __construct() {
         $this->load->model('stocks/produits_model','prod');
+    }
+
+    function index() {
         $data['produits'] = $this->prod->affiche_all();
         $data['title'] = "Produits";
         $this->load->view('templates/header', $data);

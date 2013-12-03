@@ -269,6 +269,44 @@ INSERT INTO Matiere_premiere VALUES(null,"Sucre", 45, 1);
 INSERT INTO Matiere_premiere VALUES(null,"Levain", 15, 1);
 INSERT INTO Matiere_premiere VALUES(null,"Colorant", 0, 2);
 
+-- Produits --
+INSERT INTO Produit (
+    nom_produit, prix_unitaire, disponibilite_produit, temps_preparation_produit
+) VALUES (
+    "croissant",
+    -- JE FAIS DU LISP BOBBY --
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+), (
+    "baguette",
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+), (
+    "brioche",
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+), (
+    "éclair au chocolat",
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+), (
+    "éclair au café",
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+), (
+    "pain au chocolat",
+    abs(((random() % 20) + 10) / 10.0),
+    abs((random()) % 100),
+    abs((random() % 100) + 20)
+);
+
+
+
 -- Vendu par --
 INSERT INTO Vendu_par VALUES(1,1, 2.50);
 INSERT INTO Vendu_par VALUES(1,2, 2.48);
