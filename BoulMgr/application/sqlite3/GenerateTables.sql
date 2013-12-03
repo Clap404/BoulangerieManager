@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Ville;
 DROP TABLE IF EXISTS Type_voie;
 DROP TABLE IF EXISTS Commande;
 DROP TABLE IF EXISTS Fournisseur;
+DROP TABLE IF EXISTS Unite;
 DROP TABLE IF EXISTS Matiere_premiere;
 DROP TABLE IF EXISTS Produit;
 DROP TABLE IF EXISTS Categorie;
@@ -41,7 +42,9 @@ CREATE TABLE Adresse(
     num_voie NUMBER,
     id_type_voie INTEGER,
     nom_voie TEXT,
-    id_ville INTEGER
+    id_ville INTEGER,
+    description_adresse TEXT,
+    FOREIGN KEY(id_ville) REFERENCES Ville(id_ville)
 );
 
 -- Ville -- 
@@ -69,11 +72,20 @@ CREATE TABLE Fournisseur(
     nom_fournisseur TEXT
 );
 
+-- Unités de Mesure --
+CREATE TABLE Unite(
+    id_unite INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    lib_unite TEXT,
+    lib_unite_min TEXT
+);
+
 -- Matières Premières -- 
 CREATE TABLE Matiere_premiere(
     id_matiere_premiere INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     nom_matiere_premiere TEXT,
-    disponibilite_matiere_premiere NUMBER
+    disponibilite_matiere_premiere NUMBER,
+    unite_matiere_premiere INTEGER,
+    FOREIGN KEY(unite_matiere_premiere) REFERENCES Unite(id_unite)
 );
 
 -- Produit --
@@ -94,7 +106,8 @@ CREATE TABLE Categorie(
 -- Telephone --
 CREATE TABLE Telephone(
     id_telephone INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    numero_telephone TEXT
+    numero_telephone TEXT,
+    description_telephone TEXT
 );
 
 -- ##### RELATION TABLES ##### --

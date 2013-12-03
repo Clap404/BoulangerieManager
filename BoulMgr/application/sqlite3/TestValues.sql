@@ -228,23 +228,26 @@ INSERT INTO Fournisseur VALUES(null,"Mollet");
 INSERT INTO Fournisseur VALUES(null,"Prince");
 
 -- Adresses --
-INSERT INTO Adresse VALUES(null, 12, 1, "Walter Gropius", 1);
-INSERT INTO Adresse VALUES(null, 25, 6, "Leon Blum", 2);
-INSERT INTO Adresse VALUES(null, 88, 2, "Pasteur", 3);
-INSERT INTO Adresse VALUES(null, 6, 4, "de la République", 1);
+INSERT INTO Adresse VALUES(null, 12, 1, "Walter Gropius", 1, null);
+INSERT INTO Adresse VALUES(null, 25, 6, "Leon Blum", 2, null);
+INSERT INTO Adresse VALUES(null, 88, 2, "Pasteur", 3, null);
+INSERT INTO Adresse VALUES(null, 6, 4, "de la République", 1, null);
+INSERT INTO Adresse VALUES(null, 22, 4, "du Jardin", 1, "Fermé les jeudis");
 
 -- Attribution adresses fournisseurs --
 INSERT INTO Livre_depuis VALUES(1, 1);
+INSERT INTO Livre_depuis VALUES(1, 5);
 INSERT INTO Livre_depuis VALUES(2, 2);
 INSERT INTO Livre_depuis VALUES(3, 3);
+INSERT INTO Livre_depuis VALUES(3, 4);
 
 -- Téléphones --
-INSERT INTO Telephone VALUES(null, "0100000000");
-INSERT INTO Telephone VALUES(null, "0200000000");
-INSERT INTO Telephone VALUES(null, "0300000000");
-INSERT INTO Telephone VALUES(null, "0400000000");
-INSERT INTO Telephone VALUES(null, "0500000000");
-INSERT INTO Telephone VALUES(null, "0600000000");
+INSERT INTO Telephone VALUES(null, "0100000000", "téléphone principal");
+INSERT INTO Telephone VALUES(null, "0200000000", "téléphone portable");
+INSERT INTO Telephone VALUES(null, "0300000000", null);
+INSERT INTO Telephone VALUES(null, "0400000000", null);
+INSERT INTO Telephone VALUES(null, "0500000000", "numéro personnel - n'appeler qu'en cas de problème");
+INSERT INTO Telephone VALUES(null, "0600000000", null);
 
 -- Attribution des numéros fournisseurs --
 INSERT INTO Fournisseur_joignable VALUES(1, 1);
@@ -254,12 +257,17 @@ INSERT INTO Fournisseur_joignable VALUES(2, 4);
 INSERT INTO Fournisseur_joignable VALUES(3, 5);
 INSERT INTO Fournisseur_joignable VALUES(3, 6);
 
+-- unités de base --
+INSERT INTO Unite VALUES(null, "Kilogramme", "Kg");
+INSERT INTO Unite VALUES(null, "Litre", "L");
+INSERT INTO Unite VALUES(null, "Pièce", "pc");
+
 -- Matières premières --
-INSERT INTO Matiere_premiere VALUES(null,"Farine", 50);
-INSERT INTO Matiere_premiere VALUES(null,"Œufs", 70);
-INSERT INTO Matiere_premiere VALUES(null,"Sucre", 45);
-INSERT INTO Matiere_premiere VALUES(null,"Levain", 15);
-INSERT INTO Matiere_premiere VALUES(null,"Colorant", 0);
+INSERT INTO Matiere_premiere VALUES(null,"Farine", 50, 1);
+INSERT INTO Matiere_premiere VALUES(null,"Œufs", 70, 3);
+INSERT INTO Matiere_premiere VALUES(null,"Sucre", 45, 1);
+INSERT INTO Matiere_premiere VALUES(null,"Levain", 15, 1);
+INSERT INTO Matiere_premiere VALUES(null,"Colorant", 0, 2);
 
 -- Vendu par --
 INSERT INTO Vendu_par VALUES(1,1, 2.50);
