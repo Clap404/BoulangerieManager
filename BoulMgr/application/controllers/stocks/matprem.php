@@ -2,6 +2,7 @@
 class Matprem extends CI_Controller {
 
     public function __construct() {
+        parent::__construct();
         $this->load->model('stocks/matprem_model','model_matprem');
     }
 
