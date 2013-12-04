@@ -1,13 +1,10 @@
 <?php
 class Fournisseurs_m extends CI_Model {
 
-    var $title   = '';
-    var $content = '';
-    var $date    = '';
-
     function __construct(){
         // Call the Model constructor
         parent::__construct();
+        $this->load->database();
     }
     
     function liste_fournisseurs(){
@@ -18,6 +15,7 @@ class Fournisseurs_m extends CI_Model {
             AND AD.id_ville = V.id_ville
             AND F.id_fournisseur = J.id_fournisseur
             AND T.id_telephone = J.id_telephone
+            GROUP BY T.id_telephone
             ;";
         $query = $this->db->query($sql);
         return $query->result();
