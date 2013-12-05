@@ -6,6 +6,7 @@ class Fournisseurs extends CI_Controller {
         parent::__construct();
         $this->load->model('fournisseurs_m','fournisseurs');
         $this->load->helper('url');
+        $this->load->library('table');
     }
 
     function index() {
