@@ -257,6 +257,16 @@ INSERT INTO Fournisseur_joignable VALUES(2, 4);
 INSERT INTO Fournisseur_joignable VALUES(3, 5);
 INSERT INTO Fournisseur_joignable VALUES(3, 6);
 
+-- Attribution des numéris clients --
+INSERT INTO Client_joignable VALUES(1, 1);
+INSERT INTO Client_joignable VALUES(1, 2);
+INSERT INTO Client_joignable VALUES(2, 3);
+INSERT INTO Client_joignable VALUES(3, 4);
+INSERT INTO Client_joignable VALUES(4, 5);
+INSERT INTO Client_joignable VALUES(5, 6);
+INSERT INTO Client_joignable VALUES(6, 6);
+INSERT INTO Client_joignable VALUES(7, 6);
+
 -- unités de base --
 INSERT INTO Unite VALUES(null, "Kilogramme", "Kg");
 INSERT INTO Unite VALUES(null, "Litre", "L");
@@ -315,3 +325,15 @@ INSERT INTO Vendu_par VALUES(2,3, 2.80);
 INSERT INTO Vendu_par VALUES(3,1, 3);
 INSERT INTO Vendu_par VALUES(4,2, 1.02);
 INSERT INTO Vendu_par VALUES(5,3, 0.70);
+
+-- adresses de livraisons --
+INSERT INTO A_ete_livre VALUES(1, 1);
+INSERT INTO A_ete_livre VALUES(1, 2);
+INSERT INTO A_ete_livre VALUES(1, 3);
+INSERT INTO A_ete_livre VALUES(7, 4);
+INSERT INTO A_ete_livre VALUES(6, 5);
+INSERT INTO A_ete_livre VALUES(2, 1);
+INSERT INTO A_ete_livre VALUES(3, 2);
+INSERT INTO A_ete_livre VALUES(3, 3);
+INSERT INTO A_ete_livre VALUES(4, 4);
+INSERT INTO A_ete_livre VALUES(5, 5);
