@@ -18,7 +18,7 @@ $nbTel = count($fournisseurs);
 
 foreach ($fournisseurs as $key => $line) {
 
-    echo("<tr>");
+    echo("<tr>\n");
     if ($sameId === 1) {
         while ( $key + $sameId < $nbTel
             && $line->id_fournisseur === $fournisseurs[ $key + $sameId ]->id_fournisseur) {
@@ -31,8 +31,7 @@ foreach ($fournisseurs as $key => $line) {
         <td rowspan=<?= $sameId ?> > <?= $line->nom_fournisseur ?> </td>
         <td rowspan=<?= $sameId ?> > <?= $line->nom_ville ?> </td>
         <td> <?= $line->numero_telephone ?> </td>
-        <td rowspan=<?= $sameId ?> ><a <?="href=profil/".$line->id_fournisseur ?> >
-            profil de <?= $line->nom_fournisseur ?></a></td>
+        <td rowspan=<?= $sameId ?> > <?= anchor(array("fournisseurs", "profil", $line->id_fournisseur), "Profil") ?></td>
 
     <?php
     } else {
@@ -44,10 +43,12 @@ foreach ($fournisseurs as $key => $line) {
         $sameId = $sameId -1;
     }
 
-    echo("</tr>");
+    echo("</tr>\n");
 }
 ?>
 
     </tbody>
 </table>
 </div>
+
+<?php
