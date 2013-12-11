@@ -11,6 +11,7 @@ class Vente extends CI_Controller {
 
         $data['produits'] = $this->produits->affiche_all();
         $data['title'] = "Vente";
+        $data['root'] = $this->config->base_url();
 
         $this->load->view('templates/header', $data);
         $this->load->view('commerce/vente_v', $data);
