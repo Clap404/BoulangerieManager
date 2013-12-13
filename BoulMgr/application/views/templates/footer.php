@@ -6,9 +6,10 @@
 
 <!-- TODO : Modifier adresse de conctact-->
     <p>Pour tout contact ou problème : <a href="#">Contact</a></p>
+
 </footer>
 
-<script src="public/javascript/jquery.js"></script>
-<script src="public/javascript/foundation.min.js"></script>
-<script src="public/javascript/foundation.dropdown.js"></script>
+        <script type="text/javascript" src="/assets/js/jquery.js"></script>
+        <script type="text/javascript" src="/assets/js/foundation.min.js"></script>
+
 </body>
