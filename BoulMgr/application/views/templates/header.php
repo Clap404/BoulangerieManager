@@ -24,7 +24,7 @@
 
                         <ul class="dropdown">
                             <li>
-                                <a href="#">Ventes</a>
+                                <?= '<a href="'.site_url().'/commerce/vente">Ventes</a>' ?>
                             </li>
 
                             <li>
@@ -52,11 +52,11 @@
 
                         <ul class="dropdown">
                             <li>
-                                <a href="#">Matières Premières</a>
+                                <?= '<a href="'.site_url().'/stocks/matprem">Matières Premières</a>' ?>
                             </li>
 
                             <li>
-                                <a href="#">Produits</a>
+                                <?= '<a href="'.site_url().'/stocks/produits">Produits</a>' ?>
                             </li>
                         </ul>
                     </li>
@@ -66,11 +66,11 @@
 
                         <ul class="dropdown">
                             <li>
-                                <a href="#">Clients</a>
+                                <?= '<a href="'.site_url().'/clients">Clients</a>' ?>
                             </li>
 
                             <li>
-                                <a href="#">Fournisseurs</a>
+                                <?= '<a href="'.site_url().'/fournisseurs">Fournisseurs</a>' ?>
                             </li>
                         </ul>
                     </li>

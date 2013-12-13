@@ -11,6 +11,11 @@ class Produits_model extends CI_Model {
         $query = $this->db->get('Produit');
         return $query->result_array();
     }
+
+    function remove_produit($id) {
+        $this->db->where("id_produit", $id);
+        $this->db->delete();
+    }
 }
 
 ?>

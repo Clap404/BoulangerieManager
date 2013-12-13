@@ -1,45 +1,16 @@
-<h3>Produits</h3>
+<h2>Produits</h2>
 
-<!-- Essai agencement sous forme de cadre -->
-<table>
-    <tr>
-        <td colspan="2">LA PHOTO</td>
-    <tr />
-    <tr>
-        <td colspan="2"><?= $produits[0]['nom_produit'] ?></td>
-    <tr />
-    <tr>
-        <td><?= $produits[0]['prix_unitaire'] ?> €</td>
-        <td>- +</td>
-    </tr>
-    <tr>
-        <td><?= $produits[0]['disponibilite_produit'] ?> pièces</td>
-        <td>- +</td>
-    </tr>
-    <tr>
-        <td><?= $produits[0]['temps_preparation_produit'] ?> min</td>
-    </tr>
-</table>
+<?php foreach($produits as $info): ?>
 
-<!-- Fin essai -->
+<div class="profil">
+    <h4><?= $info['nom_produit'] ?></h4>
+    <?php echo '<img src="'.base_url().'assets/images/produit/'.$info['id_produit'].'.jpg" />' ?>
+    <div class="info">
+        Prix : <?= $info['prix_unitaire'] ?> €<br />
+        Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
+        Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes
+    </div>
+    <button>Modifier</button><button>Supprimer</button>
+</div>
 
-<table>
-    <tr>
-        <td>ID</td>
-        <td>Produit</td>
-        <td>Prix unitaire</td>
-        <td>Quantité disponible</td>
-        <td>Temps de préparation</td>
-    </tr>
-
-<?php
-
-foreach($produits as $result) {
-    echo '<tr>';
-    foreach($result as $data) {
-        echo '<td>'.$data.'</td>';
-    }
-    echo '</tr>';
-}
-echo '</table>';
-?>
+<?php endforeach; ?>

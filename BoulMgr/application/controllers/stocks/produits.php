@@ -5,6 +5,7 @@ class Produits extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('stocks/produits_model','prod');
+        $this->load->helpers('url');
     }
 
     function index() {
@@ -14,6 +15,12 @@ class Produits extends CI_Controller {
         $this->load->view('stocks/produits_v', $data);
         $this->load->view('templates/footer');
     }
+
+    function remove($id) {
+        $this->prod->remove_produit($id);
+        $this->index();
+    }
 }
 
 ?>
+
