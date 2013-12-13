@@ -4,10 +4,10 @@
             <h2>Les produits</h2>
             <?php foreach ($produits as $produit): ?>
             <div class="product" id="product-<?=$produit['id_produit']?>" name="<?=$produit['id_produit']?>">
-                <h3 class="product-name">
-                    <?=$produit[ 'nom_produit']?>
-                </h3>
-                <img onclick="addQtyToProduct(1, <?=$produit['id_produit']?>);" src="/assets/images/produit/<?=$produit['id_produit']?>.jpg" />
+
+                <h3 class="product-name"><?=$produit['nom_produit']?></h3>
+                <img onclick="addQtyToProduct(1, <?=$produit['id_produit']?>);" src="<?=$root?>/assets/images/produit/<?=$produit['id_produit']?>.jpg" />
+
                 <br />
                 <button class="empty" onclick="addQtyToProduct(-99, <?=$produit['id_produit']?>);">0</button>
                 <button class="minus" onclick="addQtyToProduct(-1, <?=$produit['id_produit']?>);">-</button>
@@ -55,4 +55,5 @@
     </div>
 </div>
 
-<script src="/assets/js/vente.js"></script>
+    <script src="<?=$root?>/assets/js/vente.js"></script>
+
