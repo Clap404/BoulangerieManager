@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $title ?> | Boulangerie Manager</title>
-        <link rel=stylesheet type="text/css" href="/assets/css/normalize.css">
-        <link rel=stylesheet type="text/css" href="/assets/css/foundation.css">
+        <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/normalize.css") ?>">
+        <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/foundation.css") ?>">
 
     </head>
 
@@ -16,7 +16,7 @@
                     <h1><a href="#">Boulangerie Manager</a></h1>
                 </li>
             </ul>
-            
+
             <section class="top-bar-section">
                 <ul>
                     <li class="has-dropdown not-click">
@@ -35,7 +35,7 @@
 
                     <li class="has-dropdown not-click">
                         <a href="#">Informations</a>
-            
+
                         <ul class="dropdown">
                             <li>
                                 <a href="#">Statistiques</a>
@@ -77,4 +77,4 @@
                 </ul>
             </section>
         </nav>
-        
+
