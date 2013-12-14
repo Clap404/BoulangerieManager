@@ -5,9 +5,16 @@ if(count($matprem) != 0)
 {
     ?>
     <table>
+        <?php
+            $imgpath = base_url("assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg");
+            if(file_exists($imgpath)){
+        ?>
         <tr>
-            <td colspan="2"><img src="<?= base_url("assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg") ?>" alt="photo-<?=$matprem[0]['nom_matiere_premiere']?>"/></td>
+            <td colspan="2"><img src="<?= $imgpath ?>"/></td>
         <tr />
+        <?php
+            }
+        ?>
         <tr>
             <td><?= $matprem[0]['disponibilite_matiere_premiere'] ?> pièces</td>
         </tr>

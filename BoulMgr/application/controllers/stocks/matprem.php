@@ -32,5 +32,22 @@ class Matprem extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    function modify()
+    {
+        // TODO : Add error gesture
+        $json = trim(file_get_contents('php://input'));
+        $changes = json_decode($json, true);
+
+        $array = $this->model_matprem->printByID($changes['id_matiere_premiere'])[0];
+        $array['nom_matiere_premiere'] = $changes['nom_matiere_premiere'];
+
+        // Check if $array is unidimensional
+        if(count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
+        {
+            echo($this->model_matprem->updateModif($array));
+        }
+        else
+            echo(0);
+    }
 }
 ?>

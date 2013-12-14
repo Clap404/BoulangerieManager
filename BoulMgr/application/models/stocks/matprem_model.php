@@ -11,6 +11,7 @@ class Matprem_model extends CI_Model {
     function print_all()
     {
         /* Select * from Matiere_premiere; */
+        $this->db->order_by("nom_matiere_premiere", "asc");
         $query = $this->db->get('Matiere_premiere');
         return $query->result_array();
     }
@@ -33,6 +34,13 @@ class Matprem_model extends CI_Model {
         $query = $this->db->get_where('Vendu_par', array('Vendu_par.id_matiere_premiere' => $id));
 
         return $query->result_array();
+    }
+
+    function updateModif($array)
+    {
+        $this->db->where('id_matiere_premiere', $array['id_matiere_premiere']);
+        $error = $this->db->update('Matiere_premiere', $array);
+        return $error;
     }
 
 }
