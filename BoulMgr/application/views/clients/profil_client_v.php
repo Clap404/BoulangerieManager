@@ -1,4 +1,4 @@
-<h2>Profil de <?= $infos[0]->nom_client ?></h2>
+<h2><?=$title?></h2>
 
 <h3>adresses de livraison</h3>
 <div>
@@ -7,7 +7,7 @@
 
     foreach ($adresses as $value) {
         $this->table->add_row(
-            $value->num_voie ." ". $value->lib_type_voie ." ". $value->nom_voie,
+            $value->numero_voie_adresse ." ". $value->nom_type_voie ." ". $value->nom_voie_adresse,
             $value->code_postal,
             $value->nom_ville,
             $value->description_adresse
