@@ -1,4 +1,4 @@
-<h3>Matières premières</h3>
+<h3><?= $title ?></h3>
 
 <?php
 if(count($matprem) != 0)
@@ -6,14 +6,10 @@ if(count($matprem) != 0)
     ?>
     <table>
         <tr>
-            <td colspan="2">LA PHOTO</td>
-        <tr />
-        <tr>
-            <td colspan="2"><?= $matprem[0]['nom_matiere_premiere'] ?></td>
+            <td colspan="2"><img src="<?= base_url("assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg") ?>" alt="photo-<?=$matprem[0]['nom_matiere_premiere']?>"/></td>
         <tr />
         <tr>
             <td><?= $matprem[0]['disponibilite_matiere_premiere'] ?> pièces</td>
-            <td>- +</td>
         </tr>
     </table>
 
