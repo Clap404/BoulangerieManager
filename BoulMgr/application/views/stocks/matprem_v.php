@@ -4,19 +4,6 @@
 if(count($matprem) != 0)
 {
     ?>
-    <table>
-        <tr>
-            <td colspan="2">LA PHOTO</td>
-        <tr />
-        <tr>
-            <td colspan="2"><?= $matprem[0]['nom_matiere_premiere'] ?></td>
-        <tr />
-        <tr>
-            <td><?= $matprem[0]['disponibilite_matiere_premiere'] ?> pièces</td>
-            <td>- +</td>
-        </tr>
-    </table>
-
     <p></p>
     <table>
         <tr>
