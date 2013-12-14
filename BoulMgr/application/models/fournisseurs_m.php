@@ -8,59 +8,53 @@ class Fournisseurs_m extends CI_Model {
     }
     
     function liste_fournisseurs(){
-        $sql = "SELECT F.id_fournisseur, F.nom_fournisseur, V.nom_ville, T.numero_telephone 
-            FROM Fournisseur F, Ville V, Telephone T, Adresse AD, Fournisseur_joignable J, Livre_depuis LD
-            WHERE F.id_fournisseur = LD.id_fournisseur
-            AND LD.id_adresse = AD.id_adresse
-            AND AD.id_ville = V.id_ville
-            AND F.id_fournisseur = J.id_fournisseur
-            AND T.id_telephone = J.id_telephone
-            GROUP BY T.id_telephone
-            ;";
+        $sql = "SELECT fournisseur.*, nom_ville, numero_telephone 
+                FROM fournisseur 
+                    natural join adresse
+                    natural join ville
+                    natural join fournisseur_joignable_telephone
+                    natural join telephone
+                    natural join fournisseur_livre_depuis_adresse
+                GROUP BY id_telephone ;";
+
         $query = $this->db->query($sql);
         return $query->result();
     }
 
     function infos_fournisseur($id_fournisseur){
-        $sql = "SELECT F.id_fournisseur, F.nom_fournisseur
-            FROM Fournisseur F
-            WHERE F.id_fournisseur = ?
-            ;";
-        $query = $this->db->query($sql, array($id_fournisseur));
-        return $query->result();
+        $query = $this->db->get_where("fournisseur", array('id_fournisseur' => $id_fournisseur));
+        return $query->row_array();
     }
 
     function adresses_fournisseur($id_fournisseur){
-        $sql = "SELECT AD.num_voie, TV.lib_type_voie, AD.nom_voie, V.code_postal, V.nom_ville, AD.description_adresse
-            FROM Fournisseur F, Ville V, Adresse AD, Livre_depuis LD, Type_voie TV
-            WHERE F.id_fournisseur = LD.id_fournisseur
-            AND LD.id_adresse = AD.id_adresse
-            AND AD.id_ville = V.id_ville
-            AND TV.id_type_voie = AD.id_type_voie
-            AND F.id_fournisseur = ?
-            ;";
+        $sql = "SELECT numero_voie_adresse, nom_type_voie, nom_voie_adresse,
+                    description_adresse, code_postal, nom_ville
+                FROM fournisseur
+                    natural join fournisseur_livre_depuis_adresse
+                    natural join adresse
+                    natural join ville
+                    natural join type_voie
+                WHERE id_fournisseur = ? ;";
         $query = $this->db->query($sql, array($id_fournisseur));
         return $query->result();
     }
 
     function telephones_fournisseur($id_fournisseur){
-        $sql = "SELECT T.numero_telephone, T.description_telephone
-            FROM Fournisseur F, Telephone T, Fournisseur_joignable J
-            WHERE F.id_fournisseur = J.id_fournisseur
-            AND T.id_telephone = J.id_telephone
-            AND F.id_fournisseur = ?
-            ;";
+        $sql = "SELECT numero_telephone, description_telephone
+                FROM telephone
+                    natural join fournisseur_joignable_telephone
+                    natural join fournisseur
+                WHERE id_fournisseur = ? ;";
         $query = $this->db->query($sql, array($id_fournisseur));
         return $query->result();
     }
 
     function matieres_premieres($id_fournisseur){
-        $sql = "SELECT M.id_matiere_premiere, M.nom_matiere_premiere, VP.prix
-            FROM Fournisseur F, Vendu_par VP, Matiere_premiere M
-            WHERE F.id_fournisseur = VP.id_fournisseur
-            AND VP.id_matiere_premiere = M.id_matiere_premiere
-            AND F.id_fournisseur = ?
-            ;";
+        $sql = "SELECT id_matiere_premiere, nom_matiere_premiere, prix
+                FROM matiere_premiere
+                    natural join matiere_premiere_vendue_par_fournisseur
+                    natural join fournisseur
+                WHERE id_fournisseur = ? ;";
         $query = $this->db->query($sql, array($id_fournisseur));
         return $query->result();
     }

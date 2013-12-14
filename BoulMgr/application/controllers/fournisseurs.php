@@ -22,7 +22,7 @@ class Fournisseurs extends CI_Controller {
         $data['adresses'] = $this->fournisseurs->adresses_fournisseur($id_fournisseur);
         $data['telephones'] = $this->fournisseurs->telephones_fournisseur($id_fournisseur);
         $data['matieres_premieres'] = $this->fournisseurs->matieres_premieres($id_fournisseur);
-        $data['title'] = "profil de ";
+        $data['title'] = "profil de ".$data['infos']['nom_fournisseur'];
         $this->load->view('templates/header', $data);
         $this->load->view('fournisseurs/profil_fournisseur_v', $data);
         $this->load->view('templates/footer');
