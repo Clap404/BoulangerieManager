@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-cat GenerateTables.sql TestValues.sql|sqlite3 BlMgr.sdb
+cat generate.sql populate.sql|sqlite3 BlMgr.sdb
