@@ -6,7 +6,7 @@
     <h4><?= $info['nom_produit'] ?></h4>
     <?php echo '<img src="'.base_url().'assets/images/produit/'.$info['id_produit'].'.jpg" />' ?>
     <div class="info">
-        Prix : <?= $info['prix_unitaire'] ?> €<br />
+        Prix : <?= $info['prix_produit'] ?> €<br />
         Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
         Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes
     </div>

@@ -14,7 +14,7 @@
                 <input class="qty" type="text" value="0" onchange="checkIfNewActive();" maxlength="2" />
                 <button class="plus" onclick="addQtyToProduct(1, <?=$produit['id_produit']?>);">+</button>
                 <br />
-                <span class="prix" value="<?=$produit['prix_unitaire']?>"></span>
+                <span class="prix" value="<?=$produit['prix_produit']?>"></span>
             </div>
             <?php endforeach; ?>
         </div>
