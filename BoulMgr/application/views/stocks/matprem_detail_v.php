@@ -6,11 +6,12 @@ if(count($matprem) != 0)
     ?>
     <table>
         <?php
-            $imgpath = base_url("assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg");
-            if(file_exists($imgpath)){
+            $imgpath = "assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg";
+            $imgaddr = base_url($imgpath);
+            if(file_exists(FCPATH . $imgpath)){
         ?>
         <tr>
-            <td colspan="2"><img src="<?= $imgpath ?>"/></td>
+            <td colspan="2"><img src="<?= $imgaddr ?>"/></td>
         <tr />
         <?php
             }
