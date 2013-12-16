@@ -24,8 +24,9 @@ function switch2Modify(id)
 
 function saveModif(id)
 {
+    var base_url = document.getElementById("base_url").innerHTML;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "matprem/modify", true);
+    xhr.open("POST", base_url + "index.php/stocks/matprem/modify", true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     var data = {};

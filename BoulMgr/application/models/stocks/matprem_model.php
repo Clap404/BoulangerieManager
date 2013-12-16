@@ -26,12 +26,12 @@ class Matprem_model extends CI_Model {
     function printFournisseurs($id)
     {
         /* Select id_fournisseur, nom_fournisseur, prix
-         * from Vendu_par as Vp
+         * from matiere_premiere_vendue_par_fournisseur as Vp
          * inner join Fournisseur as F on F.id_fournisseur = Vp.id_fournisseur; */
-        $this->db->select('Vendu_par.id_fournisseur, nom_fournisseur, prix');
-        $this->db->join('Fournisseur', 'Fournisseur.id_fournisseur = Vendu_par.id_fournisseur');
-        $this->db->join('Matiere_premiere', 'Matiere_premiere.id_matiere_premiere = Vendu_par.id_matiere_premiere');
-        $query = $this->db->get_where('Vendu_par', array('Vendu_par.id_matiere_premiere' => $id));
+        $this->db->select('matiere_premiere_vendue_par_fournisseur.id_fournisseur, nom_fournisseur, prix');
+        $this->db->join('Fournisseur', 'Fournisseur.id_fournisseur = matiere_premiere_vendue_par_fournisseur.id_fournisseur');
+        $this->db->join('Matiere_premiere', 'Matiere_premiere.id_matiere_premiere = matiere_premiere_vendue_par_fournisseur.id_matiere_premiere');
+        $query = $this->db->get_where('matiere_premiere_vendue_par_fournisseur', array('matiere_premiere_vendue_par_fournisseur.id_matiere_premiere' => $id));
 
         return $query->result_array();
     }
@@ -39,10 +39,9 @@ class Matprem_model extends CI_Model {
     function updateModif($array)
     {
         $this->db->where('id_matiere_premiere', $array['id_matiere_premiere']);
-        $error = $this->db->update('Matiere_premiere', $array);
+        $error = $this->db->update('matiere_premiere', $array);
         return $error;
     }
-
 }
 
 ?>
