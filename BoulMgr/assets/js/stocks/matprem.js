@@ -57,3 +57,17 @@ function saveModif(id)
 
     xhr.send(JSON.stringify(data));
 }
+
+function switchButtonList(buttonState)
+{
+    var prop = "none";
+
+    if(buttonState === "on")
+        prop = "table-row";
+    else if(buttonState === "off")
+        prop = "none";
+    else
+        return;
+
+    $('.matpremHiddenItem').css('display', prop);
+}
