@@ -24,6 +24,7 @@ function switch2Modify(id)
 
 function saveModif(id)
 {
+    document.getElementById("save_button_" + id).disabled = true;
     var base_url = document.getElementById("base_url").innerHTML;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", base_url + "index.php/stocks/matprem/modify", true);
@@ -44,11 +45,15 @@ function saveModif(id)
 
     xhr.onloadend = function () {
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+        {
             document.getElementById("name_" + id).innerHTML = data["nom_matiere_premiere"];
+            back2Normal(id);
+        }
         else
             errorMessage.innerHTML = stringError;
+
+        document.getElementById("save_button_" + id).disabled = false;
     };
 
     xhr.send(JSON.stringify(data));
-    back2Normal(id);
 }
