@@ -12,7 +12,7 @@ drop table if exists fournisseur; /* OK */
     drop table if exists categorie;
 drop table if exists matiere_premiere; /* OK */
 drop table if exists ville; /* OK */
-    drop table if exists vente;
+drop table if exists vente; /* OK */
 drop table if exists unite; /* OK */
 drop table if exists type_voie; /* OK */
 drop table if exists fournisseur_joignable_telephone; /* OK */
@@ -24,7 +24,7 @@ drop table if exists client_joignable_telephone; /* OK */
 drop table if exists fournisseur_livre_depuis_adresse; /* OK */
 drop table if exists client_habite_adresse; /* OK */
     drop table if exists produit_est_produit;
-    drop table if exists vente_comprend_produit;
+drop table if exists vente_comprend_produit; /* OK */
 
 
 create table telephone(
@@ -140,8 +140,12 @@ create table vente(
         integer primary key autoincrement not null,
     date_vente
         text not null,
+    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
+    prix_vente
+        real not null,
     id_client
-        integer not null
+        integer
+        default null
         references client(id_client)
 );
 
@@ -271,3 +275,52 @@ create table vente_comprend_produit(
         integer not null,
     primary key (id_produit,id_vente)
 );
+
+--- TRIGGERS ---
+
+-- Update du prix d'une vente quand on lui ajoute / supprime / modifie un produit associé
+create trigger insertVentePrix
+    after insert
+    on vente_comprend_produit
+begin
+    update vente
+    set prix_vente = (
+        select sum(prix_produit * quantite_produit_vente)
+        from vente_comprend_produit
+            natural join produit
+        where id_vente = new.id_vente
+    )
+    where id_vente = new.id_vente;
+end;
+
+
+create trigger updateVentePrix
+    after update
+    on vente_comprend_produit
+begin
+    update vente
+    set prix_vente = (
+        select sum(prix_produit * quantite_produit_vente)
+        from vente_comprend_produit
+            natural join produit
+        where id_vente = new.id_vente
+    )
+    where id_vente = new.id_vente;
+end;
+
+
+create trigger deleteVentePrix
+    after delete
+    on vente_comprend_produit
+begin
+    update vente
+    set prix_vente = (
+        select sum(prix_produit * quantite_produit_vente)
+        from vente_comprend_produit
+            natural join produit
+        where id_vente = new.id_vente
+    )
+    where id_vente = new.id_vente;
+end;
+
+
