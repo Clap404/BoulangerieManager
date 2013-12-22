@@ -1,6 +1,6 @@
 <?php
 
-class Vente extends CI_Controller {
+class Venteform extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -14,7 +14,7 @@ class Vente extends CI_Controller {
         $data['root'] = $this->config->base_url();
 
         $this->load->view('templates/header', $data);
-        $this->load->view('commerce/vente_v', $data);
+        $this->load->view('commerce/venteform_v', $data);
         $this->load->view('templates/footer');
     }
 }
