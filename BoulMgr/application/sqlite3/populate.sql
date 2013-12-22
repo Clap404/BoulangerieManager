@@ -329,3 +329,94 @@ INSERT INTO client_habite_adresse VALUES
     (3, 3),
     (4, 4),
     (5, 5);
+
+-- ventes et produits associés--
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-2 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now","-1 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+INSERT INTO vente_comprend_produit VALUES (
+    (SELECT * FROM
+        (SELECT id_produit 
+        FROM produit 
+        EXCEPT
+        SELECT id_produit
+        FROM vente_comprend_produit
+        WHERE id_vente = (SELECT MAX(id_vente) from vente))
+    ORDER BY random()
+    LIMIT 1),
+    (SELECT MAX(id_vente) from vente),
+    abs(random() % 10) + 1
+);
+COMMIT;
