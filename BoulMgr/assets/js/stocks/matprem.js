@@ -61,6 +61,8 @@ function saveModif(id)
 function switchButtonList(buttonState)
 {
     var prop = "none";
+    csseven = $('tr:even').css('background-color');
+    cssodd = $('tr:odd').css('background-color');
 
     if(buttonState === "on")
         prop = "table-row";
@@ -70,4 +72,8 @@ function switchButtonList(buttonState)
         return;
 
     $('.matpremHiddenItem').css('display', prop);
+    $('tr:visible:even').css('background-color', csseven);
+    $('tr:visible:odd').css('background-color', cssodd);
 }
+
+switchButtonList("off");

@@ -58,7 +58,7 @@ else
 ?>
 
     <span id="base_url" style="display:none"><?= base_url() ?></span>
-    <script src="<?= base_url("/assets/js/stocks/matprem.js") ?>"></script>
+    <script defer src="<?= base_url("/assets/js/stocks/matprem.js") ?>"></script>
 
 <?php
 /* End of file matprem_v.php */
