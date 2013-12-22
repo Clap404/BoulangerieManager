@@ -48,12 +48,16 @@
                     </tr>
                 </tbody>
             </table>
-            <button>Annuler</button>
+            <a href="<?=site_url()?>/commerce/vente/"><button>Annuler</button>
             <button onclick="resetAll();">RAZ</button>
             <button>Envoyer</button>
         </div>
     </div>
 </div>
 
-    <script src="<?=$root?>/assets/js/vente.js"></script>
-
+<script src="<?=$root?>/assets/js/vente.js"></script>
+<script defer>
+<?php foreach($prods_commande as $p) :?>
+    addQtyToProduct(<?=$p->quantite_produit_vente?>, <?=$p->id_produit?>);
+<?php endforeach;?>
+</script>
