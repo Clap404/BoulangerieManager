@@ -142,7 +142,8 @@ create table vente(
         text not null,
     /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     prix_vente
-        real not null,
+        real
+        default 0,
     id_client
         integer
         default null
