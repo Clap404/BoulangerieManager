@@ -12,7 +12,7 @@ if(count($matprem) != 0)
         ?>
         <tr>
             <td colspan="2"><img src="<?= $imgaddr ?>"/></td>
-        <tr />
+        </tr>
         <?php
             }
         ?>
