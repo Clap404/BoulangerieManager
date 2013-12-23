@@ -34,7 +34,6 @@ class Matprem extends CI_Controller {
 
     function modify()
     {
-        // TODO : Add error gesture
         $json = trim(file_get_contents('php://input'));
         $changes = json_decode($json, true);
 
@@ -43,9 +42,7 @@ class Matprem extends CI_Controller {
 
         // Check if $array is unidimensional
         if(count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
-        {
             echo($this->model_matprem->updateModif($array));
-        }
         else
             echo(0);
     }

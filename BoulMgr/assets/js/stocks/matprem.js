@@ -24,8 +24,10 @@ function switch2Modify(id)
 
 function saveModif(id)
 {
+    document.getElementById("save_button_" + id).disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "matprem/modify", true);
+    xhr.open("POST", base_url + "index.php/stocks/matprem/modify", true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     var data = {};
@@ -43,11 +45,35 @@ function saveModif(id)
 
     xhr.onloadend = function () {
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+        {
             document.getElementById("name_" + id).innerHTML = data["nom_matiere_premiere"];
+            back2Normal(id);
+        }
         else
             errorMessage.innerHTML = stringError;
+
+        document.getElementById("save_button_" + id).disabled = false;
     };
 
     xhr.send(JSON.stringify(data));
-    back2Normal(id);
 }
+
+function switchButtonList(buttonState)
+{
+    var prop = "none";
+    csseven = $('tr:even').css('background-color');
+    cssodd = $('tr:odd').css('background-color');
+
+    if(buttonState === "on")
+        prop = "table-row";
+    else if(buttonState === "off")
+        prop = "none";
+    else
+        return;
+
+    $('.matpremHiddenItem').css('display', prop);
+    $('tr:visible:even').css('background-color', csseven);
+    $('tr:visible:odd').css('background-color', cssodd);
+}
+
+switchButtonList("off");
