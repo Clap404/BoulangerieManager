@@ -303,9 +303,9 @@ begin
         select sum(prix_produit * quantite_produit_vente)
         from vente_comprend_produit
             natural join produit
-        where id_vente = new.id_vente
+        where id_vente = old.id_vente
     )
-    where id_vente = new.id_vente;
+    where id_vente = old.id_vente;
 end;
 
 
@@ -318,9 +318,9 @@ begin
         select sum(prix_produit * quantite_produit_vente)
         from vente_comprend_produit
             natural join produit
-        where id_vente = new.id_vente
+        where id_vente = old.id_vente
     )
-    where id_vente = new.id_vente;
+    where id_vente = old.id_vente;
 end;
 
 
