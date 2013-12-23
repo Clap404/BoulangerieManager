@@ -8,9 +8,9 @@
     <div class="info">
         Prix : <?= $info['prix_produit'] ?> €<br />
         Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
-        Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes
+        Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
     </div>
-    <button>Modifier</button><button>Supprimer</button>
+    <button>Modifier</button> <button>Supprimer</button>
 </div>
 
 <?php endforeach; ?>
