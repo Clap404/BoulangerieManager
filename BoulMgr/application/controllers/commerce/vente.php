@@ -40,14 +40,19 @@ class Vente extends CI_Controller {
     }
 
     function save($id_vente) {
+        $id_vente = intval($id_vente, 10);
         $json = json_decode(trim(file_get_contents('php://input')));
-        if ($id_vente === 0 || $id_vente === "0") {
-            $id_vente = 'null';
+        if (!(count($json) === 0 && $id_vente === 0)) {
+            if (count($json) === 0) {
+                $res = $this->ventes->delete_vente($id_vente);
+            } elseif ($id_vente === 0) {
+                $this->ventes->ajoute_vente($json);
+            } else {
+                $this->ventes->modif_vente($id_vente, $json); 
+            }
         }
-        $res = $this->ventes->ajoute_vente($id_vente, $json);
-        $this->output->set_output($res);
+        $this->output->set_output("OK");
     }
-
 }
 
 ?>

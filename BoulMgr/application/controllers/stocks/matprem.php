@@ -46,5 +46,16 @@ class Matprem extends CI_Controller {
         else
             echo(0);
     }
+
+    function jsonQuickDetail()
+    {
+        $id = $this->input->post('id');
+        $result = $this->model_matprem->printByID($id);
+
+        if(count($result) != 0)
+            echo(json_encode($result[0]));
+        else
+            echo(0);
+    }
 }
 ?>

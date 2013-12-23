@@ -97,7 +97,11 @@ function addQtyToProduct(qty, product) {
     val += qty;
     if (val < 0) {
         val = 0;
-    } else if (val >= 99) { //99 super arbitraire
+    } else if (val >= 99) {
+        //99 super arbitraire
+        //TODO : faire en sorte de prendre en compte la disponibilité
+        //mais attention à ajouter de la fausse disponibilité lorsque
+        //l'on modifie un tiquet existant
         val = 99;
     }
     input.value = val;
@@ -107,14 +111,13 @@ function addQtyToProduct(qty, product) {
 function saveTicket() {
     var toSend = JSON.stringify(commande);
     var url = rootURL + "/commerce/vente/save/" + id_vente;
-    console.log("sending", toSend);
     $.ajax({
         type : "POST",
         url : url,
         data : toSend,
         contentType : "application/json; charset=utf8",
         success : function(data) {
-            if (data === "1" || data === 1) {
+            if (data === "OK") {
                 document.location = rootURL + "/commerce/vente/";
             } else {
                 alert("Erreur côté serveur !");
@@ -123,10 +126,7 @@ function saveTicket() {
         failure : function(err) {
             alert("Impossible d'envoyer la requête au serveur pour le moment !");
         }
-
-
     });
-
 }
 
 window.onload = function() {

@@ -1,10 +1,13 @@
 <h3>Matières premières</h3>
 
+<!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
+<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;">Content of popup</div>
+
 <?php
 if(count($matprem) != 0)
 {
     ?>
-
+    <!-- TODO CSS : Print on the same line text and button  -->
     Afficher tout (même non en stock) :
     <div class="switch round">
         <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList('off');">
@@ -14,7 +17,11 @@ if(count($matprem) != 0)
         <label for="switchOn">On</label>
     </div>
 
-    <span id="error"></span>
+    <!-- TODO CSS : Bold, or red color, something to alert the user !-->
+    <div>
+        <span id="error"></span>
+    </div>
+
     <table>
         <tr>
             <td>Matière première</td>
@@ -35,7 +42,7 @@ if(count($matprem) != 0)
             echo('<tr>');
         ?>
                 <td>
-                    <?= anchor($matprem_detailed_adr, $result['nom_matiere_premiere'], "id='name_".$idMatprem."'") ?>
+                    <a id="name_<?= $idMatprem ?>" onclick="popupButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
                     <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()"></input>
                 </td>
                 <td><?= $dispo ?> pièces</td>
@@ -58,6 +65,7 @@ else
 ?>
 
     <span id="base_url" style="display:none"><?= base_url() ?></span>
+    <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/stocks/matprem.js") ?>"></script>
 
 <?php
