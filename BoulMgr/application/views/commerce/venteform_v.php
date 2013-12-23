@@ -48,9 +48,11 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="<?=site_url()?>/commerce/vente/"><button>Annuler</button>
+            <a href="<?=site_url()?>/commerce/vente/">
+                <button>Annuler</button>
+            </a>
             <button onclick="resetAll();">RAZ</button>
-            <button>Envoyer</button>
+            <button onclick="saveTicket();">Envoyer</button>
         </div>
     </div>
 </div>
@@ -60,4 +62,6 @@
 <?php foreach($prods_commande as $p) :?>
     addQtyToProduct(<?=$p->quantite_produit_vente?>, <?=$p->id_produit?>);
 <?php endforeach;?>
+    var id_vente = <?=$id_vente?>;
+    var rootURL = "<?=site_url()?>";
 </script>

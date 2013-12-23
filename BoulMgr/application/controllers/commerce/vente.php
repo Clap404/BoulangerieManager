@@ -28,6 +28,7 @@ class Vente extends CI_Controller {
         } else {
             $data['prods_commande'] = $this->ventes->liste_produits_pour($id_vente);
         }
+        $data['id_vente'] = $id_vente;
 
         $data['produits'] = $this->produits->affiche_all();
         $data['title'] = "Vente";
@@ -37,6 +38,16 @@ class Vente extends CI_Controller {
         $this->load->view('commerce/venteform_v', $data);
         $this->load->view('templates/footer');
     }
+
+    function save($id_vente) {
+        $json = json_decode(trim(file_get_contents('php://input')));
+        if ($id_vente === 0 || $id_vente === "0") {
+            $id_vente = 'null';
+        }
+        $res = $this->ventes->ajoute_vente($id_vente, $json);
+        $this->output->set_output($res);
+    }
+
 }
 
 ?>

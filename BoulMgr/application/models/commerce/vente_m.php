@@ -24,6 +24,22 @@ class Vente_m extends CI_Model {
                 WHERE id_vente = $id_vente";
         $query = $this->db->query($sql);
         return $query->result();
+    }
+
+    function ajoute_vente($id, $prods) {
+
+        $this->db->trans_start();
+
+        $sql = "INSERT OR REPLACE INTO vente VALUES ($id, datetime('now'), 0, null);";
+        $this->db->query($sql);
+        foreach($prods as $prod) {
+            $sql ="INSERT INTO vente_comprend_produit
+                   VALUES ($prod->id, (SELECT MAX(id_vente) from vente), $prod->quantite );";
+            $this->db->query($sql);
+        }
+        $res = $this->db->trans_status();
+        $this->db->trans_complete();
+        return $res;
 
     }
 

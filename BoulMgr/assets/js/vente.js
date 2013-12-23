@@ -104,6 +104,31 @@ function addQtyToProduct(qty, product) {
     checkIfNewActive();
 }
 
+function saveTicket() {
+    var toSend = JSON.stringify(commande);
+    var url = rootURL + "/commerce/vente/save/" + id_vente;
+    console.log("sending", toSend);
+    $.ajax({
+        type : "POST",
+        url : url,
+        data : toSend,
+        contentType : "application/json; charset=utf8",
+        success : function(data) {
+            if (data === "1" || data === 1) {
+                document.location = rootURL + "/commerce/vente/";
+            } else {
+                alert("Erreur côté serveur !");
+            }
+        },
+        failure : function(err) {
+            alert("Impossible d'envoyer la requête au serveur pour le moment !");
+        }
+
+
+    });
+
+}
+
 window.onload = function() {
     populateTable();
 };
