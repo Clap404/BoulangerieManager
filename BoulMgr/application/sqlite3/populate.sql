@@ -273,14 +273,13 @@ INSERT INTO unite VALUES
 
 -- Matières premières --
 INSERT INTO matiere_premiere VALUES
-    (null,"Farine", 50, 1),
-    (null,"Œufs", 70, 3),
-    (null,"Sucre", 45, 1),
-    (null,"Levain", 15, 1),
-    (null,"Colorant", 0, 2);
+    (null,"Farine", 1),
+    (null,"Œufs", 3),
+    (null,"Sucre", 1),
+    (null,"Levain", 1),
+    (null,"Colorant", 2);
 
 -- Produits --
--- JE FAIS DU LISP BOBBY --
 INSERT INTO produit VALUES
     (null,
     "croissant",
@@ -306,6 +305,13 @@ INSERT INTO produit VALUES
     "pain au chocolat",
     abs(((random() % 20) + 10) / 10.0),
     abs((random() % 100) + 20) );
+
+-- Commandes Matières premières --
+INSERT INTO commande_matiere_premiere VALUES
+    (null, datetime("now", "-100 day"), 50, 1.53, 1, 1),
+    (null, datetime("now", "-10 day"), 13, 2.4, 2, 1),
+    (null, datetime("now", "-20 day"), 20, 4, 4, 2),
+    (null, datetime("now", "-32 day"), 35, 2.21, 5, 3);
 
 -- Vendu par --
 INSERT INTO matiere_premiere_vendue_par_fournisseur VALUES
@@ -335,8 +341,8 @@ BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now", "-2 day"), 0, null);
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit
@@ -352,8 +358,8 @@ BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now","-1 day"), 0, null);
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit
@@ -365,8 +371,8 @@ INSERT INTO vente_comprend_produit VALUES (
 );
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit
@@ -378,8 +384,8 @@ INSERT INTO vente_comprend_produit VALUES (
 );
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit
@@ -395,8 +401,8 @@ BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now"), 0, null);
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit
@@ -408,8 +414,8 @@ INSERT INTO vente_comprend_produit VALUES (
 );
 INSERT INTO vente_comprend_produit VALUES (
     (SELECT * FROM
-        (SELECT id_produit 
-        FROM produit 
+        (SELECT id_produit
+        FROM produit
         EXCEPT
         SELECT id_produit
         FROM vente_comprend_produit

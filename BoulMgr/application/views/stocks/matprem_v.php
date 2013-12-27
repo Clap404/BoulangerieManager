@@ -1,7 +1,7 @@
 <h3>Matières premières</h3>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
-<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;">Content of popup</div>
+<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
 
 <?php
 if(count($matprem) != 0)
@@ -10,10 +10,10 @@ if(count($matprem) != 0)
     <!-- TODO CSS : Print on the same line text and button  -->
     Afficher tout (même non en stock) :
     <div class="switch round">
-        <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList('off');">
+        <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList(false);">
         <label for="switchOff">Off</label>
 
-        <input id="switchOn" name="switch-list" type="radio" onclick="switchButtonList('on');">
+        <input id="switchOn" name="switch-list" type="radio" onclick="switchButtonList(true);">
         <label for="switchOn">On</label>
     </div>
 
@@ -24,9 +24,9 @@ if(count($matprem) != 0)
 
     <table>
         <tr>
-            <td>Matière première</td>
-            <td>Quantité disponible</td>
-            <td></td>
+            <th>Matière première</th>
+            <th>Quantité disponible</th>
+            <th></th>
         </tr>
     <?php
 
@@ -45,7 +45,7 @@ if(count($matprem) != 0)
                     <a id="name_<?= $idMatprem ?>" onclick="popupButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
                     <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()"></input>
                 </td>
-                <td><?= $dispo ?> pièces</td>
+                <td><?= $dispo." ".$result["abbreviation_unite"] ?></td>
                 <td>
                     <button id="modif_button_<?= $idMatprem ?>" onclick="switch2Modify('<?= $idMatprem ?>');">Modifier</button>
                     <button style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif('<?= $idMatprem ?>');">Sauvegarder</button>

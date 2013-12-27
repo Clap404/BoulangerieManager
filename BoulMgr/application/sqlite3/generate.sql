@@ -7,6 +7,7 @@ drop table if exists telephone; /* OK */
 drop table if exists adresse; /* OK */
 drop table if exists produit; /* OK */
     drop table if exists commande;
+    drop table if exists commande_matiere_premiere;
 drop table if exists client; /* OK */
 drop table if exists fournisseur; /* OK */
     drop table if exists categorie;
@@ -90,6 +91,25 @@ create table commande(
         on delete cascade on update cascade
 );
 
+create table commande_matiere_premiere(
+    id_commande_matiere_premiere
+        integer primary key autoincrement not null,
+    date_commande_matiere_premiere
+        text not null,
+    quantite_matiere_premiere
+        integer not null,
+    prix_unite_matiere_premiere
+        real not null,
+    id_matiere_premiere
+        integer not null
+        references matiere_premiere(id_matiere_premiere)
+        on delete cascade on update cascade,
+    id_fournisseur
+        integer not null
+        references fournisseur(id_fournisseur)
+        on delete cascade on update cascade
+);
+
 create table client(
     id_client
         integer primary key autoincrement not null,
@@ -118,9 +138,6 @@ create table matiere_premiere(
         integer primary key autoincrement not null,
     nom_matiere_premiere
         text not null,
-    disponibilite_matiere_premiere
-        integer not null
-        default 0,
     id_unite
         integer not null
         references unite(id_unite)

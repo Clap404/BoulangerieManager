@@ -21,6 +21,7 @@ class Matprem extends CI_Controller {
     {
         $data['matprem'] = $this->model_matprem->printByID($id);
         $data['fournisseur'] = $this->model_matprem->printFournisseurs($id);
+        $data['commandes'] = $this->model_matprem->printCommandesMatprem($id);
 
         if(count($data['matprem']) != 0)
             $data['title'] = $data['matprem'][0]['nom_matiere_premiere'];
@@ -37,12 +38,9 @@ class Matprem extends CI_Controller {
         $json = trim(file_get_contents('php://input'));
         $changes = json_decode($json, true);
 
-        $array = $this->model_matprem->printByID($changes['id_matiere_premiere'])[0];
-        $array['nom_matiere_premiere'] = $changes['nom_matiere_premiere'];
-
         // Check if $array is unidimensional
         if(count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
-            echo($this->model_matprem->updateModif($array));
+            echo($this->model_matprem->updateModif($changes));
         else
             echo(0);
     }
@@ -50,10 +48,12 @@ class Matprem extends CI_Controller {
     function jsonQuickDetail()
     {
         $id = $this->input->post('id');
-        $result = $this->model_matprem->printByID($id);
+        $matprem = $this->model_matprem->printByID($id);
+        $fournisseurs = $this->model_matprem->printFournisseurs($id);
+        $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
 
         if(count($result) != 0)
-            echo(json_encode($result[0]));
+            echo(json_encode($result));
         else
             echo(0);
     }
