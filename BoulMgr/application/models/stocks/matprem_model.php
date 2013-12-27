@@ -12,6 +12,7 @@ class Matprem_model extends CI_Model {
     {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite; */
+        $this->db->select('*, (SELECT SUM(com.quantite_matiere_premiere) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
         $this->db->order_by("nom_matiere_premiere", "asc");
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $query = $this->db->get('Matiere_premiere');
@@ -23,6 +24,7 @@ class Matprem_model extends CI_Model {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite;
          * where id_matiere_premiere = $id; */
+        $this->db->select('*, (SELECT SUM(com.quantite_matiere_premiere) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $query = $this->db->get_where('Matiere_premiere', array('id_matiere_premiere' => $id));
         return $query->result_array();
