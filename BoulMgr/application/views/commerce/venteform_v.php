@@ -48,6 +48,12 @@
                     </tr>
                 </tbody>
             </table>
+            <select id="client">
+                <option value="null">--  Choisissez un client</option>
+<?php foreach($clients as $client) :?>
+                <option <?php echo($client->id_client === $cli['id_client'] ? 'selected="selected"' : "")?> value="<?=$client->id_client?>"><?=$client->nom_client?> <?=$client->prenom_client?></option>
+<?php endforeach;?>
+            </select>
             <a href="<?=site_url()?>/commerce/vente/">
                 <button>Annuler</button>
             </a>

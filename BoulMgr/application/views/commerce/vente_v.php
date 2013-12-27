@@ -11,7 +11,7 @@
         $this->table->add_row(
             $value->date_vente,
             $value->prix_vente,
-            $value->id_client,
+            $value->nom_client." ".$value->prenom_client,
             '<a href="'.site_url().'/commerce/vente/form/'.$value->id_vente.'">
                 <button>modifier</button>
             </a>'
