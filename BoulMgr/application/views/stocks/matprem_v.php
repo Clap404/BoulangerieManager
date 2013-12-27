@@ -45,7 +45,7 @@ if(count($matprem) != 0)
                     <a id="name_<?= $idMatprem ?>" onclick="popupButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
                     <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()"></input>
                 </td>
-                <td><?= $dispo ?> pièces</td>
+                <td><?= $dispo." ".$result["abbreviation_unite"] ?></td>
                 <td>
                     <button id="modif_button_<?= $idMatprem ?>" onclick="switch2Modify('<?= $idMatprem ?>');">Modifier</button>
                     <button style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif('<?= $idMatprem ?>');">Sauvegarder</button>

@@ -10,15 +10,20 @@ class Matprem_model extends CI_Model {
 
     function print_all()
     {
-        /* Select * from Matiere_premiere; */
+        /* Select * from Matiere_premiere
+         * inner join unite as u on u.id_unite = matiere_premiere.id_unite; */
         $this->db->order_by("nom_matiere_premiere", "asc");
+        $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $query = $this->db->get('Matiere_premiere');
         return $query->result_array();
     }
 
     function printByID($id)
     {
-        /* Select * from Matiere_premiere where id_matiere_premiere = $id; */
+        /* Select * from Matiere_premiere
+         * inner join unite as u on u.id_unite = matiere_premiere.id_unite;
+         * where id_matiere_premiere = $id; */
+        $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $query = $this->db->get_where('Matiere_premiere', array('id_matiere_premiere' => $id));
         return $query->result_array();
     }

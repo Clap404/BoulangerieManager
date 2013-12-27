@@ -91,7 +91,7 @@ function fillPopup(data)
     popupContent += '<tr>' +
                             '<td colspan="2"><img src="' + base_url + 'assets/images/matprem/' + matprem["id_matiere_premiere"] + '.jpg"/></td>' +
                     '</tr>';
-    popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' pièces</td></tr>';
+    popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
     popupContent += '</table>';
 
     popupContent += "<p><b>Prix le plus bas : </b>" + fournisseur["prix"] + "€<br/>";
