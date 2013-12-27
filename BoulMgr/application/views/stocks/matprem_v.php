@@ -1,7 +1,7 @@
 <h3>Matières premières</h3>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
-<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;">Content of popup</div>
+<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
 
 <?php
 if(count($matprem) != 0)
@@ -24,9 +24,9 @@ if(count($matprem) != 0)
 
     <table>
         <tr>
-            <td>Matière première</td>
-            <td>Quantité disponible</td>
-            <td></td>
+            <th>Matière première</th>
+            <th>Quantité disponible</th>
+            <th></th>
         </tr>
     <?php
 

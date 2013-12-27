@@ -80,18 +80,22 @@ function fillPopup(data)
 {
     var popup = document.getElementById("pop_up");
     var base_url = document.getElementById("base_url").innerHTML;
+    var matprem = data["matprem"];
+    var fournisseur = data["fournisseur"];
 
-    var popupContent = "<h3>" + data["nom_matiere_premiere"] + "</h3>"
+    var popupContent = "<h3>" + matprem["nom_matiere_premiere"] + "</h3>"
 
-    popupContent += "<div><button onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + data['id_matiere_premiere'] + "\";'>Détails</button>";
+    popupContent += "<div style='float: right; margin-right: 10%;'><button onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button></div>";
 
     popupContent += '<table>';
     popupContent += '<tr>' +
-                            '<td colspan="2"><img src="' + base_url + 'assets/images/matprem/' + data["id_matiere_premiere"] + '.jpg"/></td>' +
+                            '<td colspan="2"><img src="' + base_url + 'assets/images/matprem/' + matprem["id_matiere_premiere"] + '.jpg"/></td>' +
                     '</tr>';
-
-    popupContent += '<tr><td>' + data["disponibilite_matiere_premiere"] + ' pièces</td></tr>';
+    popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' pièces</td></tr>';
     popupContent += '</table>';
+
+    popupContent += "<p><b>Prix le plus bas : </b>" + fournisseur["prix"] + "€<br/>";
+    popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
     popup.innerHTML = popupContent;
 }

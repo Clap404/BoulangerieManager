@@ -50,10 +50,12 @@ class Matprem extends CI_Controller {
     function jsonQuickDetail()
     {
         $id = $this->input->post('id');
-        $result = $this->model_matprem->printByID($id);
+        $matprem = $this->model_matprem->printByID($id);
+        $fournisseurs = $this->model_matprem->printFournisseurs($id);
+        $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
 
         if(count($result) != 0)
-            echo(json_encode($result[0]));
+            echo(json_encode($result));
         else
             echo(0);
     }
