@@ -10,10 +10,10 @@ if(count($matprem) != 0)
     <!-- TODO CSS : Print on the same line text and button  -->
     Afficher tout (même non en stock) :
     <div class="switch round">
-        <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList('off');">
+        <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList(false);">
         <label for="switchOff">Off</label>
 
-        <input id="switchOn" name="switch-list" type="radio" onclick="switchButtonList('on');">
+        <input id="switchOn" name="switch-list" type="radio" onclick="switchButtonList(true);">
         <label for="switchOn">On</label>
     </div>
 

@@ -64,12 +64,10 @@ function switchButtonList(buttonState)
     csseven = $('tr:even').css('background-color');
     cssodd = $('tr:odd').css('background-color');
 
-    if(buttonState === "on")
+    if(buttonState)
         prop = "table-row";
-    else if(buttonState === "off")
-        prop = "none";
     else
-        return;
+        prop = "none";
 
     $('.matpremHiddenItem').css('display', prop);
     $('tr:visible:even').css('background-color', csseven);
@@ -147,4 +145,4 @@ function popupButton(id)
     });
 }
 
-switchButtonList("off");
+switchButtonList(document.getElementById("switchOn").checked);
