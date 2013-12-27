@@ -58,8 +58,9 @@ class Matprem_model extends CI_Model {
 
     function updateModif($array)
     {
+        $this->db->set('nom_matiere_premiere', $array['nom_matiere_premiere']);
         $this->db->where('id_matiere_premiere', $array['id_matiere_premiere']);
-        $error = $this->db->update('matiere_premiere', $array);
+        $error = $this->db->update('matiere_premiere');
         return $error;
     }
 }
