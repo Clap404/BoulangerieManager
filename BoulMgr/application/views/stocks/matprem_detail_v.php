@@ -17,16 +17,15 @@ if(count($matprem) != 0)
             }
         ?>
         <tr>
-            <td><?= $matprem[0]['disponibilite_matiere_premiere'] ?> pièces</td>
+            <td><?= $matprem[0]['disponibilite_matiere_premiere']." ".$matprem[0]['abbreviation_unite']?> </td>
         </tr>
     </table>
 
-    <p></p>
-    <table>
+    <table style="margin-top: 10px;">
         <tr>
-            <td>ID Fournisseur</td>
-            <td>Fournisseur</td>
-            <td>Prix</td>
+            <th>ID Fournisseur</th>
+            <th>Fournisseur</th>
+            <th>Prix</th>
         </tr>
     <?php
 
@@ -39,7 +38,39 @@ if(count($matprem) != 0)
             </tr>
         <?php
     }
-    echo('</table>');
+    ?>
+    </table>
+
+    <div>
+        <b>Commandes</b>
+        <table style="margin-top: 10px;">
+            <tr>
+                <th>Numéro de commande</th>
+                <th>Date commande</th>
+                <th>Fournisseur</th>
+                <th>Quantité</th>
+                <th>Prix à l'unité</th>
+                <th>Prix total</th>
+            </tr>
+    <?php
+
+    foreach($commandes as $result) {
+        ?>
+            <tr>
+                <td><?= $result['id_commande_matiere_premiere'] ?></td>
+                <td><?= $result['date_commande_matiere_premiere'] ?></td>
+                <td><?= $result['id_fournisseur'] ?></td>
+                <td><?= $result['quantite_matiere_premiere'] ?></td>
+                <td><?= $result['prix_unite_matiere_premiere'] ?></td>
+                <td><?= $result['quantite_matiere_premiere'] * $result['prix_unite_matiere_premiere'] ?></td>
+            </tr>
+        <?php
+    }
+    ?>
+        </table>
+    </div>
+
+    <?php
 }
 
 else

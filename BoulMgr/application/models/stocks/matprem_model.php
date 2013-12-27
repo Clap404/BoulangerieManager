@@ -12,9 +12,9 @@ class Matprem_model extends CI_Model {
     {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite; */
-        $this->db->select('*, (SELECT SUM(com.quantite_matiere_premiere) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
-        $this->db->order_by("nom_matiere_premiere", "asc");
+        $this->db->select('*, (SELECT IFNULL(SUM(com.quantite_matiere_premiere),0) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
+        $this->db->order_by("nom_matiere_premiere", "asc");
         $query = $this->db->get('Matiere_premiere');
         return $query->result_array();
     }
@@ -24,7 +24,7 @@ class Matprem_model extends CI_Model {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite;
          * where id_matiere_premiere = $id; */
-        $this->db->select('*, (SELECT SUM(com.quantite_matiere_premiere) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
+        $this->db->select('*, (SELECT IFNULL(SUM(com.quantite_matiere_premiere),0) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $query = $this->db->get_where('Matiere_premiere', array('id_matiere_premiere' => $id));
         return $query->result_array();
@@ -34,11 +34,24 @@ class Matprem_model extends CI_Model {
     {
         /* Select id_fournisseur, nom_fournisseur, prix
          * from matiere_premiere_vendue_par_fournisseur as Vp
-         * inner join Fournisseur as F on F.id_fournisseur = Vp.id_fournisseur; */
+         * inner join Fournisseur as F on F.id_fournisseur = Vp.id_fournisseur
+         * inner join Matiere_premiere as M on M.id_matiere_premiere = Vp.id_matiere_premiere
+         * where Vp.id_matiere_premiere=$id; */
         $this->db->select('matiere_premiere_vendue_par_fournisseur.id_fournisseur, nom_fournisseur, prix');
         $this->db->join('Fournisseur', 'Fournisseur.id_fournisseur = matiere_premiere_vendue_par_fournisseur.id_fournisseur');
         $this->db->join('Matiere_premiere', 'Matiere_premiere.id_matiere_premiere = matiere_premiere_vendue_par_fournisseur.id_matiere_premiere');
         $query = $this->db->get_where('matiere_premiere_vendue_par_fournisseur', array('matiere_premiere_vendue_par_fournisseur.id_matiere_premiere' => $id));
+
+        return $query->result_array();
+    }
+
+    function printCommandesMatprem($id)
+    {
+        /* Select * from commande_matiere_premiere as com
+         * inner join Fournisseur as F on F.id_fournisseur = com.id_fournisseur
+         * where com.id_matiere_premiere=$id; */
+        $this->db->join('Fournisseur', 'Fournisseur.id_fournisseur = commande_matiere_premiere.id_fournisseur');
+        $query = $this->db->get_where('commande_matiere_premiere', array('commande_matiere_premiere.id_matiere_premiere' => $id));
 
         return $query->result_array();
     }

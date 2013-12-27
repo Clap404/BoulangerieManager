@@ -92,7 +92,7 @@ create table commande(
 );
 
 create table commande_matiere_premiere(
-    id_commande_matprem
+    id_commande_matiere_premiere
         integer primary key autoincrement not null,
     date_commande_matiere_premiere
         text not null,
