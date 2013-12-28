@@ -25,13 +25,14 @@ class Vente extends CI_Controller {
 
         if ($id_vente === 0) {
             $data['prods_commande'] = [];           
+            $data['cli'] = 0;
         } else {
             $data['prods_commande'] = $this->ventes->liste_produits_pour($id_vente);
+            $data['cli'] = $this->ventes->get_client_for_vente($id_vente);
         }
         $data['id_vente'] = $id_vente;
         $data['produits'] = $this->produits->affiche_all();
         $data['clients'] = $this->clients->all_clients();
-        $data['cli'] = $this->ventes->get_client_for_vente($id_vente);
 
         $data['title'] = "Vente";
         $data['root'] = $this->config->base_url();
