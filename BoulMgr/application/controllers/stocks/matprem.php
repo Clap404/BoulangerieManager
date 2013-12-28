@@ -40,7 +40,7 @@ class Matprem extends CI_Controller {
         $changes = $this->security->xss_clean($changes);
 
         // Check if $array is unidimensional
-        if(count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
+        if(is_array($changes) && count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
             echo($this->model_matprem->updateModif($changes));
         else
             echo(0);
