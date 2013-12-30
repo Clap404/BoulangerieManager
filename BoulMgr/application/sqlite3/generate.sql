@@ -91,6 +91,7 @@ create table commande(
         on delete cascade on update cascade
 );
 
+/* TABLE A AJOUTER DANS LE MCD */
 create table commande_matiere_premiere(
     id_commande_matiere_premiere
         integer primary key autoincrement not null,

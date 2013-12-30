@@ -6,6 +6,12 @@ class Clients_m extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+
+    function all_clients() {
+        $query = $this->db->get('client');
+        return $query->result();
+
+    }
     
     function liste_clients(){
         $sql = "SELECT client.*, ville.nom_ville, telephone.numero_telephone 

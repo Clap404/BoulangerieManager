@@ -109,7 +109,12 @@ function addQtyToProduct(qty, product) {
 }
 
 function saveTicket() {
-    var toSend = JSON.stringify(commande);
+    var toSend = {
+        commande : commande,
+        client : document.querySelector("#client").value
+    };
+    toSend = JSON.stringify(toSend);
+    console.log(toSend);
     var url = rootURL + "/commerce/vente/save/" + id_vente;
     $.ajax({
         type : "POST",
