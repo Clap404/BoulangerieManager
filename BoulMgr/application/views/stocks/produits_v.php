@@ -10,7 +10,7 @@
         Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
         Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
     </div>
-    <button>Modifier</button> <button>Supprimer</button>
+    <button>Modifier</button> <a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a>
 </div>
 
 <?php endforeach; ?>

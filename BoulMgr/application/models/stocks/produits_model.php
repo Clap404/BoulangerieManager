@@ -7,7 +7,7 @@ class Produits_model extends CI_Model {
         $this->load->database();
     }
 
-    function   affiche_all() {
+    function affiche_all() {
         $sql = "SELECT *,
                 (prod_ajd - (comm_ajd + vendu_ajd)) as disponibilite_produit
                 FROM (
@@ -40,7 +40,7 @@ class Produits_model extends CI_Model {
 
     function remove_produit($id) {
         $this->db->where("id_produit", $id);
-        $this->db->delete();
+        $this->db->delete("produit");
     }
 }
 
