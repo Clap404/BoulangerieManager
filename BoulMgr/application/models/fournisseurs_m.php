@@ -8,14 +8,14 @@ class Fournisseurs_m extends CI_Model {
     }
     
     function liste_fournisseurs(){
-        $sql = "SELECT fournisseur.*, nom_ville, numero_telephone 
+        $sql = "SELECT fournisseur.*, GROUP_CONCAT( DISTINCT ville.nom_ville ) AS nom_ville, GROUP_CONCAT( DISTINCT telephone.numero_telephone ) AS numero_telephone 
                 FROM fournisseur 
                     natural join adresse
                     natural join ville
                     natural join fournisseur_joignable_telephone
                     natural join telephone
                     natural join fournisseur_livre_depuis_adresse
-                GROUP BY id_telephone ;";
+                GROUP BY id_fournisseur ;";
 
         $query = $this->db->query($sql);
         return $query->result();

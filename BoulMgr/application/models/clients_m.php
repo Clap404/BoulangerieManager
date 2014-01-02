@@ -14,14 +14,14 @@ class Clients_m extends CI_Model {
     }
     
     function liste_clients(){
-        $sql = "SELECT client.*, ville.nom_ville, telephone.numero_telephone 
+        $sql = "SELECT client.*, GROUP_CONCAT( DISTINCT ville.nom_ville ) AS nom_ville, GROUP_CONCAT( DISTINCT telephone.numero_telephone ) AS numero_telephone
                 FROM client
                     natural join ville
                     natural join telephone
                     natural join adresse
                     natural join client_joignable_telephone
                     natural join client_habite_adresse
-                GROUP BY id_telephone, id_client ;";
+                GROUP BY id_client ;";
         $query = $this->db->query($sql);
         return $query->result();
     }
