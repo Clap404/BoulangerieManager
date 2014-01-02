@@ -5368,9 +5368,13 @@ img:hover {
 
 .product-active {
     background-color : #2fc46b;
-}   
+}
 
-.product, .product-active {
+.product-depleted {
+    background-color : #ff623d;
+}
+
+.product, .product-active, .product-depleted {
     text-align: center;
     display : inline-block;
     width : 200px;

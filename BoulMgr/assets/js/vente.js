@@ -1,6 +1,7 @@
 var commande = [];
 
 function populateTable() {
+    checkValidity();
     var products = document.querySelectorAll(".product-active");
     var totQuant = document.querySelector(".summary tfoot tr .total-quantity");
     var totPrix = document.querySelector(".summary tfoot tr .total-price");
@@ -29,7 +30,6 @@ function populateTable() {
         prod.prix = parseFloat(products[i].querySelector(".prix").getAttribute("value"), 10).toFixed(2);
         prod.quantite = parseInt(products[i].querySelector(".qty").value, 10);
         commande.push(prod);
-
 
         td = document.createElement("td");
         td.className = "item-name";
@@ -63,49 +63,51 @@ function populateTable() {
     document.querySelector(".summary tfoot tr .total-price").innerHTML = total.prix.toFixed(2);
 }
 
-function checkIfNewActive() {
-    var products = document.querySelectorAll(".product, .product-active");
+function checkValidity() {
+    var products = document.querySelectorAll(".product, .product-active, .product-depleted");
     for (var i = 0; i < products.length; i ++) {
         var val = products[i].children[5].value;
-        if (val !== parseInt(val, 10).toString()) {
-            products[i].children[5].value = 0;
+        var dispo = parseInt(products[i].children[9].getAttribute("value"), 10);
+        intval = parseInt(val, 10);
+        if (val !== intval.toString() ||
+                            typeof intval === 'undefined' ||
+                            intval === null ||
+                            Number.isNaN(intval) ||
+                            intval < 0 ) {
+
+            intval = 0;
             products[i].className = "product";
-        } else if (val === "0") {
+        } else if (intval === 0) {
             products[i].className = "product";
         } else {
             products[i].className = "product-active";
         }
+        if (intval >= dispo) {
+            intval = dispo;
+            products[i].className = "product-depleted";
+        }
+        products[i].children[5].value = intval;
     }
-    populateTable();
 }
 
 function resetAll() {
-    var products = document.querySelectorAll(".product, .product-active");
+    var products = document.querySelectorAll(".product, .product-active, .product-depleted");
     for (var i = 0; i < products.length; i ++) {
         products[i].querySelector(".qty").value = 0;
     }
-    checkIfNewActive();
+    populateTable();
 }
 
 function addQtyToProduct(qty, product) {
     var input = document.querySelector("#product-" + product + " .qty");
     var val = parseInt(input.value, 10);
+    val += qty;
     if (typeof val === 'undefined' || typeof val === 'string' ||
         val === null || Number.isNaN(val)) {
         val = 0;
     }
-    val += qty;
-    if (val < 0) {
-        val = 0;
-    } else if (val >= 99) {
-        //99 super arbitraire
-        //TODO : faire en sorte de prendre en compte la disponibilité
-        //mais attention à ajouter de la fausse disponibilité lorsque
-        //l'on modifie un tiquet existant
-        val = 99;
-    }
     input.value = val;
-    checkIfNewActive();
+    populateTable();
 }
 
 function saveTicket() {
