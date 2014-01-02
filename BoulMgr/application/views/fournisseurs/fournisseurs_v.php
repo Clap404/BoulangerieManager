@@ -1,54 +1,20 @@
 
 <div>
-<table>
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>Nom du fournisseur</td>
-            <td>Ville</td>
-            <td>Numéro de téléphone</td>
-            <td>Fiche détaillée</td>
-        </tr>
-    </thead>
-    <tbody>
 <?php
+    $this->table->set_heading("ID", "Nom du fournisseur", "Ville", "Numéro de téléphone", "Fiche détaillée");
 
-$sameId = 1;
-$nbTel = count($fournisseurs);
-
-foreach ($fournisseurs as $key => $line) {
-
-    echo("<tr>\n");
-    if ($sameId === 1) {
-        while ( $key + $sameId < $nbTel
-            && $line->id_fournisseur === $fournisseurs[ $key + $sameId ]->id_fournisseur) {
-
-            $sameId = $sameId +1;
-        }
-        ?>
-
-        <td rowspan=<?= $sameId ?> > <?= $line->id_fournisseur ?> </td>
-        <td rowspan=<?= $sameId ?> > <?= $line->nom_fournisseur ?> </td>
-        <td rowspan=<?= $sameId ?> > <?= $line->nom_ville ?> </td>
-        <td> <?= $line->numero_telephone ?> </td>
-        <td rowspan=<?= $sameId ?> > <?= anchor(array("fournisseurs", "profil", $line->id_fournisseur), "Profil") ?></td>
-
-    <?php
-    } else {
-    ?>
-
-        <td> <?= $line->numero_telephone ?> </td>
-
-        <?php
-        $sameId = $sameId -1;
+    foreach ($fournisseurs as $value) {
+        $this->table->add_row(
+            $value->id_fournisseur,
+            $value->nom_fournisseur,
+            $value->nom_ville,
+            $value->numero_telephone,
+            anchor(array("fournisseurs", "profil", $value->id_fournisseur), "Profil")
+        );
     }
 
-    echo("</tr>\n");
-}
+    echo $this->table->generate(); 
 ?>
-
-    </tbody>
-</table>
 </div>
 
 <?php
