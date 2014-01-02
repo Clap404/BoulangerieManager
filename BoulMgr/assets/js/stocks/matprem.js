@@ -176,7 +176,7 @@ function ajaxQuickDetails(id)
     xhr.onloadend = function () {
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText != 0)
         {
-            var response = eval("(" + xhr.responseText + ")");
+            var response = JSON.parse(xhr.responseText);
             fillPopup(response);
         }
         else
