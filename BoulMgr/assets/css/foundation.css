@@ -5339,6 +5339,10 @@ th.hide-for-touch {
 
 footer {
   margin-top: 50px;
+  background: #333333;
+  color: #777777;
+  padding: 20px;
+  text-align: center;
 }
 
 h1, h2 {
@@ -5404,4 +5408,16 @@ h2{
 
 .product-name {
     min-height: 74px;
+}
+
+.fournisseur table {
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+
+#content {
+    min-height: 704px;
 }

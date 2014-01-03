@@ -1,7 +1,8 @@
 <h2><?=$title?></h2>
-
+<div class="row">
+    <div class="small-6 large-4 columns">
 <h3>adresses</h3>
-<div>
+<div class="fournisseur">
 <?php
     $this->table->set_heading('Adresse', 'Code postal', 'Ville', 'Description');
 
@@ -17,10 +18,11 @@
     echo $this->table->generate(); 
 ?>
 </div>
+    </div>
 
-
+    <div class="small-4 large-4 columns">
 <h3>numéros de téléphone</h3>
-<div>
+<div class="fournisseur">
   
 <?php
     $this->table->set_heading('Numéro', 'Description');
@@ -36,9 +38,10 @@
 ?>
 
 </div>
-
+    </div>
+    <div class="small-2 large-4 columns">
 <h3>produits vendus</h3>
-<div>
+<div class="fournisseur">
 <?php
     $this->table->set_heading('id', 'Matiere Premiere', 'prix fournisseur');
 
@@ -54,3 +57,5 @@
     echo $this->table->generate(); 
 ?>
 </div>
+</div>
+    </div>
