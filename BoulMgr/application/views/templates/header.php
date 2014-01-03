@@ -13,7 +13,7 @@
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href="#">Boulangerie Manager</a></h1>
+                    <h1><a href=<?= '"'.base_url().'"'?>>Boulangerie Manager</a></h1>
                 </li>
             </ul>
 
