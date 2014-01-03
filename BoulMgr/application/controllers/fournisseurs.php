@@ -10,10 +10,13 @@ class Fournisseurs extends CI_Controller {
     }
 
     function index() {
+        $this->load->helper("form");
         $data['fournisseurs'] = $this->fournisseurs->liste_fournisseurs();
         $data['title'] = "fournisseurs";
         $this->load->view('templates/header', $data);
         $this->load->view('fournisseurs/fournisseurs_v', $data);
+        //formulaire d'ajout de fournisseur
+        $this->load->view('fournisseurs/add_fournisseur_v');
         $this->load->view('templates/footer');
     }
 

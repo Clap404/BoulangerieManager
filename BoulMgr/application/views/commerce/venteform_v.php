@@ -69,8 +69,13 @@
 <script src="<?=$root?>/assets/js/vente.js"></script>
 <script defer>
 <?php foreach($prods_commande as $p) :?>
-    var disp = parseInt(document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").getAttribute("value"), 10);
-    document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").setAttribute("value", disp + <?=$p->id_produit?>);
+    var disp = parseInt(
+        document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").
+            getAttribute("value"),
+    10);
+
+    document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").
+        setAttribute("value", disp + <?=$p->quantite_produit_vente?>);
     addQtyToProduct(<?=$p->quantite_produit_vente?>, <?=$p->id_produit?>);
 <?php endforeach;?>
     var id_vente = <?=$id_vente?>;

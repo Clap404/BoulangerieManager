@@ -5336,9 +5336,20 @@ th.hide-for-touch {
  AJOUTS PERSONNELS #
 ####################
 */
+#content {
+    min-height: 774px;
+}
 
 footer {
   margin-top: 50px;
+  background: #333333;
+  color: #777777;
+  padding: 5px;
+  text-align: center;
+}
+
+footer p {
+    margin-bottom: 0px;
 }
 
 h1, h2 {
@@ -5405,3 +5416,12 @@ h2{
 .product-name {
     min-height: 74px;
 }
+
+.fournisseur table {
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+
