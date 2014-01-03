@@ -63,7 +63,7 @@ class Produits extends CI_Controller {
 
     private function do_upload($field_name) {
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'jpg';
         $config['max_size'] = '100';
         $config['max_width']  = '128';
         $config['max_height']  = '128';
