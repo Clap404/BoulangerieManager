@@ -5379,8 +5379,27 @@ img:hover {
     display : inline-block;
     width : 200px;
     text-decoration: none;
+    margin-bottom: 2px;
+    border: 1px solid black;
 }
 
 .summary {
     margin-top: 81px;
+}
+
+
+h2{
+    margin-bottom: 100px;
+}
+
+#mobile {
+    position: fixed;
+}
+
+#client {
+    width: 90%;
+}
+
+.product-name {
+    min-height: 74px;
 }

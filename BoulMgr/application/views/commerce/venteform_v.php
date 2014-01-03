@@ -23,6 +23,7 @@
     <div class="small-4 columns">
         <div class="cart">
             <h2>La selection</h2>
+            <div id="mobile">
             <table class="summary">
                 <thead>
                     <tr>
@@ -60,6 +61,7 @@
             </a>
             <button onclick="resetAll();">RAZ</button>
             <button onclick="saveTicket();">Envoyer</button>
+                </div>
         </div>
     </div>
 </div>

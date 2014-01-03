@@ -1,7 +1,11 @@
-<h2><?=$title?></h2>
+<div class="row" id="teest">
 
+
+
+<h2><?=$title?></h2>
+    <div class="small-6 small-centered columns">
 <a href="<?=site_url()?>/commerce/vente/form">
-    <button>Enregistrer un nouveau tiquet</button>
+    <button id="tiquet">Enregistrer un nouveau tiquet</button>
 </a>
 <div>
 <?php
@@ -20,4 +24,6 @@
 
     echo $this->table->generate(); 
 ?>
+</div>
+    </div>
 </div>
