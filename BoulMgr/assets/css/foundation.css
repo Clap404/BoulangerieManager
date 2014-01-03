@@ -5336,13 +5336,20 @@ th.hide-for-touch {
  AJOUTS PERSONNELS #
 ####################
 */
+#content {
+    min-height: 774px;
+}
 
 footer {
   margin-top: 50px;
   background: #333333;
   color: #777777;
-  padding: 20px;
+  padding: 5px;
   text-align: center;
+}
+
+footer p {
+    margin-bottom: 0px;
 }
 
 h1, h2 {
@@ -5418,6 +5425,3 @@ h3 {
     text-align: center;
 }
 
-#content {
-    min-height: 704px;
-}
