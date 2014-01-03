@@ -76,5 +76,15 @@ class Matprem extends CI_Controller {
 
         echo($this->model_matprem->insertCommand($command));
     }
+
+    function deleteCommand($idCommand)
+    {
+        if(isset($idCommand))
+        {
+            echo($this->model_matprem->deleteCommand($idCommand));
+            return;
+        }
+        echo(0);
+    }
 }
 ?>

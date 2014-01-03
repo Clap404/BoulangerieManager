@@ -54,6 +54,16 @@ if(count($matprem) != 0)
             </tr>
         <?php
     }
+
+    if($matprem === [])
+    { ?>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+        </tr>
+      <?php
+    }
     echo('</table>');
 }
 

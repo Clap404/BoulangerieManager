@@ -24,6 +24,10 @@ if(count($matprem) != 0)
         </tr>
     </table>
 
+    <div>
+        <span id="error"></span>
+    </div>
+
     <table style="margin-top: 10px;">
         <tr>
             <th>ID Fournisseur</th>
@@ -43,6 +47,16 @@ if(count($matprem) != 0)
             </tr>
         <?php
     }
+    if($commandes === [])
+    { ?>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+        </tr>
+      <?php
+    }
     ?>
     </table>
 
@@ -60,6 +74,7 @@ if(count($matprem) != 0)
     <?php
 
     foreach($commandes as $result) {
+        $id_command = $result['id_commande_matiere_premiere'];
         ?>
             <tr>
                 <td><?= $result['id_commande_matiere_premiere'] ?></td>
@@ -68,8 +83,22 @@ if(count($matprem) != 0)
                 <td><?= $result['quantite_matiere_premiere'] ?></td>
                 <td><?= $result['prix_unite_matiere_premiere'] ?></td>
                 <td><?= $result['quantite_matiere_premiere'] * $result['prix_unite_matiere_premiere'] ?></td>
+                <td><button id="delete_command_button_<?= $id_command ?>" onclick="deleteCommand(<?= $id_command ?>);">Supprimer</button></td>
             </tr>
         <?php
+    }
+    if($commandes === [])
+    { ?>
+        <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+        </tr>
+      <?php
     }
     ?>
         </table>

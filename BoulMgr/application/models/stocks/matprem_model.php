@@ -84,6 +84,11 @@ class Matprem_model extends CI_Model {
         $error = $this->db->insert("commande_matiere_premiere", $array);
         return $error;
     }
+
+    function deleteCommand($idCommand)
+    {
+        return $this->db->delete("commande_matiere_premiere", array("id_commande_matiere_premiere" => $idCommand));
+    }
 }
 
 ?>

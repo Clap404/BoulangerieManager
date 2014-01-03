@@ -32,6 +32,34 @@ function sendCommand(data, errorMessage)
     xhr.send(JSON.stringify(data));
 }
 
+function deleteCommand(id_command)
+{
+    document.getElementById("delete_command_button_" + id_command).disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/deleteCommand/" + id_command, true);
+
+    var stringError = "Erreur lors de la suppression de la commande";
+    errorMessage = document.getElementById("error");
+
+    xhr.onreadystatechange = function (oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status != 200)
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.onloadend = function () {
+        document.getElementById("delete_command_button_" + id_command).disabled = false;
+
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+            location.reload();
+        else
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.send();
+}
+
 function saveCommand(id_fourn)
 {
     var data = {};
