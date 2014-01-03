@@ -248,7 +248,7 @@ function fillPopup(data)
 
     popupContent += "<div id='div_command' style='display: none;'>" +
                         "<b>Quantité à commander : </b><input id='qte_command'></input><br>" +
-                        "<b>Prix total : </b><span id='prix_total_command'></span>" +
+                        "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
                     "</div>";
 
     popup.innerHTML = popupContent;
