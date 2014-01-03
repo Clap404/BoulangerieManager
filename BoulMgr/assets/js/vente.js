@@ -68,10 +68,9 @@ function checkValidity() {
     for (var i = 0; i < products.length; i ++) {
         var val = products[i].children[5].value;
         var dispo = parseInt(products[i].children[9].getAttribute("value"), 10);
-        intval = parseInt(val, 10);
-        if (intval >= dispo) {
-            intval = dispo;
-        }
+        var intval = parseInt(val, 10);
+
+        //Ici, on trouve la bonne valeur
         if (val !== intval.toString() ||
                             typeof intval === 'undefined' ||
                             intval === null ||
@@ -79,14 +78,19 @@ function checkValidity() {
                             intval < 0 ) {
 
             intval = 0;
-            products[i].className = "product";
-        } else if (intval === 0) {
+        } else if (intval >= dispo) {
+            intval = dispo;
+        }
+
+        //ici on trouve si le produit est actif
+        if (intval === 0) {
             products[i].className = "product";
         } else {
             products[i].className = "product-active";
         }
-        if (intval >= dispo) {
-            intval = dispo;
+
+        //et enfin, on regarde si c'est hors stock ou pas
+        if (intval === dispo) {
             products[i].className += " product-depleted";
         }
         products[i].children[5].value = intval;
