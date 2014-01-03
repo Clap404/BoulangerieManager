@@ -79,11 +79,14 @@ if(count($matprem) != 0)
             <tr>
                 <td><?= $result['id_commande_matiere_premiere'] ?></td>
                 <td><?= $result['date_commande_matiere_premiere'] ?></td>
-                <td><?= $result['nom_fournisseur'] ?></td>
-                <td><?= $result['quantite_matiere_premiere'] ?></td>
-                <td><?= $result['prix_unite_matiere_premiere'] ?></td>
+                <td id="nom_fourn_command_<?= $id_command ?>"><?= $result['nom_fournisseur'] ?></td>
+                <td id="qte_command_<?= $id_command ?>"><?= $result['quantite_matiere_premiere'] ?></td>
+                <td id="prix_unite_command_<?= $id_command ?>"><?= $result['prix_unite_matiere_premiere'] ?></td>
                 <td><?= $result['quantite_matiere_premiere'] * $result['prix_unite_matiere_premiere'] ?></td>
-                <td><button id="delete_command_button_<?= $id_command ?>" onclick="deleteCommand(<?= $id_command ?>);">Supprimer</button></td>
+                <td>
+                    <button id="modify_command_button_<?= $id_command ?>" onclick="modifyCommand(<?= $id_command.','.$result["id_fournisseur"] ?>);">Modifier</button>
+                    <button id="delete_command_button_<?= $id_command ?>" onclick="deleteCommand(<?= $id_command ?>);">Supprimer</button>
+                </td>
             </tr>
         <?php
     }

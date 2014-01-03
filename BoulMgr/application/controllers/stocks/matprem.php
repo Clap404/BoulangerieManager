@@ -41,7 +41,7 @@ class Matprem extends CI_Controller {
 
         // Check if $array is unidimensional
         if(is_array($changes) && count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
-            echo($this->model_matprem->updateModif($changes));
+            echo($this->model_matprem->updateMatprem($changes));
         else
             echo(0);
     }
@@ -85,6 +85,15 @@ class Matprem extends CI_Controller {
             return;
         }
         echo(0);
+    }
+
+    function modifyCommand()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $command = json_decode($json, true);
+        $command = $this->security->xss_clean($command);
+
+        echo($this->model_matprem->modifyCommand($command));
     }
 }
 ?>
