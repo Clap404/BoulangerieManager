@@ -48,7 +48,7 @@ function checkSaveModif()
     var button = document.getElementById("save_command");
     var qte = document.getElementById("qte_command");
 
-    var check = parseInt(qte.value) <= 0 || 1. * parseInt(qte.value) != parseFloat(qte.value);
+    var check = parseFloat(qte.value) <= 0 || isNaN(parseFloat(qte.value));
     button.disabled = check;
     return !check;
 }
@@ -60,7 +60,7 @@ function refreshTotalPrice()
     var qte = document.getElementById("qte_command");
 
 
-    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseInt(qte.value) || 0;
+    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseFloat(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
     checkSaveModif();
@@ -104,7 +104,7 @@ function fillPopup(id_fourn)
     div.appendChild(document.createElement("br"));
 
     var qte = document.createElement("b");
-    qte.appendChild(document.createTextNode("Quantité : "));
+    qte.appendChild(document.createTextNode("Quantité (en " + document.getElementById("abrev_unite").innerHTML + ") : "));
     div.appendChild(qte);
     var qte_input = document.createElement("input");
     qte_input.id = "qte_command";
@@ -147,4 +147,5 @@ function popupButton(id_fourn)
             positionStyle: 'fixed'
         });
     });
+    document.getElementById("qte_command").focus();
 }

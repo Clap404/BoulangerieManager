@@ -20,7 +20,7 @@ if(count($matprem) != 0)
             }
         ?>
         <tr>
-            <td><?= $matprem[0]['disponibilite_matiere_premiere']." ".$matprem[0]['abbreviation_unite']?> </td>
+            <td><?= $matprem[0]['disponibilite_matiere_premiere']." <span id='abrev_unite'>".$matprem[0]['abbreviation_unite']?></span></td>
         </tr>
     </table>
 

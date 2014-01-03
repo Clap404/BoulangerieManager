@@ -184,6 +184,7 @@ function switch2Command(id_fournisseur)
     var save_button = document.getElementById("save_button_popup");
     save_button.onclick = function(){saveCommand(id_fournisseur);};
     save_button.style.display = "inline";
+    save_button.disabled = true;
     document.getElementById("cancel_button_popup").style.display = "inline";
 
     var qte_input = document.getElementById("qte_command");
@@ -192,6 +193,7 @@ function switch2Command(id_fournisseur)
             document.getElementById("save_button_popup").click();
     }
     qte_input.onkeyup = function(){refreshTotalPrice();};
+    document.getElementById("qte_command").focus();
 }
 
 function checkSaveModif()
@@ -199,7 +201,7 @@ function checkSaveModif()
     var button = document.getElementById("save_button_popup");
     var qte = document.getElementById("qte_command");
 
-    var check = parseInt(qte.value) <= 0 || 1. * parseInt(qte.value) != parseFloat(qte.value);
+    var check = parseFloat(qte.value) <= 0 || isNaN(parseFloat(qte.value));
     button.disabled = check;
     return !check;
 }
@@ -210,7 +212,7 @@ function refreshTotalPrice()
     var price = document.getElementById("prix_min");
     var qte = document.getElementById("qte_command");
 
-    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseInt(qte.value) || 0;
+    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseFloat(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
     checkSaveModif();
@@ -247,7 +249,7 @@ function fillPopup(data)
     popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
     popupContent += "<div id='div_command' style='display: none;'>" +
-                        "<b>Quantité à commander : </b><input id='qte_command'></input><br>" +
+                        "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
                         "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
                     "</div>";
 
