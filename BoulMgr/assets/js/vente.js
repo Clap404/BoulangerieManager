@@ -69,6 +69,9 @@ function checkValidity() {
         var val = products[i].children[5].value;
         var dispo = parseInt(products[i].children[9].getAttribute("value"), 10);
         intval = parseInt(val, 10);
+        if (intval >= dispo) {
+            intval = dispo;
+        }
         if (val !== intval.toString() ||
                             typeof intval === 'undefined' ||
                             intval === null ||
@@ -82,9 +85,9 @@ function checkValidity() {
         } else {
             products[i].className = "product-active";
         }
-        if (intval >= dispo) {
+        if (intval >= dispo) {
             intval = dispo;
-            products[i].className = "product-depleted";
+            products[i].className += " product-depleted";
         }
         products[i].children[5].value = intval;
     }
