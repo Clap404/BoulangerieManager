@@ -70,6 +70,20 @@ class Matprem_model extends CI_Model {
         $error = $this->db->update('matiere_premiere');
         return $error;
     }
+
+    function getFournPrice($idMatprem, $idFourn)
+    {
+        $this->db->select('prix');
+        $query = $this->db->get_where('matiere_premiere_vendue_par_fournisseur', array('matiere_premiere_vendue_par_fournisseur.id_matiere_premiere' => $idMatprem, 'matiere_premiere_vendue_par_fournisseur.id_fournisseur' => $idFourn));
+
+        return $query->result_array();
+    }
+
+    function insertCommand($array)
+    {
+        $error = $this->db->insert("commande_matiere_premiere", $array);
+        return $error;
+    }
 }
 
 ?>

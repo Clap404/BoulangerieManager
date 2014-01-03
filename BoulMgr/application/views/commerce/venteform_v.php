@@ -23,6 +23,7 @@
     <div class="small-4 columns">
         <div class="cart">
             <h2>La selection</h2>
+            <div id="mobile"><div id="dim">
             <table class="summary">
                 <thead>
                     <tr>
@@ -54,12 +55,13 @@
 <?php foreach($clients as $client) :?>
                 <option <?php echo($client->id_client === $cli['id_client'] ? 'selected="selected"' : "")?> value="<?=$client->id_client?>"><?=$client->nom_client?> <?=$client->prenom_client?></option>
 <?php endforeach;?>
-            </select>
+            </select></div>
             <a href="<?=site_url()?>/commerce/vente/">
                 <button>Annuler</button>
             </a>
             <button onclick="resetAll();">RAZ</button>
             <button onclick="saveTicket();">Envoyer</button>
+                </div>
         </div>
     </div>
 </div>
@@ -67,9 +69,14 @@
 <script src="<?=$root?>/assets/js/vente.js"></script>
 <script defer>
 <?php foreach($prods_commande as $p) :?>
+    var disp = parseInt(
+        document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").
+            getAttribute("value"),
+    10);
+
+    document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").
+        setAttribute("value", disp + <?=$p->quantite_produit_vente?>);
     addQtyToProduct(<?=$p->quantite_produit_vente?>, <?=$p->id_produit?>);
-    var disp = parseInt(document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").getAttribute("value"), 10);
-    document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").setAttribute("value", disp + <?=$p->id_produit?>);
 <?php endforeach;?>
     var id_vente = <?=$id_vente?>;
     var rootURL = "<?=site_url()?>";

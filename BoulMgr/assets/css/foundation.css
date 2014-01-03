@@ -5336,9 +5336,20 @@ th.hide-for-touch {
  AJOUTS PERSONNELS #
 ####################
 */
+#content {
+    min-height: 774px;
+}
 
 footer {
   margin-top: 50px;
+  background: #333333;
+  color: #777777;
+  padding: 5px;
+  text-align: center;
+}
+
+footer p {
+    margin-bottom: 0px;
 }
 
 h1, h2 {
@@ -5379,8 +5390,38 @@ img:hover {
     display : inline-block;
     width : 200px;
     text-decoration: none;
+    margin-bottom: 2px;
+    border: 1px solid black;
 }
 
 .summary {
     margin-top: 81px;
 }
+
+
+h2{
+    margin-bottom: 100px;
+}
+
+#mobile {
+    position: fixed;
+}
+
+#dim {
+    width: 334px;
+}
+
+
+
+.product-name {
+    min-height: 74px;
+}
+
+.fournisseur table {
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+

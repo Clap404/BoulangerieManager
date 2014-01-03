@@ -8,7 +8,10 @@ class Vente_m extends CI_Model {
     }
 
     function liste_ventes() {
-        $sql = "SELECT *
+        $sql = "SELECT *,
+                    (case
+                        when date_vente between date('now') and date('now', '+1 day')
+                        then 'Y' else 'N' end) as today
                 FROM vente
                     NATURAL LEFT JOIN client
                     NATURAL LEFT JOIN vente_comprend_produit
@@ -18,10 +21,20 @@ class Vente_m extends CI_Model {
         return $query->result();
     }
 
+    function liste_single_vente($id_vente) {
+        $sql = "SELECT *
+                FROM vente
+                    NATURAL LEFT JOIN client
+                WHERE id_vente = $id_vente";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
     function liste_produits_pour($id_vente) {
-        $sql = "SELECT id_produit, quantite_produit_vente
+        $sql = "SELECT p.*, id_produit, quantite_produit_vente
                 FROM vente
                     NATURAL JOIN vente_comprend_produit
+                    NATURAL JOIN produit p
                 WHERE id_vente = $id_vente";
         $query = $this->db->query($sql);
         return $query->result();

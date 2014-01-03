@@ -58,5 +58,23 @@ class Matprem extends CI_Controller {
         else
             echo(0);
     }
+
+    function addCommand()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $command = json_decode($json, true);
+        $command = $this->security->xss_clean($command);
+
+        $prix = $this->model_matprem->getFournPrice($command["id_matiere_premiere"], $command["id_fournisseur"]);
+        if(count($prix) == 0)
+        {
+            echo(0);
+            return;
+        }
+        $command["prix_unite_matiere_premiere"] = $prix[0]["prix"];
+        $command["date_commande_matiere_premiere"] = date("Y-m-d H:i:s");
+
+        echo($this->model_matprem->insertCommand($command));
+    }
 }
 ?>

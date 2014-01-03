@@ -22,7 +22,6 @@ class Vente extends CI_Controller {
     }
 
     function form($id_vente = 0) {
-
         if ($id_vente === 0) {
             $data['prods_commande'] = [];           
             $data['cli'] = 0;
@@ -40,6 +39,19 @@ class Vente extends CI_Controller {
 
         $this->load->view('templates/header', $data);
         $this->load->view('commerce/venteform_v', $data);
+        $this->load->view('templates/footer');
+    }
+
+    function archive($id_vente = 0) {
+        $data['vente'] = $this->ventes->liste_single_vente($id_vente);
+        $data['produits'] = $this->ventes->liste_produits_pour($id_vente);
+        $data['title'] = "Récapitulatif de la vente";
+        if (count($data['vente']) === 0) {
+            show_404();
+        }
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('commerce/archive_v', $data);
         $this->load->view('templates/footer');
     }
 
