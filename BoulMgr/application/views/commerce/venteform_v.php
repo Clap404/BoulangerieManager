@@ -11,10 +11,11 @@
                 <br />
                 <button class="minus" onclick="addQtyToProduct(-1, <?=$produit['id_produit']?>);">-</button>
                 <button class="plus" onclick="addQtyToProduct(1, <?=$produit['id_produit']?>);">+</button>
-                <input class="qty" type="text" value="0" onchange="checkIfNewActive();" maxlength="2" />
+                <input class="qty" type="text" value="0" onchange="populateTable();" maxlength="2" />
                 <button class="empty" onclick="addQtyToProduct(-99, <?=$produit['id_produit']?>);">0</button>
                 <br />
                 <span class="prix" value="<?=$produit['prix_produit']?>"></span>
+                <span class="dispo" value="<?=$produit['disponibilite_produit']?>"></span>
             </div>
             <?php endforeach; ?>
         </div>
@@ -66,6 +67,8 @@
 <script src="<?=$root?>/assets/js/vente.js"></script>
 <script defer>
 <?php foreach($prods_commande as $p) :?>
+    var disp = parseInt(document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").getAttribute("value"), 10);
+    document.querySelector("#product-" + <?=$p->id_produit?> + " .dispo").setAttribute("value", disp + <?=$p->id_produit?>);
     addQtyToProduct(<?=$p->quantite_produit_vente?>, <?=$p->id_produit?>);
 <?php endforeach;?>
     var id_vente = <?=$id_vente?>;
