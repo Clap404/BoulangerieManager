@@ -43,6 +43,16 @@ function saveCommand(id_fourn)
     sendCommand(data,errorMessage);
 }
 
+function checkSaveModif()
+{
+    var button = document.getElementById("save_command");
+    var qte = document.getElementById("qte_command");
+
+    var check = parseInt(qte.value) <= 0 || 1. * parseInt(qte.value) != parseFloat(qte.value);
+    button.disabled = check;
+    return !check;
+}
+
 function refreshTotalPrice()
 {
     var totalPrice = document.getElementById("prix_total_command");
@@ -53,6 +63,7 @@ function refreshTotalPrice()
     totalPrice.innerHTML = parseFloat(price.innerHTML) * parseInt(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
+    checkSaveModif();
 }
 
 function fillPopup(id_fourn)
@@ -118,8 +129,9 @@ function fillPopup(id_fourn)
     div = document.createElement("div");
     var valider = document.createElement("button");
     valider.id = "save_command";
-    valider.onclick = function(){saveCommand(id_fourn);};
+    valider.onclick = function(){checkSaveModif() && saveCommand(id_fourn);};
     valider.appendChild(document.createTextNode("Valider"));
+    valider.disabled = true;
     div.appendChild(valider);
     popup.appendChild(div);
 }
