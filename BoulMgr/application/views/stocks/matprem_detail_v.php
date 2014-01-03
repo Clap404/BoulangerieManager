@@ -32,7 +32,7 @@ if(count($matprem) != 0)
         <tr>
             <th>ID Fournisseur</th>
             <th>Fournisseur</th>
-            <th>Prix</th>
+            <th>Prix (en €)</th>
         </tr>
     <?php
 
@@ -67,9 +67,9 @@ if(count($matprem) != 0)
                 <th>Numéro de commande</th>
                 <th>Date commande</th>
                 <th>Fournisseur</th>
-                <th>Quantité</th>
-                <th>Prix à l'unité (par <?= $matprem[0]['nom_unite'] ?>)</th>
-                <th>Prix total</th>
+                <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
+                <th>Prix à l'unité<br>(en € par <?= $matprem[0]['nom_unite'] ?>)</th>
+                <th>Prix total<br>(en €)</th>
             </tr>
     <?php
 

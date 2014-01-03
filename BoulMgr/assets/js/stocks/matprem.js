@@ -245,7 +245,7 @@ function fillPopup(data)
     popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
     popupContent += '</table>';
 
-    popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€<br/>";
+    popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
     popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
     popupContent += "<div id='div_command' style='display: none;'>" +
