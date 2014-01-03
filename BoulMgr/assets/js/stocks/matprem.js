@@ -5,6 +5,8 @@ function back2Normal(id)
         var popup_id = document.getElementById("popup_id").innerHTML;
         // Change le nom de la matière première dans la liste des matprem
         document.getElementById("name_" + popup_id).innerHTML = document.getElementById("name_popup").innerHTML;
+        document.getElementById("details_button_popup").style.display = "inline";
+        document.getElementById("commander_button_popup").style.display = "inline";
         ajaxQuickDetails(popup_id);
         return;
     }
@@ -115,8 +117,14 @@ function switch2ModifyPopup()
     name.style.display = "none";
     document.getElementById("modif_name_input_popup").style.display = "inline";
 
+    document.getElementById("details_button_popup").style.display = "none";
+    document.getElementById("commander_button_popup").style.display = "none";
     document.getElementById("modif_button_popup").style.display = "none";
-    document.getElementById("save_button_popup").style.display = "inline";
+
+    var id_matprem = document.getElementById("popup_id").innerHTML;
+    var save_button = document.getElementById("save_button_popup");
+    save_button.onclick = function(){saveModifPopup(id_matprem);};
+    save_button.style.display = "inline";
     document.getElementById("cancel_button_popup").style.display = "inline";
 }
 
@@ -133,9 +141,10 @@ function fillPopup(data)
     popupContent += "<span id='error_popup'></span>";
 
     popupContent += "<div style='float: right; margin-right: 10%;'>" +
-                        "<button onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button><br>" +
+                        "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button>"+
+                        "<button id='commander_button_popup'>Commander</button><br>" +
                         "<button id='modif_button_popup' onclick='switch2ModifyPopup();'>Modifier</button>" +
-                        "<button style='display:none;' id='save_button_popup' onclick='saveModifPopup(\"" + matprem["id_matiere_premiere"] + "\");'>Sauvegarder</button>" +
+                        "<button style='display:none;' id='save_button_popup'>Sauvegarder</button>" +
                         "<button style='display:none;' id='cancel_button_popup' onclick='ajaxQuickDetails(\"" + matprem['id_matiere_premiere'] + "\");'>Annuler</button>" +
                     "</div>";
 
