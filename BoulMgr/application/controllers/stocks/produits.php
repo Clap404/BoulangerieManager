@@ -18,7 +18,7 @@ class Produits extends CI_Controller {
 
     function remove($id) {
         $this->prod->remove_produit($id);
-        $this->index();
+        redirect('/stocks/produits/');
     }
 
     function ajoutproduit() {
@@ -52,13 +52,8 @@ class Produits extends CI_Controller {
             else {
                 echo "L'upload a échoué";
             }
-            $this->index();
+            redirect('/stocks/produits');
         }
-    }
-
-    function add($add) {
-        $this->prod->add_produit($add);
-        $this->index();
     }
 
     private function do_upload($field_name) {
@@ -70,6 +65,38 @@ class Produits extends CI_Controller {
 
         $this->load->library('upload', $config);
         return $this->upload->do_upload($field_name);
+    }
+
+    function modifproduit($id = 0) {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+       
+        $this->form_validation->set_rules('nom', 'nom', 'required');
+        $this->form_validation->set_rules('prix', 'prix', 'required');
+        $this->form_validation->set_rules('temps', 'temps', 'required');
+        if(isset($_POST['id_produit'])) {
+            $idtemp = $_POST['id_produit'];
+            $data['produit'] = $this->prod->get_prod_by_id($idtemp)[0];
+        }
+        else {
+            $data['produit'] = $this->prod->get_prod_by_id($id)[0];
+        }
+        $data['title'] = "Modifier produit";
+        if($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('stocks/produits_modif', $data);
+            $this->load->view('templates/footer');
+        }
+        else {
+            $id = $_POST['id_produit'];
+            $donnees = array(
+                'nom_produit' => $_POST['nom'],
+                'prix_produit' => $_POST['prix'],
+                'temps_preparation_produit' => $_POST['temps']
+            );
+            $this->prod->modif_produit($id, $donnees);
+            redirect('/stocks/produits/');
+        }
     }
 }
 

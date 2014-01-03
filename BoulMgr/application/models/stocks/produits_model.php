@@ -52,6 +52,17 @@ class Produits_model extends CI_Model {
         $query = $this->db->get('produit');
         return $query->result_array();
     }
+
+    function get_prod_by_id($id) {
+        $this->db->where('id_produit', $id);
+        $query = $this->db->get('produit');
+        return $query->result_array();
+    }
+
+    function modif_produit($id, $donnees) {
+        $this->db->where("id_produit", $id);
+        $this->db->update("produit", $donnees);
+    }
 }
 
 ?>
