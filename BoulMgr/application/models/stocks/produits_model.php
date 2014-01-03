@@ -42,6 +42,16 @@ class Produits_model extends CI_Model {
         $this->db->where("id_produit", $id);
         $this->db->delete("produit");
     }
+
+    function add_produit($donnees) {
+        $this->db->insert("produit", $donnees);
+    }
+
+    function get_next_id() {
+        $this->db->select_max('id_produit');
+        $query = $this->db->get('produit');
+        return $query->result_array();
+    }
 }
 
 ?>
