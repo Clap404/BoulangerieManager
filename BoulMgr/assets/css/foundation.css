@@ -5396,9 +5396,11 @@ h2{
     position: fixed;
 }
 
-#client {
-    width: 90%;
+#dim {
+    width: 334px;
 }
+
+
 
 .product-name {
     min-height: 74px;

@@ -23,7 +23,7 @@
     <div class="small-4 columns">
         <div class="cart">
             <h2>La selection</h2>
-            <div id="mobile">
+            <div id="mobile"><div id="dim">
             <table class="summary">
                 <thead>
                     <tr>
@@ -55,7 +55,7 @@
 <?php foreach($clients as $client) :?>
                 <option <?php echo($client->id_client === $cli['id_client'] ? 'selected="selected"' : "")?> value="<?=$client->id_client?>"><?=$client->nom_client?> <?=$client->prenom_client?></option>
 <?php endforeach;?>
-            </select>
+            </select></div>
             <a href="<?=site_url()?>/commerce/vente/">
                 <button>Annuler</button>
             </a>
