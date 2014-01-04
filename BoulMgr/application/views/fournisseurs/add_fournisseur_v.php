@@ -1,4 +1,4 @@
-<div id="pop_up" style="display:none;">
+<div class="pop_up" style="display:none;">
 
 <style type="text/css">
     textarea {
@@ -47,7 +47,7 @@
     ?>
     <script type="text/javascript">
 
-        document.querySelector("div#pop_up form").reset();
+        document.querySelector("div.pop_up form").reset();
 
         var fields = {
             dl : {
@@ -120,7 +120,7 @@
 
 
 <div id="addfourn">
-    <button class="button radius round" onclick="popupFormDiv('div#pop_up', null, 0.6, 'fixed' )" >Ajouter un fournisseur</button>
+    <button class="button radius round" onclick="popupFormDiv('div.pop_up', null, 0.6, 'fixed' )" >Ajouter un fournisseur</button>
 </div>
 
 <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>

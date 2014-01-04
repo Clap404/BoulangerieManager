@@ -17,7 +17,7 @@ function popupFormAjax(url, requestMethod, closeButtonSelector, opacity, positio
     popup.setAttribute("id", "pop_up")
 
     //TODO, un CSS pour les popups avec l'id "pop_up" pour fonctionner avec la lib anthony 
-    popup.style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;";
+    // popup.style="width: 600px; height: 400px; padding: 20px; background-color: white;";
 
     var xhr = new XMLHttpRequest();
 
@@ -55,7 +55,7 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
     var popup = document.querySelector(popupSelector);
 
     //TODO, un CSS pour les popups avec l'id "pop_up" pour fonctionner avec la lib anthony 
-    popup.style="display: none; width: 640px; padding: 20px; background-color: white;";
+    // popup.setAttribute("style", "display: none; width: 640px; padding: 20px; background-color: white;");
 
     $(popup).bPopup({
         opacity: opacity,
