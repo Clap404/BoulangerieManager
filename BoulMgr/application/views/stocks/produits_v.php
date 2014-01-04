@@ -9,26 +9,31 @@ que les boutons modifier et supprimer, que les corners soit arrondis et que le t
 Il faudra également qu'au survol de la souris le background devienne bleu foncé (toujours comme les boutons).
 
 -->
-
-<a href=<?='"'.site_url().'/stocks/produits/ajoutproduit"'?>>
-<div class="profil" width="400" height="200">
-Ajouter un nouveau produit
-</div>
+<div id="addprod">
+<a class="button radius round" href=<?='"'.site_url().'/stocks/produits/ajoutproduit"'?>>
+    <div class="profil" width="400" height="200">
+        Ajouter un nouveau produit
+    </div>
 </a>
+</div>
 
 <?php foreach($produits as $info): ?>
 
 
-<div class="profil">
-    <h4><?= $info['nom_produit'] ?></h4>
-    <?php echo '<img src="'.base_url().'assets/images/produit/'.$info['id_produit'].'.jpg" />' ?>
-    <div class="info">
-        Prix : <?= $info['prix_produit'] ?> €<br />
-        Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
-        Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
+    <div class="profil">
+        <table>
+            <caption>
+                <h4><?= $info['nom_produit'] ?></h4></caption>
+            <tr><td>
+                    <?php echo '<img src="'.base_url().'assets/images/produit/'.$info['id_produit'].'.jpg" />' ?>
+                </td><td><div class="info">
+                        Prix : <?= $info['prix_produit'] ?> €<br />
+                        Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
+                        Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
+                    </div></td></td></tr><tr><td>
+                    <a href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a> </td><td><a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a></td></tr>
+        </table>
     </div>
-    <a href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a> <a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a>
-</div>
 
 <?php endforeach; ?>
 

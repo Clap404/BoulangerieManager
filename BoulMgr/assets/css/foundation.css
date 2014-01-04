@@ -5439,7 +5439,11 @@ table {
 p, code{
     text-align: center;
 }
-#tiquet, #addfourn {
+#tiquet, #addfourn, #addprod {
     margin: auto;
     text-align: center;
+}
+
+#addfourn {
+    margin-top: 10px;
 }

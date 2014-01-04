@@ -5,8 +5,8 @@
 <h2><?=$title?></h2>
 
 <div id="tiquet">
-<a href="<?=site_url()?>/commerce/vente/form">
-    <button >Enregistrer un nouveau tiquet</button>
+<a class="button radius round" href="<?=site_url()?>/commerce/vente/form">
+    Enregistrer un nouveau tiquet
 </a></div>
 <div>
 <?php
