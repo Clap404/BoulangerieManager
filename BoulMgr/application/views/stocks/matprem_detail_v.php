@@ -10,9 +10,9 @@ if(count($matprem) != 0)
     <table>
         <?php
             $imgpath = "assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg";
-            $imgaddr = base_url($imgpath);
             if(!file_exists(FCPATH . $imgpath))
                 $imgpath = "assets/images/empty.jpg";
+            $imgaddr = base_url($imgpath);
         ?>
         <tr>
             <td colspan="2"><img src="<?= $imgaddr ?>"/></td>
