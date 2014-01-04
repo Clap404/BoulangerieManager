@@ -24,11 +24,11 @@
 
                         <ul class="dropdown">
                             <li>
-                                <?= '<a href="'.site_url().'/commerce/vente">Ventes</a>' ?>
+                                <a href="<?=site_url()?>/commerce/vente">Ventes</a>
                             </li>
 
                             <li>
-                                <a href="#">Commandes</a>
+                                <a href="<?=site_url()?>/commerce/commande">Commandes</a>
                             </li>
                         </ul>
                     </li>
