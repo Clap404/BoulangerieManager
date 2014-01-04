@@ -20,54 +20,18 @@
     <!-- sélection du type de rue -->
 
     <input id="type_rue" list="type_rue_lst" style="width:20%; display:inline-block;" placeholder="type de voie" />
-    <datalist id="type_rue_lst">
-        <?php
-
-        foreach ($type_rue as $key => $value) {
-            echo "<option id='".$key."' value='".$value."'>\n";
-        }
-
-        ?>
-    </datalist>
-    <input type="hidden" id="id_type_rue" value="new">
+    <datalist id="type_rue_lst"></datalist>
 
     <!-- sélection du nom de rue -->
     <input id="nom_rue" list="nom_rue_lst" style="width:60%; display:inline-block;" placeholder="nom de la rue" />
-    <datalist id="nom_rue_lst">
-        <?php
+    <datalist id="nom_rue_lst"></datalist>
 
-        foreach ($nom_rue as $key => $value) {
-            echo "<option id='".$key."' value='".$value."'>\n";
-        }
-
-        ?>
-    </datalist>
-
-    <!-- sélection du code postal -->
-    <input id="code_postal" list="code_postal_lst" style="width:30%; display:inline-block;" placeholder="code postal" />
-    <datalist id="code_postal_lst">
-        <?php
-
-        foreach ($code_postal as $key => $value) {
-            echo "<option id='".$key."' value='".$value."'>\n";
-        }
-
-        ?>
-    </datalist>
-    <input type="hidden" id="id_code_postal" value="new">
+    <!-- code postal -->
+    <input id="code_postal" type="text" style="width:30%; display:inline-block;" placeholder="code postal" />
 
     <!-- sélection de la ville -->
     <input id="ville" list="ville_lst" style="width:60%; display:inline-block;" placeholder="ville" />
-    <datalist id="ville_lst">
-        <?php
-
-        foreach ($ville as $key => $value) {
-            echo "<option id='".$key."' value='".$value."'>\n";
-        }
-
-        ?>
-    </datalist>
-    <input type="hidden" id="id_ville" value="new">
+    <datalist id="ville_lst"></datalist>
     
     <textarea id="description_adresse" placeholder="description de l'adresse"></textarea>
 
@@ -85,30 +49,72 @@
 
         document.querySelector("div#pop_up form").reset();
 
-        document.querySelector("#ville").oninput = function(event){
-            var datalistToFill = document.querySelector("#ville_lst"); 
+        var fields = {
+            dl : {
+                ville : document.querySelector("#ville_lst"),
+                type_rue : document.querySelector("#type_rue_lst"),
+                nom_rue : document.querySelector("#nom_rue_lst")
+            },
+            in : {
+                ville : document.querySelector("#ville"),
+                type_rue : document.querySelector("#type_rue"),
+                nom_rue : document.querySelector("#nom_rue"),
+                numero_rue : document.querySelector("#numero_rue"),
+                code_postal : document.querySelector("#code_postal")
+            }
+        }
+
+        fields.in.ville.oninput = function(event){
+            var datalistToFill = fields.dl.ville; 
             
-            if(this.value.length === 1){
+            if( firstCharChanged(this) ) {
                 setDatalistOptions(
                     datalistToFill,
-                    "http://localhost:8080/BDD/BoulangerieManager/BoulMgr/index.php/adresses/liste_ville/" + this.value ,
-                    "id_ville",
+                    "<?= base_url('/index.php/adresses/liste_ville') ?>/" + this.value ,
                     "nom_ville"
                 );
             }
         }
 
-        document.querySelector("input#type_rue").onchange = function(){
-            dataListWithId("type_rue");
+        fields.in.type_rue.onfocus = function(){
+                var datalistToFill = fields.dl.type_rue; 
+                if (!datalistToFill.hasChildNodes()) {
+                setDatalistOptions(
+                    datalistToFill,
+                    "<?= base_url('/index.php/adresses/liste_type_rue') ?>",
+                    "nom_type_voie"
+                );
+            }
         }
 
-        document.querySelector("input#code_postal").onchange = function(){
-            dataListWithId("code_postal");
+        fields.in.nom_rue.oninput = function(event){
+            var datalistToFill = fields.dl.nom_rue; 
+            
+            if( firstCharChanged(this) ) {
+                setDatalistOptions(
+                    datalistToFill,
+                    "<?= base_url('/index.php/adresses/liste_nom_rue') ?>/" + this.value ,
+                    "nom_voie_adresse"
+                );
+            }
         }
 
-        document.querySelector("input#ville").onchange = function(){
-            dataListWithId("ville");
+        fields.in.ville.onchange = function() {
+            setInputValue(
+                fields.in.code_postal,
+                "<?= base_url('/index.php/adresses/postal_by_ville') ?>/" + fields.in.ville.value ,
+                "code_postal"
+            );
         }
+
+        fields.in.code_postal.onchange = function() {
+            setInputValue(
+                fields.in.ville,
+                "<?= base_url('/index.php/adresses/ville_by_postal') ?>/" + fields.in.code_postal.value ,
+                "nom_ville"
+            );
+        }
+
     </script>
 </div>
 

@@ -16,17 +16,17 @@ class Adresses_m extends CI_Model {
 
     function ville_by_postal($postal) {
         $sql = "SELECT ville.nom_ville FROM ville
-            WHERE ville.code_postal LIKE ? ;";
+            WHERE ville.code_postal = ? ;";
 
-        $query = $this->db->query($sql, array($postal."%"));
+        $query = $this->db->query($sql, array($postal));
         return $query->result_array();
     }
 
     function postal_by_ville($ville) {
         $sql = "SELECT ville.code_postal FROM ville
-            WHERE ville.nom_ville LIKE ? ;";
+            WHERE ville.nom_ville = ? ;";
 
-        $query = $this->db->query($sql, array($ville."%"));
+        $query = $this->db->query($sql, array($ville));
         return $query->result_array();
     }
 

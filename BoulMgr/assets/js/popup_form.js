@@ -72,24 +72,10 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
 
     Cette fonction efface toutes les options de la datalist à chaque appel avant de repeupler.
 
-    Cette fonction peut être utilisé avec la callback oninput:
-
-    document.querySelector("input#champ").oninput = function(event){
-            var datalistToFill = document.querySelector("datalist#champ"); 
-            
-            //appel uniquement lorsqu'une seule lettre est présente dans l'input
-            if(this.value.length === 1){
-                setDatalistOptions(
-                    datalistToFill,
-                    "http://url/" + this.value ,
-                    "id_champ",
-                    "nom_champ"
-                );
-            }
-        }
+    Cette fonction peut être utilisé avec la callback oninput
 */
 
-var setDatalistOptions = function(datalistToFill, requestUrl, putInId, putInValue) {
+var setDatalistOptions = function(datalistToFill, requestUrl, putInValue) {
 
     //remove already present option nodes
     while( datalistToFill.hasChildNodes() ){
@@ -106,7 +92,6 @@ var setDatalistOptions = function(datalistToFill, requestUrl, putInId, putInValu
 
             for (var i = 0; i < responseArray.length ; i ++) {
                 var newOption = document.createElement("option");
-                newOption.id = responseArray[i][putInId];
                 newOption.value = responseArray[i][putInValue];
 
                 datalistToFill.appendChild(newOption);
@@ -118,4 +103,31 @@ var setDatalistOptions = function(datalistToFill, requestUrl, putInId, putInValu
     xhr.open("GET", requestUrl, true);
     xhr.send();
 
+}
+
+var setInputValue = function(inputTofill, requestUrl, putInValue) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status == 200){
+            var responseArray = JSON.parse(xhr.responseText);
+            inputTofill.value = responseArray[0][putInValue];
+        }
+
+    };
+
+    xhr.open("GET", requestUrl, true);
+    xhr.send();
+}
+
+var firstCharChanged = function(input) {
+    if(typeof(input.last1stChar) == "undefined" ) { input.last1stChar = null}
+
+    if(input.value.length === 1 && input.last1stChar !== input.value) {
+        input.last1stChar = input.value;
+        return true;
+    }
+
+    return false;
 }
