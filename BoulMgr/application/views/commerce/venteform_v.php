@@ -22,7 +22,7 @@
     </div>
     <div class="small-4 columns">
         <div class="cart">
-            <h2>La selection</h2>
+            <h2 >La selection</h2>
             <div id="mobile"><div id="dim">
             <table class="summary">
                 <thead>

@@ -140,7 +140,7 @@
 </div>
 
 
-<div>
+<div id="addfourn">
     <button onclick="popupFormDiv('div#pop_up', null, 0.6, 'fixed' )" >Ajouter un fournisseur</button>
 </div>
 

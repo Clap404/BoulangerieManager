@@ -1,5 +1,5 @@
 <h2>Fournisseurs</h2>
-<div class="small-4 small-centered columns"><div>
+
 <?php
     $this->table->set_heading("ID", "Nom du fournisseur", "Ville", "Numéro de téléphone", "Fiche détaillée");
 
@@ -15,4 +15,4 @@
 
     echo $this->table->generate(); 
 ?>
-</div>
+
