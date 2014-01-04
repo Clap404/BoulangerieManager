@@ -342,4 +342,49 @@ begin
     where id_vente = old.id_vente;
 end;
 
+-- Update du prix d'une commande quand on lui ajoute / supprime / modifie un produit associé
+
+create trigger insertCommandePrix
+    after insert
+    on commande_contient_produit
+begin
+    update commande
+    set prix_total = (
+        select sum(prix_produit * quantite_produit_commande)
+        from commande_contient_produit
+            natural join produit
+        where id_commande = new.id_commande
+    )
+    where id_commande = new.id_commande;
+end;
+
+
+create trigger updateCommandePrix
+    after update
+    on commande_contient_produit
+begin
+    update commande
+    set prix_total = (
+        select sum(prix_produit * quantite_produit_commande)
+        from commande_contient_produit
+            natural join produit
+        where id_commande = old.id_commande
+    )
+    where id_commande = old.id_commande;
+end;
+
+
+create trigger deleteCommandePrix
+    after delete
+    on commande_contient_produit
+begin
+    update commande
+    set prix_total = (
+        select sum(prix_produit * quantite_produit_commande)
+        from commande_contient_produit
+            natural join produit
+        where id_commande = old.id_commande
+    )
+    where id_commande = old.id_commande;
+end;
 
