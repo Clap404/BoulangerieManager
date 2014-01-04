@@ -1,7 +1,7 @@
 <h3>Matières premières</h3>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
-<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
+<div class="pop_up" id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
 
 <?php
 if(count($matprem) != 0)

@@ -20,20 +20,17 @@ class Produits_model extends CI_Model {
                             NATURAL LEFT JOIN (
                                 SELECT *
                                 FROM produit_est_produit
-                                WHERE date_production
-                                    BETWEEN date('now') AND date('now', '+1 day'))
+                                WHERE date(date_production) = date('now'))
                             NATURAL LEFT JOIN (
                                 SELECT ccp.*
                                 FROM commande_contient_produit ccp
                                     NATURAL JOIN commande
-                                WHERE date_livraison
-                                    BETWEEN date('now') AND date('now', '+1 day'))
+                                WHERE date(date_livraison) = date('now'))
                             NATURAL LEFT JOIN (
                                 SELECT vcp.*
                                 FROM vente_comprend_produit vcp
                                     NATURAL JOIN vente
-                                WHERE date_vente
-                                    BETWEEN date('now') AND date('now', '+1 day'))
+                                WHERE date(date_vente) = date('now'))
                     GROUP BY p1.id_produit);";
 
 

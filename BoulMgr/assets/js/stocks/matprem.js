@@ -62,6 +62,7 @@ function saveAddMatprem()
 
     var data = {};
     data["nom_matiere_premiere"] = document.getElementById("nom_add_matiere_premiere").value;
+    data["abbreviation_unite"] = document.getElementById("unite_input").value;
     var errorMessage = document.getElementById("error_popup");
     sendAddMatprem(data, errorMessage);
 }
@@ -75,6 +76,20 @@ function saveCommand(id_fourn)
 
     var errorMessage = document.getElementById("error_popup");
     sendCommand(data,errorMessage);
+}
+
+function getListUnites()
+{
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/jsonListUnites", true);
+
+    xhr.onloadend = function () {
+        if (xhr.readyState == 4 && xhr.status == 200)
+            listUnites(xhr.responseText);
+    };
+
+    xhr.send();
 }
 
 function sendAddMatprem(data, errorMessage)
@@ -96,6 +111,7 @@ function sendAddMatprem(data, errorMessage)
     xhr.onloadend = function () {
         document.getElementById("save_button_popup").disabled = false;
 
+        console.log("Response : " + xhr.responseText);
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
         {
             console.log("Response : " + xhr.responseText);
@@ -104,7 +120,7 @@ function sendAddMatprem(data, errorMessage)
             });
             location.reload();
         }
-        else if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === -1)
+        else if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText == -1)
             errorMessage.innerHTML = "Erreur, le nom de la matière première existe déjà.";
         else
             errorMessage.innerHTML = stringError;
@@ -257,8 +273,10 @@ function checkSaveAddMatprem()
 {
     var button = document.getElementById("save_button_popup");
     var name = document.getElementById("nom_add_matiere_premiere");
+    var unite = document.getElementById("unite_input");
 
     var check = ($.trim(name.value).length && isNaN(parseInt(name.value)));
+    var check = check && ($.trim(unite.value).length && isNaN(parseInt(unite.value)));
     button.disabled = !check;
     return check;
 }
@@ -273,6 +291,28 @@ function refreshTotalPrice()
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
     checkSaveModif();
+}
+
+function listUnites(list_unites_json)
+{
+    console.log(list_unites_json);
+    var list_unites = JSON.parse(list_unites_json);
+
+    if(list_unites === [])
+        return;
+
+    var html_list_unites = document.createElement("datalist");
+    html_list_unites.id="list_unite";
+    var option;
+
+    for(i in list_unites)
+    {
+        option = document.createElement("option");
+        option.value = list_unites[i]["abbreviation_unite"];
+        html_list_unites.appendChild(option);
+    }
+
+    document.getElementById("pop_up").appendChild(html_list_unites);
 }
 
 function fillPopupDetails(data)
@@ -320,7 +360,7 @@ function fillPopupAdd()
 
     var popupContent = "<h3>Ajout d'une matière première</h3>"
 
-    popupContent += "<span id='error_popup'></span>";
+    popupContent += "<span id='error_popup'></span><br>";
 
     // TODO CSS : Mettre l'input plus long, et mettre la police plus grosse
     popupContent += "<input id='nom_add_matiere_premiere'i placeholder='Nom de la matière première'></h4>";
@@ -329,6 +369,8 @@ function fillPopupAdd()
                             '<td colspan="2"><img src="' + base_url + 'assets/images/empty.jpg"/></td>' +
                     '</tr>';
     popupContent += '</table>';
+
+    popupContent += "<input list='list_unite' type='text' id='unite_input'>"
 
     popupContent += "<div>" +
                         "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button> " +
@@ -383,12 +425,20 @@ function popupAddButton()
 {
     fillPopupAdd();
 
+    getListUnites();
     var name = document.getElementById("nom_add_matiere_premiere");
-    name.onkeydown = function(event){
+    var unite = document.getElementById("unite_input");
+    var onkeydownFunc = function(event){
         if (event.keyCode == 13)
             document.getElementById("save_button_popup").click();
     }
-    name.onkeyup = function(){checkSaveAddMatprem();};
+    var oninputFunc = function(){checkSaveAddMatprem();};
+
+    name.onkeydown = onkeydownFunc;
+    unite.onkeydown = onkeydownFunc;
+
+    name.oninput = oninputFunc;
+    unite.oninput = oninputFunc;
 
     popup();
 }

@@ -7,18 +7,6 @@ class Matprem extends CI_Controller {
         $this->load->helper('url');
     }
 
-    function addMatprem()
-    {
-        $json = trim(file_get_contents('php://input'));
-        $matprem = json_decode($json, true);
-        $matprem = $this->security->xss_clean($matprem);
-
-        // temp line for test
-        $matprem["id_unite"] = 1;
-
-        echo($this->model_matprem->insert_matprem($matprem));
-    }
-
     function index()
     {
         $data['matprem'] = $this->model_matprem->print_all();
@@ -43,6 +31,43 @@ class Matprem extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('stocks/matprem_detail_v', $data);
         $this->load->view('templates/footer');
+    }
+
+    function addMatprem()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $array = json_decode($json, true);
+        $array = $this->security->xss_clean($array);
+
+        if(!array_key_exists("abbreviation_unite", $array))
+        {
+            echo(0);
+            return;
+        }
+        else if($this->model_matprem->matpremNameAlreadyExists($array["nom_matiere_premiere"]))
+        {
+            echo(-1);
+            return;
+        }
+
+        $id = $this->model_matprem->getIdUniteByName($array["abbreviation_unite"]);
+        if($id === [])
+        {
+            $unite = [];
+            $unite["abbreviation_unite"] = $array["abbreviation_unite"];
+            $unite["nom_unite"] = $unite["abbreviation_unite"];
+            $matprem["id_unite"] = $this->model_matprem->insertUnite($unite);
+            if($matprem["id_unite"] === -1)
+            {
+                echo(0);
+                return;
+            }
+        }
+        else
+            $matprem["id_unite"] = $id[0]["id_unite"];
+
+        $matprem["nom_matiere_premiere"] = $array["nom_matiere_premiere"];
+        echo($this->model_matprem->insert_matprem($matprem));
     }
 
     function modify()
@@ -75,7 +100,7 @@ class Matprem extends CI_Controller {
     {
         $unites = $this->model_matprem->printUnites();
         if(count($unites) != 0)
-            echo(json_encode($result));
+            echo(json_encode($unites));
         else
             echo(0);
     }

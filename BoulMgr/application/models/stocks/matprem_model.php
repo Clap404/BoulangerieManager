@@ -36,6 +36,12 @@ class Matprem_model extends CI_Model {
         return $query->result_array();
     }
 
+    function printUnites()
+    {
+        $query = $this->db->get("unite");
+        return $query->result_array();
+    }
+
     function printFournisseurs($id)
     {
         /* Select id_fournisseur, nom_fournisseur, prix
@@ -77,12 +83,40 @@ class Matprem_model extends CI_Model {
         return $error;
     }
 
+    function matpremNameAlreadyExists($name)
+    {
+        $this->db->select('nom_matiere_premiere');
+        $query = $this->db->get_where('matiere_premiere', array('nom_matiere_premiere' => $name));
+
+        $result = $query->result_array();
+        return !($result === []);
+    }
+
     function getFournPrice($idMatprem, $idFourn)
     {
         $this->db->select('prix');
         $query = $this->db->get_where('matiere_premiere_vendue_par_fournisseur', array('matiere_premiere_vendue_par_fournisseur.id_matiere_premiere' => $idMatprem, 'matiere_premiere_vendue_par_fournisseur.id_fournisseur' => $idFourn));
 
         return $query->result_array();
+    }
+
+    function getIdUniteByName($abbreviation_unite)
+    {
+        $this->db->select('id_unite');
+        $query = $this->db->get_where('unite', array('abbreviation_unite' => $abbreviation_unite));
+
+        return $query->result_array();
+    }
+
+    function insertUnite($array)
+    {
+        $error = $this->db->insert("unite", $array);
+        $insert_id = $this->db->insert_id();
+
+        if(!$error)
+            return -1;
+
+        return $insert_id;
     }
 
     function insertCommand($array)

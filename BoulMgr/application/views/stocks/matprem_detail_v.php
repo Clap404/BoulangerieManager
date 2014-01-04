@@ -1,7 +1,7 @@
 <h3><?= $title ?></h3>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
-<div id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
+<div class="pop_up" id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
 
 <?php
 if(count($matprem) != 0)
@@ -39,7 +39,7 @@ if(count($matprem) != 0)
         ?>
             <tr>
                 <td><?= $result['id_fournisseur'] ?></td>
-                <td id='nom_fourn_<?= $id_fourn ?>'><?= $result['nom_fournisseur'] ?></td>
+                <td><?= anchor("fournisseurs/profil/".$id_fourn, $result['nom_fournisseur'], "id='nom_fourn_".$id_fourn."'") ?></td>
                 <td id='prix_fourn_<?= $id_fourn ?>'><?= $result['prix'] ?></td>
                 <td><button onclick="popupButton(<?= $id_fourn ?>);">Commander</button></td>
             </tr>
@@ -77,7 +77,7 @@ if(count($matprem) != 0)
             <tr>
                 <td><?= $result['id_commande_matiere_premiere'] ?></td>
                 <td><?= $result['date_commande_matiere_premiere'] ?></td>
-                <td id="nom_fourn_command_<?= $id_command ?>"><?= $result['nom_fournisseur'] ?></td>
+                <td><?= anchor("fournisseurs/profil/".$result['id_fournisseur'], $result['nom_fournisseur'], "id='nom_fourn_command".$id_command."'") ?></td>
                 <td id="qte_command_<?= $id_command ?>"><?= $result['quantite_matiere_premiere'] ?></td>
                 <td id="prix_unite_command_<?= $id_command ?>"><?= $result['prix_unite_matiere_premiere'] ?></td>
                 <td><?= $result['quantite_matiere_premiere'] * $result['prix_unite_matiere_premiere'] ?></td>
