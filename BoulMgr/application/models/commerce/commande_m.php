@@ -16,7 +16,7 @@ class Commande_m extends CI_Model {
                     NATURAL LEFT JOIN client
                     NATURAL LEFT JOIN commande_contient_produit
                 GROUP BY commande.id_commande
-                ORDER BY commande.date_livraison DESC;";
+                ORDER BY commande.date_livraison;";
         $query = $this->db->query($sql);
         return $query->result();
     }
