@@ -64,41 +64,6 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
 }
 
 /*
-l'attribut selector prend l'id de l'input lié à la datalist
-
-fonctionne avec une datalist et un champ hidden destiné à contenir l'id
-de la ligne choisie ou bien la chaine new "new"
-les balises doivent être désignées comme suit:
-    <input id="[selector]" list="[selector]_lst"/>
-    <datalist id="[selector]_lst">
-        <?php
-
-        foreach ($rue as $key => $value) {
-            echo "<option id='".$key."' value='".$value."'>\n";
-        }
-
-        ?>
-    </datalist>
-    <input type="hidden" id="id_[selector]" value="new">
-*/
-
-var dataListWithId = function(selector) {
-
-    var idChamp = document.querySelector('#id_'+selector);
-    var value = document.querySelector('#'+selector).value;
-
-    var selectedOption = document.querySelector('datalist#'+selector+'_lst option[value="'+value+'"]')
-    if (selectedOption) {
-        var id = selectedOption.id;
-        idChamp.value = id;
-    }
-    else{
-        idChamp.value = "new";
-    }
-    alert(idChamp.value);
-}
-
-/*
     Permet de remplir les options d'une datalist à partir d'un array d'objets JSON
     datalistTofill est le node de la datalist à peupler
     requestUrl est l'URL vers laquelle doit être faite la requête
