@@ -32,7 +32,7 @@ class Clients_m extends CI_Model {
     }
 
     function adresses_client($id_client){
-        $sql = "SELECT numero_voie_adresse, nom_type_voie, nom_voie_adresse,
+        $sql = "SELECT id_adresse, numero_voie_adresse, nom_type_voie, nom_voie_adresse,
                     code_postal, nom_ville, description_adresse
                 FROM client
                     natural join client_habite_adresse
