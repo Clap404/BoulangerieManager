@@ -62,3 +62,95 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
         positionStyle: positionStyle
     });
 }
+
+/*
+l'attribut selector prend l'id de l'input lié à la datalist
+
+fonctionne avec une datalist et un champ hidden destiné à contenir l'id
+de la ligne choisie ou bien la chaine new "new"
+les balises doivent être désignées comme suit:
+    <input id="[selector]" list="[selector]_lst"/>
+    <datalist id="[selector]_lst">
+        <?php
+
+        foreach ($rue as $key => $value) {
+            echo "<option id='".$key."' value='".$value."'>\n";
+        }
+
+        ?>
+    </datalist>
+    <input type="hidden" id="id_[selector]" value="new">
+*/
+
+var dataListWithId = function(selector) {
+
+    var idChamp = document.querySelector('#id_'+selector);
+    var value = document.querySelector('#'+selector).value;
+
+    var selectedOption = document.querySelector('datalist#'+selector+'_lst option[value="'+value+'"]')
+    if (selectedOption) {
+        var id = selectedOption.id;
+        idChamp.value = id;
+    }
+    else{
+        idChamp.value = "new";
+    }
+    alert(idChamp.value);
+}
+
+/*
+    Permet de remplir les options d'une datalist à partir d'un array d'objets JSON
+    datalistTofill est le node de la datalist à peupler
+    requestUrl est l'URL vers laquelle doit être faite la requête
+    putInId et putInValue sont respectivement les noms des attributs dans les objets JSON
+        à placer dans id et value des <option>
+
+    Cette fonction efface toutes les options de la datalist à chaque appel avant de repeupler.
+
+    Cette fonction peut être utilisé avec la callback oninput:
+
+    document.querySelector("input#champ").oninput = function(event){
+            var datalistToFill = document.querySelector("datalist#champ"); 
+            
+            //appel uniquement lorsqu'une seule lettre est présente dans l'input
+            if(this.value.length === 1){
+                setDatalistOptions(
+                    datalistToFill,
+                    "http://url/" + this.value ,
+                    "id_champ",
+                    "nom_champ"
+                );
+            }
+        }
+*/
+
+var setDatalistOptions = function(datalistToFill, requestUrl, putInId, putInValue) {
+
+    //remove already present option nodes
+    while( datalistToFill.hasChildNodes() ){
+        datalistToFill.removeChild(datalistToFill.lastChild);
+    }
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status == 200){
+
+            var responseArray = JSON.parse(xhr.responseText);
+
+            for (var i = 0; i < responseArray.length ; i ++) {
+                var newOption = document.createElement("option");
+                newOption.id = responseArray[i][putInId];
+                newOption.value = responseArray[i][putInValue];
+
+                datalistToFill.appendChild(newOption);
+            };
+        }
+
+    };
+
+    xhr.open("GET", requestUrl, true);
+    xhr.send();
+
+}

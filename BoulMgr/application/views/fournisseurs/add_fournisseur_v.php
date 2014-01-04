@@ -9,7 +9,6 @@
 
 <h3>Nouveau fournisseur</h3>
 <?php
-    $rue = array("1" => "toto", "2" => "tata", "3" => "tutu");
 
     echo form_open("fournisseurs/save");
 
@@ -24,7 +23,7 @@
     <datalist id="type_rue_lst">
         <?php
 
-        foreach ($rue as $key => $value) {
+        foreach ($type_rue as $key => $value) {
             echo "<option id='".$key."' value='".$value."'>\n";
         }
 
@@ -37,20 +36,19 @@
     <datalist id="nom_rue_lst">
         <?php
 
-        foreach ($rue as $key => $value) {
+        foreach ($nom_rue as $key => $value) {
             echo "<option id='".$key."' value='".$value."'>\n";
         }
 
         ?>
     </datalist>
-    <input type="hidden" id="id_nom_rue" value="new">
 
     <!-- sélection du code postal -->
     <input id="code_postal" list="code_postal_lst" style="width:30%; display:inline-block;" placeholder="code postal" />
     <datalist id="code_postal_lst">
         <?php
 
-        foreach ($rue as $key => $value) {
+        foreach ($code_postal as $key => $value) {
             echo "<option id='".$key."' value='".$value."'>\n";
         }
 
@@ -63,7 +61,7 @@
     <datalist id="ville_lst">
         <?php
 
-        foreach ($rue as $key => $value) {
+        foreach ($ville as $key => $value) {
             echo "<option id='".$key."' value='".$value."'>\n";
         }
 
@@ -87,42 +85,17 @@
 
         document.querySelector("div#pop_up form").reset();
 
-        /*
-        l'attribut selector prend l'id de l'input lié à la datalist
-
-        fonctionne avec une datalist et un champ hidden destiné à contenir l'id
-        de la ligne choisie ou bien la chaine new "new"
-        les balises doivent être désignées comme suit:
-            <input id="[selector]" list="[selector]_lst"/>
-            <datalist id="[selector]_lst">
-                <?php
-
-                foreach ($rue as $key => $value) {
-                    echo "<option id='".$key."' value='".$value."'>\n";
-                }
-
-                ?>
-            </datalist>
-            <input type="hidden" id="id_[selector]" value="new">
-        */
-        var dataListWithId = function(selector) {
-
-            var idChamp = document.querySelector('#id_'+selector);
-            var value = document.querySelector('#'+selector).value;
-
-            var selectedOption = document.querySelector('datalist#'+selector+'_lst option[value="'+value+'"]')
-            if (selectedOption) {
-                var id = selectedOption.id;
-                idChamp.value = id;
+        document.querySelector("#ville").oninput = function(event){
+            var datalistToFill = document.querySelector("#ville_lst"); 
+            
+            if(this.value.length === 1){
+                setDatalistOptions(
+                    datalistToFill,
+                    "http://localhost:8080/BDD/BoulangerieManager/BoulMgr/index.php/adresses/liste_ville/" + this.value ,
+                    "id_ville",
+                    "nom_ville"
+                );
             }
-            else{
-                idChamp.value = "new";
-            }
-            alert(idChamp.value);
-        }
-
-        document.querySelector("input#nom_rue").onchange = function(){
-            dataListWithId("nom_rue");
         }
 
         document.querySelector("input#type_rue").onchange = function(){
