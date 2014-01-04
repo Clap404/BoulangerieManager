@@ -17,6 +17,8 @@ if(count($matprem) != 0)
         <label for="switchOn">On</label>
     </div>
 
+    <td><button id="add_matprem" onclick="popupAddButton();">Ajouter</button></td>
+
     <!-- TODO CSS : Bold, or red color, something to alert the user !-->
     <div>
         <span id="error"></span>
@@ -42,7 +44,7 @@ if(count($matprem) != 0)
             echo('<tr>');
         ?>
                 <td>
-                    <a id="name_<?= $idMatprem ?>" onclick="popupButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
+                    <a id="name_<?= $idMatprem ?>" onclick="popupDetailsButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
                     <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()"></input>
                 </td>
                 <td><?= $dispo." ".$result["abbreviation_unite"] ?></td>

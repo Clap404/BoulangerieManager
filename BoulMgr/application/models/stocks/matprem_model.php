@@ -8,6 +8,12 @@ class Matprem_model extends CI_Model {
         $this->load->database();
     }
 
+    function insert_matprem($array)
+    {
+        $error = $this->db->insert("matiere_premiere", $array);
+        return $error;
+    }
+
     function print_all()
     {
         /* Select * from Matiere_premiere

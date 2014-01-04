@@ -7,6 +7,18 @@ class Matprem extends CI_Controller {
         $this->load->helper('url');
     }
 
+    function addMatprem()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $matprem = json_decode($json, true);
+        $matprem = $this->security->xss_clean($matprem);
+
+        // temp line for test
+        $matprem["id_unite"] = 1;
+
+        echo($this->model_matprem->insert_matprem($matprem));
+    }
+
     function index()
     {
         $data['matprem'] = $this->model_matprem->print_all();
@@ -54,6 +66,15 @@ class Matprem extends CI_Controller {
         $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
 
         if(count($result) != 0)
+            echo(json_encode($result));
+        else
+            echo(0);
+    }
+
+    function jsonListUnites()
+    {
+        $unites = $this->model_matprem->printUnites();
+        if(count($unites) != 0)
             echo(json_encode($result));
         else
             echo(0);

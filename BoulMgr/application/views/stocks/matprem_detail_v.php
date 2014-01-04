@@ -11,14 +11,12 @@ if(count($matprem) != 0)
         <?php
             $imgpath = "assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg";
             $imgaddr = base_url($imgpath);
-            if(file_exists(FCPATH . $imgpath)){
+            if(!file_exists(FCPATH . $imgpath))
+                $imgpath = "assets/images/empty.jpg";
         ?>
         <tr>
             <td colspan="2"><img src="<?= $imgaddr ?>"/></td>
         </tr>
-        <?php
-            }
-        ?>
         <tr>
             <td><?= $matprem[0]['disponibilite_matiere_premiere']." <span id='abrev_unite'>".$matprem[0]['abbreviation_unite']?></span></td>
         </tr>
