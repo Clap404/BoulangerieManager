@@ -7,6 +7,18 @@ class Matprem extends CI_Controller {
         $this->load->helper('url');
     }
 
+    function addMatprem()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $matprem = json_decode($json, true);
+        $matprem = $this->security->xss_clean($matprem);
+
+        // temp line for test
+        $matprem["id_unite"] = 1;
+
+        echo($this->model_matprem->insert_matprem($matprem));
+    }
+
     function index()
     {
         $data['matprem'] = $this->model_matprem->print_all();
@@ -41,7 +53,7 @@ class Matprem extends CI_Controller {
 
         // Check if $array is unidimensional
         if(is_array($changes) && count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
-            echo($this->model_matprem->updateModif($changes));
+            echo($this->model_matprem->updateMatprem($changes));
         else
             echo(0);
     }
@@ -54,6 +66,15 @@ class Matprem extends CI_Controller {
         $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
 
         if(count($result) != 0)
+            echo(json_encode($result));
+        else
+            echo(0);
+    }
+
+    function jsonListUnites()
+    {
+        $unites = $this->model_matprem->printUnites();
+        if(count($unites) != 0)
             echo(json_encode($result));
         else
             echo(0);
@@ -75,6 +96,25 @@ class Matprem extends CI_Controller {
         $command["date_commande_matiere_premiere"] = date("Y-m-d H:i:s");
 
         echo($this->model_matprem->insertCommand($command));
+    }
+
+    function deleteCommand($idCommand)
+    {
+        if(isset($idCommand))
+        {
+            echo($this->model_matprem->deleteCommand($idCommand));
+            return;
+        }
+        echo(0);
+    }
+
+    function modifyCommand()
+    {
+        $json = trim(file_get_contents('php://input'));
+        $command = json_decode($json, true);
+        $command = $this->security->xss_clean($command);
+
+        echo($this->model_matprem->modifyCommand($command));
     }
 }
 ?>

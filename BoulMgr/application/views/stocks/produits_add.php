@@ -1,5 +1,9 @@
 <h2>Ajouter un produit</h2>
 
+<!-- CSS à faire pour cette page
+Un formulaire classique avec des champs alignés avec les labels à gauche des input text.
+-->
+
 <?php
 
 echo validation_errors();

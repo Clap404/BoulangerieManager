@@ -1,3 +1,4 @@
+<div id="large">
 <div class="row">
     <div class="small-8 columns">
         <div class="product-list">
@@ -22,7 +23,7 @@
     </div>
     <div class="small-4 columns">
         <div class="cart">
-            <h2>La selection</h2>
+            <h2 >La selection</h2>
             <div id="mobile"><div id="dim">
             <table class="summary">
                 <thead>
@@ -65,7 +66,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <script src="<?=$root?>/assets/js/vente.js"></script>
 <script defer>
 <?php foreach($prods_commande as $p) :?>

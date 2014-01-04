@@ -8,6 +8,12 @@ class Matprem_model extends CI_Model {
         $this->load->database();
     }
 
+    function insert_matprem($array)
+    {
+        $error = $this->db->insert("matiere_premiere", $array);
+        return $error;
+    }
+
     function print_all()
     {
         /* Select * from Matiere_premiere
@@ -57,7 +63,7 @@ class Matprem_model extends CI_Model {
         return $query->result_array();
     }
 
-    function updateModif($array)
+    function updateMatprem($array)
     {
         $error = !(array_key_exists("nom_matiere_premiere", $array));
         $error = $error || !(array_key_exists("id_matiere_premiere", $array));
@@ -82,6 +88,25 @@ class Matprem_model extends CI_Model {
     function insertCommand($array)
     {
         $error = $this->db->insert("commande_matiere_premiere", $array);
+        return $error;
+    }
+
+    function deleteCommand($idCommand)
+    {
+        return $this->db->delete("commande_matiere_premiere", array("id_commande_matiere_premiere" => $idCommand));
+    }
+
+    function modifyCommand($array)
+    {
+        $error = !(array_key_exists("id_commande_matiere_premiere", $array));
+        $error = $error || !(array_key_exists("quantite_matiere_premiere", $array));
+
+        if($error)
+            return 0;
+
+        $this->db->set('quantite_matiere_premiere', $array['quantite_matiere_premiere']);
+        $this->db->where('id_commande_matiere_premiere', $array['id_commande_matiere_premiere']);
+        $error = $this->db->update('commande_matiere_premiere');
         return $error;
     }
 }

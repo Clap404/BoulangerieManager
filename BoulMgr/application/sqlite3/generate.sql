@@ -98,7 +98,7 @@ create table commande_matiere_premiere(
     date_commande_matiere_premiere
         text not null,
     quantite_matiere_premiere
-        integer not null,
+        real not null,
     prix_unite_matiere_premiere
         real not null,
     id_matiere_premiere
@@ -203,7 +203,7 @@ create table produit_est_compose_de_matiere_premiere(
         integer not null
         references produit(id_produit),
     quantite_matiere_premiere_produit
-        integer not null,
+        real not null,
     primary key (id_matiere_premiere, id_produit)
 );
 

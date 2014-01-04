@@ -55,6 +55,17 @@ function saveModifPopup(id)
     sendModif(data, errorMessage, "popup");
 }
 
+function saveAddMatprem()
+{
+    if(!checkSaveAddMatprem)
+        return;
+
+    var data = {};
+    data["nom_matiere_premiere"] = document.getElementById("nom_add_matiere_premiere").value;
+    var errorMessage = document.getElementById("error_popup");
+    sendAddMatprem(data, errorMessage);
+}
+
 function saveCommand(id_fourn)
 {
     var data = {};
@@ -64,6 +75,42 @@ function saveCommand(id_fourn)
 
     var errorMessage = document.getElementById("error_popup");
     sendCommand(data,errorMessage);
+}
+
+function sendAddMatprem(data, errorMessage)
+{
+    document.getElementById("save_button_popup").disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/addMatPrem", true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    var stringError = "Erreur lors de l'ajout";
+
+    xhr.onreadystatechange = function (oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status != 200)
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.onloadend = function () {
+        document.getElementById("save_button_popup").disabled = false;
+
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+        {
+            console.log("Response : " + xhr.responseText);
+            $(function(){
+                $('#pop_up').bPopup().close();
+            });
+            location.reload();
+        }
+        else if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText === -1)
+            errorMessage.innerHTML = "Erreur, le nom de la matière première existe déjà.";
+        else
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.send(JSON.stringify(data));
 }
 
 /**
@@ -184,6 +231,7 @@ function switch2Command(id_fournisseur)
     var save_button = document.getElementById("save_button_popup");
     save_button.onclick = function(){saveCommand(id_fournisseur);};
     save_button.style.display = "inline";
+    save_button.disabled = true;
     document.getElementById("cancel_button_popup").style.display = "inline";
 
     var qte_input = document.getElementById("qte_command");
@@ -192,6 +240,7 @@ function switch2Command(id_fournisseur)
             document.getElementById("save_button_popup").click();
     }
     qte_input.onkeyup = function(){refreshTotalPrice();};
+    document.getElementById("qte_command").focus();
 }
 
 function checkSaveModif()
@@ -199,9 +248,19 @@ function checkSaveModif()
     var button = document.getElementById("save_button_popup");
     var qte = document.getElementById("qte_command");
 
-    var check = parseInt(qte.value) <= 0 || 1. * parseInt(qte.value) != parseFloat(qte.value);
+    var check = parseFloat(qte.value) <= 0 || isNaN(parseFloat(qte.value));
     button.disabled = check;
     return !check;
+}
+
+function checkSaveAddMatprem()
+{
+    var button = document.getElementById("save_button_popup");
+    var name = document.getElementById("nom_add_matiere_premiere");
+
+    var check = ($.trim(name.value).length && isNaN(parseInt(name.value)));
+    button.disabled = !check;
+    return check;
 }
 
 function refreshTotalPrice()
@@ -210,13 +269,13 @@ function refreshTotalPrice()
     var price = document.getElementById("prix_min");
     var qte = document.getElementById("qte_command");
 
-    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseInt(qte.value) || 0;
+    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseFloat(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
     checkSaveModif();
 }
 
-function fillPopup(data)
+function fillPopupDetails(data)
 {
     var popup = document.getElementById("pop_up");
     var base_url = document.getElementById("base_url").innerHTML;
@@ -229,10 +288,10 @@ function fillPopup(data)
     popupContent += "<span id='error_popup'></span>";
 
     popupContent += "<div style='float: right; margin-right: 10%;'>" +
-                        "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button>"+
-                        "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br>" +
+                        "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button> "+
+                        "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br> " +
                         "<button id='modif_button_popup' onclick='switch2ModifyPopup();'>Modifier</button>" +
-                        "<button style='display:none;' id='save_button_popup'>Sauvegarder</button>" +
+                        "<button style='display:none;' id='save_button_popup'>Sauvegarder</button> " +
                         "<button style='display:none;' id='cancel_button_popup' onclick='ajaxQuickDetails(\"" + matprem['id_matiere_premiere'] + "\");'>Annuler</button>" +
                     "</div>";
 
@@ -243,12 +302,37 @@ function fillPopup(data)
     popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
     popupContent += '</table>';
 
-    popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€<br/>";
+    popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
     popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
     popupContent += "<div id='div_command' style='display: none;'>" +
-                        "<b>Quantité à commander : </b><input id='qte_command'></input><br>" +
+                        "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
                         "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
+                    "</div>";
+
+    popup.innerHTML = popupContent;
+}
+
+function fillPopupAdd()
+{
+    var popup = document.getElementById("pop_up");
+    var base_url = document.getElementById("base_url").innerHTML;
+
+    var popupContent = "<h3>Ajout d'une matière première</h3>"
+
+    popupContent += "<span id='error_popup'></span>";
+
+    // TODO CSS : Mettre l'input plus long, et mettre la police plus grosse
+    popupContent += "<input id='nom_add_matiere_premiere'i placeholder='Nom de la matière première'></h4>";
+    popupContent += '<table>';
+    popupContent += '<tr>' +
+                            '<td colspan="2"><img src="' + base_url + 'assets/images/empty.jpg"/></td>' +
+                    '</tr>';
+    popupContent += '</table>';
+
+    popupContent += "<div>" +
+                        "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button> " +
+                        "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button>" +
                     "</div>";
 
     popup.innerHTML = popupContent;
@@ -279,7 +363,7 @@ function ajaxQuickDetails(id)
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText != 0)
         {
             var response = JSON.parse(xhr.responseText);
-            fillPopup(response);
+            fillPopupDetails(response);
         }
         else
             popup.innerHTML = stringError;
@@ -288,16 +372,41 @@ function ajaxQuickDetails(id)
     xhr.send(parameters);
 }
 
-function popupButton(id)
+function popupDetailsButton(id)
 {
     // Fill the popup window
     ajaxQuickDetails(id);
+    popup();
+}
 
+function popupAddButton()
+{
+    fillPopupAdd();
+
+    var name = document.getElementById("nom_add_matiere_premiere");
+    name.onkeydown = function(event){
+        if (event.keyCode == 13)
+            document.getElementById("save_button_popup").click();
+    }
+    name.onkeyup = function(){checkSaveAddMatprem();};
+
+    popup();
+}
+
+function popup()
+{
     $(function(){
         $('#pop_up').bPopup({
             opacity: 0.6,
             positionStyle: 'fixed'
         });
+    });
+}
+
+function closePopup()
+{
+    $(function(){
+        $('#pop_up').bPopup().close();
     });
 }
 

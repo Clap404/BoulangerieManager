@@ -32,6 +32,68 @@ function sendCommand(data, errorMessage)
     xhr.send(JSON.stringify(data));
 }
 
+function sendModifCommand(data, errorMessage)
+{
+    document.getElementById("save_command").disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/modifyCommand", true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    console.log(data);
+
+    var stringError = "Erreur lors de la modification de la commande";
+
+    xhr.onreadystatechange = function (oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status != 200)
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.onloadend = function () {
+        document.getElementById("save_command").disabled = false;
+
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+        {
+            $(function(){
+                $('#pop_up').bPopup().close();
+            });
+            location.reload();
+        }
+        else
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.send(JSON.stringify(data));
+}
+
+function deleteCommand(id_command)
+{
+    document.getElementById("delete_command_button_" + id_command).disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/deleteCommand/" + id_command, true);
+
+    var stringError = "Erreur lors de la suppression de la commande";
+    errorMessage = document.getElementById("error");
+
+    xhr.onreadystatechange = function (oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status != 200)
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.onloadend = function () {
+        document.getElementById("delete_command_button_" + id_command).disabled = false;
+
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+            location.reload();
+        else
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.send();
+}
+
 function saveCommand(id_fourn)
 {
     var data = {};
@@ -43,12 +105,22 @@ function saveCommand(id_fourn)
     sendCommand(data,errorMessage);
 }
 
+function saveModifCommand(id_command)
+{
+    var data = {};
+    data["id_commande_matiere_premiere"] = id_command;
+    data["quantite_matiere_premiere"] = document.getElementById("qte_command").value;
+
+    var errorMessage = document.getElementById("error_command");
+    sendModifCommand(data, errorMessage);
+}
+
 function checkSaveModif()
 {
     var button = document.getElementById("save_command");
     var qte = document.getElementById("qte_command");
 
-    var check = parseInt(qte.value) <= 0 || 1. * parseInt(qte.value) != parseFloat(qte.value);
+    var check = parseFloat(qte.value) <= 0 || isNaN(parseFloat(qte.value));
     button.disabled = check;
     return !check;
 }
@@ -60,10 +132,28 @@ function refreshTotalPrice()
     var qte = document.getElementById("qte_command");
 
 
-    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseInt(qte.value) || 0;
+    totalPrice.innerHTML = parseFloat(price.innerHTML) * parseFloat(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
     checkSaveModif();
+}
+
+function modifyCommand(id_command, id_fourn)
+{
+    popupButton(id_fourn);
+    var saveButton = document.getElementById("save_command");
+    saveButton.onclick = function(){checkSaveModif() && saveModifCommand(id_command);};
+
+    var qte_command = document.getElementById("qte_command");
+    qte_command.value = document.getElementById("qte_command_" + id_command).innerHTML;
+
+    var prix_command = document.getElementById("prix_command");
+    prix_command.value = document.getElementById("prix_unite_command_" + id_command).innerHTML;
+
+    var title = document.getElementById("title_popup");
+    title.innerHTML = "Modification de commande"
+
+    refreshTotalPrice();
 }
 
 function fillPopup(id_fourn)
@@ -75,6 +165,7 @@ function fillPopup(id_fourn)
     var b;
 
     var title = document.createElement("h3");
+    title.id = "title_popup";
     title.appendChild(document.createTextNode("Commander"));
     popup.appendChild(title);
 
@@ -104,7 +195,7 @@ function fillPopup(id_fourn)
     div.appendChild(document.createElement("br"));
 
     var qte = document.createElement("b");
-    qte.appendChild(document.createTextNode("Quantité : "));
+    qte.appendChild(document.createTextNode("Quantité (en " + document.getElementById("abrev_unite").innerHTML + ") : "));
     div.appendChild(qte);
     var qte_input = document.createElement("input");
     qte_input.id = "qte_command";
@@ -147,4 +238,5 @@ function popupButton(id_fourn)
             positionStyle: 'fixed'
         });
     });
+    document.getElementById("qte_command").focus();
 }

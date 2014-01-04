@@ -5336,8 +5336,18 @@ th.hide-for-touch {
  AJOUTS PERSONNELS #
 ####################
 */
+body {
+    min-width:785px;
+}
+
 #content {
     min-height: 774px;
+    margin: 0;
+    padding: 0;
+}
+
+#large {
+    min-width: 1100px;
 }
 
 footer {
@@ -5352,9 +5362,13 @@ footer p {
     margin-bottom: 0px;
 }
 
-h1, h2 {
+h1, h2, h3 {
     text-align : center;
     display : block;
+}
+
+h2{
+    margin-bottom: 100px;
 }
 
 .product-name {
@@ -5398,20 +5412,16 @@ img:hover {
     margin-top: 81px;
 }
 
-
-h2{
-    margin-bottom: 100px;
-}
-
 #mobile {
     position: fixed;
+    right: 10%;
+    bottom: 1px;
+    top: 120px;
 }
 
 #dim {
     width: 334px;
 }
-
-
 
 .product-name {
     min-height: 74px;
@@ -5421,7 +5431,19 @@ h2{
     width: 100%;
 }
 
-h3 {
+
+table {
+    margin: auto;
+}
+
+p, code{
+    text-align: center;
+}
+#tiquet, #addfourn, #addprod {
+    margin: auto;
     text-align: center;
 }
 
+#addfourn {
+    margin-top: 10px;
+}
