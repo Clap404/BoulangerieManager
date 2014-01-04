@@ -70,7 +70,7 @@
             <?php endforeach;?>
           </select>
           <select id="adresse" >
-            <option>Choisissez une adresse de livraison</option>
+            <option value="null">-- Choisissez une adresse de livraison</option>
           </select>
         </div>
         <input type="text" placeholder="Selectionnez une date" id="datepicker" />
