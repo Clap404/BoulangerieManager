@@ -87,8 +87,17 @@ class Matprem extends CI_Controller {
     {
         $id = $this->input->post('id');
         $matprem = $this->model_matprem->printByID($id);
+        if($matprem === [])
+        {
+            echo(0);
+            return;
+        }
+
         $fournisseurs = $this->model_matprem->printFournisseurs($id);
-        $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
+        if($fournisseurs === [])
+            $result = array("matprem" => $matprem[0]);
+        else
+            $result = array("matprem" => $matprem[0], "fournisseur" => $fournisseurs[0]);
 
         if(count($result) != 0)
             echo(json_encode($result));

@@ -281,6 +281,14 @@ function checkSaveAddMatprem()
     return check;
 }
 
+function checkImageExists(image_name)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', image_name, false);
+    http.send();
+    return http.status!=404;
+}
+
 function refreshTotalPrice()
 {
     var totalPrice = document.getElementById("prix_total_command");
@@ -319,8 +327,10 @@ function fillPopupDetails(data)
 {
     var popup = document.getElementById("pop_up");
     var base_url = document.getElementById("base_url").innerHTML;
+    var en_vente = (typeof data["fournisseur"] != "undefined");
     var matprem = data["matprem"];
-    var fournisseur = data["fournisseur"];
+    if(en_vente)
+        var fournisseur = data["fournisseur"];
 
     var popupContent = "<span id='popup_id' style='display: none;'>" + matprem["id_matiere_premiere"] + "</span>";
     popupContent += "<h3><span id=name_popup>" + matprem["nom_matiere_premiere"] + "</span><input id=modif_name_input_popup style='display:none;' onkeydown='if (event.keyCode == 13) document.getElementById(\"save_button_popup\").click()'></input></h3>"
@@ -328,27 +338,36 @@ function fillPopupDetails(data)
     popupContent += "<span id='error_popup'></span>";
 
     popupContent += "<div style='float: right; margin-right: 10%;'>" +
-                        "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button> "+
-                        "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br> " +
-                        "<button id='modif_button_popup' onclick='switch2ModifyPopup();'>Modifier</button>" +
+                        "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button> ";
+    if(en_vente)
+        popupContent += "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br> ";
+    popupContent +=     "<button id='modif_button_popup' onclick='switch2ModifyPopup();'>Modifier</button>" +
                         "<button style='display:none;' id='save_button_popup'>Sauvegarder</button> " +
                         "<button style='display:none;' id='cancel_button_popup' onclick='ajaxQuickDetails(\"" + matprem['id_matiere_premiere'] + "\");'>Annuler</button>" +
                     "</div>";
 
+    if(checkImageExists(base_url + 'assets/images/matprem/' + matprem["id_matiere_premiere"] + '.jpg'))
+        var image_addr = base_url + 'assets/images/matprem/' + matprem["id_matiere_premiere"] + '.jpg';
+    else
+        var image_addr = base_url + 'assets/images/empty.jpg';
+
     popupContent += '<table>';
     popupContent += '<tr>' +
-                            '<td colspan="2"><img src="' + base_url + 'assets/images/matprem/' + matprem["id_matiere_premiere"] + '.jpg"/></td>' +
+                            '<td colspan="2"><img src="' + image_addr + '"/></td>' +
                     '</tr>';
     popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
     popupContent += '</table>';
 
-    popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
-    popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
+    if(en_vente)
+    {
+        popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
+        popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
-    popupContent += "<div id='div_command' style='display: none;'>" +
-                        "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
-                        "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
-                    "</div>";
+        popupContent += "<div id='div_command' style='display: none;'>" +
+                            "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
+                            "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
+                        "</div>";
+    }
 
     popup.innerHTML = popupContent;
 }
