@@ -8,6 +8,7 @@ class Adresses extends CI_Controller {
     }
 
     function liste_ville($ville = "") {
+        $ville = urldecode($ville);
         $result = $this->adresses->liste_ville($ville);
         echo( json_encode($result) );
     }
@@ -18,16 +19,19 @@ class Adresses extends CI_Controller {
     }
 
     function postal_by_ville($ville = "") {
+        $ville = urldecode($ville);
         $result = $this->adresses->postal_by_ville($ville);
         echo( json_encode($result) );
     }
 
     function liste_nom_rue($rue = "") {
+        $rue = urldecode($rue);
         $result = $this->adresses->liste_nom_rue($rue);
         echo( json_encode($result) );
     }
 
     function liste_type_rue($type = "") {
+        $type = urldecode($type);
         $result = $this->adresses->liste_type_rue($type);
         echo( json_encode($result) );
     }
