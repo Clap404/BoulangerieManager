@@ -105,18 +105,52 @@ function addQtyToProduct(qty, product) {
     checkIfNewActive();
 }
 
+function checkDate(date) {
+    if (date.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/) !== null) {
+        return true;
+    }
+    alert("La date saisie n'est pas valide !");
+    return false;
+}
+
+function checkClient(client) {
+    if (client !== null && client !== "null" && parseInt(client).toString() === client) {
+        return true;
+    }
+    alert("Le client saisi n'est pas valide !");
+    return false;
+} 
+
+function checkAdresse(adresse) {
+    if (adresse !== null && adresse !== "null" && parseInt(adresse).toString() === adresse) {
+        return true;
+    }
+    alert("L'adresse choisie n'est pas valide !");
+    return false;
+}
+
+
 function saveTicket() {
     //manipulation de la date
     var datetime = document.querySelector("#datepicker").value.split(" ");
     var date = datetime[0].split("/").reverse().join("-");
     var datetime = date + " " + datetime[1] + ":00";
+    var client = document.querySelector("#client").value;
+    var adresse = document.querySelector("#adresse").value;
     
-    //TODO valider la date, le client, l'adresse
+    //validation
+    var ok = true;
+    ok &= checkDate(datetime);
+    ok &= checkClient(client);
+    ok &= checkAdresse(adresse);
+    if (!ok) {
+        return;
+    }
 
     var toSend = {
         commande : commande,
-        client : document.querySelector("#client").value,
-        adresse : document.querySelector("#adresse").value,
+        client : client,
+        adresse : adresse,
         date : datetime
     };
     toSend = JSON.stringify(toSend);
@@ -200,3 +234,4 @@ function updateAdresses(toSelect) {
         }
     });
 }
+
