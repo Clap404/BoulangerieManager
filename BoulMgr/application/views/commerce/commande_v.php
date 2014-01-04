@@ -1,9 +1,11 @@
 <h2><?=$title?></h2>
 
 <div class="small-6 small-centered columns">
-    <a href="<?=site_url()?>/commerce/commande/form">
-        <button id="tiquet">Enregistrer une nouvelle commande</button>
-    </a>
+    <div id="tiquet">
+        <a class="button radius round" href="<?=site_url()?>/commerce/commande/form">
+            Enregistrer une nouvelle commande
+        </a>
+    </div>
     <div>
         <h3>Commandes en cours</h3>
         <?php
