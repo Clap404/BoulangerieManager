@@ -11,9 +11,7 @@ function back2Normal(id)
         document.getElementById("image_preview").style.display = "none";
         var image_popup = document.getElementById("image_popup");
         image_popup.style.display = "inline";
-        //TODO Fix previous image still there after refreshing popup
         ajaxQuickDetails(popup_id);
-        image_popup.src += "?" + new Date().getTime();
         return;
     }
 
@@ -158,9 +156,10 @@ function sendImageMatprem(id_matprem, errorMessage)
         document.getElementById("save_button_popup").disabled = false;
 
         console.log("Response : " + xhr.responseText);
-        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText > 0)
+        if (xhr.readyState == 4 && xhr.status == 200)
         {
             console.log("Response : " + xhr.responseText);
+            location.reload();
         }
     };
 
@@ -239,6 +238,7 @@ function sendCommand(data, errorMessage)
             $(function(){
                 $('#pop_up').bPopup().close();
             });
+            // Refresh the page to force the modified image to reload
             location.reload();
         }
         else
