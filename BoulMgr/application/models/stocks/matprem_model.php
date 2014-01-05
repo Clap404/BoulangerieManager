@@ -10,8 +10,9 @@ class Matprem_model extends CI_Model {
 
     function insert_matprem($array)
     {
-        $error = $this->db->insert("matiere_premiere", $array);
-        return $error;
+        $this->db->insert("matiere_premiere", $array);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
     }
 
     function print_all()

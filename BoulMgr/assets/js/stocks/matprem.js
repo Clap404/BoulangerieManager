@@ -112,9 +112,10 @@ function sendAddMatprem(data, errorMessage)
         document.getElementById("save_button_popup").disabled = false;
 
         console.log("Response : " + xhr.responseText);
-        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText > 0)
         {
             console.log("Response : " + xhr.responseText);
+            sendImageMatprem(xhr.responseText, errorMessage);
             $(function(){
                 $('#pop_up').bPopup().close();
             });
@@ -127,6 +128,37 @@ function sendAddMatprem(data, errorMessage)
     };
 
     xhr.send(JSON.stringify(data));
+}
+
+function sendImageMatprem(id_matprem, errorMessage)
+{
+    document.getElementById("save_button_popup").disabled = true;
+    var base_url = document.getElementById("base_url").innerHTML;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", base_url + "index.php/stocks/matprem/uploadMatpremImage/" + id_matprem, true);
+
+    var stringError = "Erreur lors de l'ajout";
+
+    xhr.onreadystatechange = function (oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status != 200)
+            errorMessage.innerHTML = stringError;
+    };
+
+    xhr.onloadend = function () {
+        document.getElementById("save_button_popup").disabled = false;
+
+        console.log("Response : " + xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText > 0)
+        {
+            console.log("Response : " + xhr.responseText);
+        }
+    };
+
+    var form = new FormData();
+    var fileInput = document.querySelector('#upload_image');
+    form.append('upload_image', fileInput.files[0]);
+    xhr.send(form);
 }
 
 /**
@@ -382,14 +414,15 @@ function fillPopupAdd()
     popupContent += "<span id='error_popup'></span><br>";
 
     // TODO CSS : Mettre l'input plus long, et mettre la police plus grosse
-    popupContent += "<input id='nom_add_matiere_premiere'i placeholder='Nom de la matière première'></h4>";
+    popupContent += "<input id='nom_add_matiere_premiere' placeholder='Nom de la matière première'>";
+    popupContent += "<input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
     popupContent += '<table>';
     popupContent += '<tr>' +
-                            '<td colspan="2"><img src="' + base_url + 'assets/images/empty.jpg"/></td>' +
+                            '<td colspan="2"><img id="image_preview" src="' + base_url + 'assets/images/empty.jpg" style="width: 128px; height: 128px;"/></td>' +
                     '</tr>';
     popupContent += '</table>';
 
-    popupContent += "<input list='list_unite' type='text' id='unite_input'>"
+    popupContent += "<b>Unité : </b><input list='list_unite' type='text' id='unite_input'>"
 
     popupContent += "<div>" +
                         "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button> " +
@@ -440,6 +473,21 @@ function popupDetailsButton(id)
     popup();
 }
 
+/**
+ * Gives the temporary URL for an image preview before the upload
+ */
+function readUploadFileURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image_preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 function popupAddButton()
 {
     fillPopupAdd();
@@ -458,6 +506,11 @@ function popupAddButton()
 
     name.oninput = oninputFunc;
     unite.oninput = oninputFunc;
+
+    document.getElementById("image_preview").onclick = function(){document.getElementById("upload_image").click();};
+    $("#upload_image").change(function(){
+        readUploadFileURL(this);
+    });
 
     popup();
 }

@@ -67,7 +67,11 @@ class Matprem extends CI_Controller {
             $matprem["id_unite"] = $id[0]["id_unite"];
 
         $matprem["nom_matiere_premiere"] = $array["nom_matiere_premiere"];
-        echo($this->model_matprem->insert_matprem($matprem));
+        $id_matprem = $this->model_matprem->insert_matprem($matprem);
+        if($id_matprem > 0)
+            echo($id_matprem);
+        else
+            echo(0);
     }
 
     function modify()
@@ -81,6 +85,31 @@ class Matprem extends CI_Controller {
             echo($this->model_matprem->updateMatprem($changes));
         else
             echo(0);
+    }
+
+    function uploadMatpremImage($id_newmatprem)
+    {
+        $field_name = "upload_image";
+
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'jpg';
+        $config['max_size'] = '100';
+        $config['max_width']  = '128';
+        $config['max_height']  = '128';
+
+        $this->load->library('upload', $config);
+        $this->upload->do_upload($field_name);
+        $info = $this->upload->data();
+
+        if($info === [])
+        {
+            echo(0);
+            return;
+        }
+
+        $dest = $info['file_path'].'../assets/images/matprem/'.$id_newmatprem.$info['file_ext'];
+        $src = $info['full_path'];
+        echo(rename($src,$dest));
     }
 
     function jsonQuickDetail()
