@@ -49,7 +49,9 @@ function closePopup(id_popup)
  * @param {string} id_popup : id of the div_popup to show
  * @param {string} popup_title : Popup title (question asked to the user)
  * @param {function} functionYes : Function launched when it's yes
- * @param {function} functionNo : Function launched when it's no
+ * @param {function} functionNo : Function launched when it's no (in option :
+ * if doesn't exists, the popup will just be closed when the user will click on
+ * "no")
  *
  * functionYes and functionNo has to return true if everything is ok, false if
  * there is an error. The error can be printed in the element
