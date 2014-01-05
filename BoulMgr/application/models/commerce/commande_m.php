@@ -80,7 +80,7 @@ class Commande_m extends CI_Model {
         $sql = "UPDATE commande
                 SET id_client = $commande->client,
                     id_adresse = $commande->adresse,
-                    date_livraison = $commande->date
+                    date_livraison = datetime('$commande->date')
                 WHERE id_commande = $id_commande ;";
         $this->db->query($sql);
         foreach($commande->commande as $prod) {

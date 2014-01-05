@@ -75,8 +75,10 @@ create table produit(
 create table commande(
     id_commande
         integer primary key autoincrement not null,
+    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     prix_total
-        real not null,
+        real
+        default 0,
     date_commande
         text not null,
     date_livraison
