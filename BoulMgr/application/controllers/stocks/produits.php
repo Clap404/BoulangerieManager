@@ -5,7 +5,6 @@ class Produits extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('stocks/produits_model','prod');
-        $this->load->helpers('url');
     }
 
     function index() {

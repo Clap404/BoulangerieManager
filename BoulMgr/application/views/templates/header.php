@@ -58,6 +58,10 @@
                             <li>
                                 <?= '<a href="'.site_url().'/stocks/produits">Produits</a>' ?>
                             </li>
+                            
+                            <li>
+                                <?= '<a href="'.site_url().'/stocks/production">Production</a>' ?>
+
                         </ul>
                     </li>
 
