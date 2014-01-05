@@ -8,7 +8,8 @@ if(count($matprem) != 0)
 {
     ?>
     <!-- TODO CSS : Print on the same line text and button  -->
-    <table id="affichage"><tr><td>Afficher tout (même non en stock) :</td><td>
+    <table id="affichage"><tr><td>Masquer les matières non utilisées depuis plus d'1 mois :</td>
+    <td>
     <div class="switch round">
         <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList(false);">
         <label for="switchOff">Off</label>
@@ -32,13 +33,22 @@ if(count($matprem) != 0)
         </tr>
     <?php
 
-    foreach($matprem as $result) {
+    for($i = 0; $i < count($matprem); $i++)
+    {
+        $result = $matprem[$i];
         $matprem_detailed_adr = site_url("stocks/matprem/detail/".$result['id_matiere_premiere']);
         $idMatprem = $result['id_matiere_premiere'];
         $dispo = $result['disponibilite_matiere_premiere'];
-        /* For the debug :
-            <td><?= $result['id_matiere_premiere'] ?></td> */
-        if($dispo == 0)
+
+        $dateMatprem = new DateTime($result['last_production']);
+        $date1MonthAgo = new DateTime("now");
+        date_sub($date1MonthAgo, date_interval_create_from_date_string('1 month'));
+
+        if($dispo == 0 && $dateMatprem < $date1MonthAgo)
+            echo('<tr class="matpremHiddenItem undispo" style="display: none; background-color: #F7AB53;">');
+        else if($dispo == 0)
+            echo('<tr class="undispo" style="background-color: #F7AB53;">');
+        else if($dateMatprem < $date1MonthAgo)
             echo('<tr class="matpremHiddenItem" style="display: none">');
         else
             echo('<tr>');
