@@ -47,7 +47,7 @@ if(count($matprem) != 0)
         else
             $dateMatprem = $date1MonthAgo;
 
-        if($dispo == 0 && $dateMatprem < $date1MonthAgo)
+        if($dispo == 0 && $dateMatprem <= $date1MonthAgo)
             echo('<tr class="matpremHiddenItem undispo" style="display: none; background-color: #F7AB53;">');
         else if($dispo == 0)
             echo('<tr class="undispo" style="background-color: #F7AB53;">');
