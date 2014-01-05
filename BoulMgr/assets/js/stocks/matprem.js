@@ -8,7 +8,12 @@ function back2Normal(id)
         document.getElementById("details_button_popup").style.display = "inline";
         document.getElementById("commander_button_popup").style.display = "inline";
         document.getElementById("div_command").style.display = "none";
+        document.getElementById("image_preview").style.display = "none";
+        var image_popup = document.getElementById("image_popup");
+        image_popup.style.display = "inline";
+        //TODO Fix previous image still there after refreshing popup
         ajaxQuickDetails(popup_id);
+        image_popup.src += "?" + new Date().getTime();
         return;
     }
 
@@ -132,10 +137,14 @@ function sendAddMatprem(data, errorMessage)
 
 function sendImageMatprem(id_matprem, errorMessage)
 {
+    var fileInput = document.querySelector('#upload_image');
+    if(typeof fileInput.files[0] === "undefined")
+        return;
+
     document.getElementById("save_button_popup").disabled = true;
     var base_url = document.getElementById("base_url").innerHTML;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", base_url + "index.php/stocks/matprem/uploadMatpremImage/" + id_matprem, true);
+    xhr.open("POST", base_url + "index.php/stocks/matprem/uploadMatpremImage/" + id_matprem, false);
 
     var stringError = "Erreur lors de l'ajout";
 
@@ -156,7 +165,6 @@ function sendImageMatprem(id_matprem, errorMessage)
     };
 
     var form = new FormData();
-    var fileInput = document.querySelector('#upload_image');
     form.append('upload_image', fileInput.files[0]);
     xhr.send(form);
 }
@@ -190,6 +198,12 @@ function sendModif(data, errorMessage, balID)
         if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText == 1)
         {
             console.log("Response : " + xhr.responseText);
+
+            if(balID === "popup")
+            {
+                var idMatprem = document.getElementById("popup_id").innerHTML;
+                sendImageMatprem(idMatprem, errorMessage);
+            }
             document.getElementById("name_" + balID).innerHTML = data["nom_matiere_premiere"];
             back2Normal(balID);
         }
@@ -267,6 +281,14 @@ function switch2ModifyPopup()
     save_button.onclick = function(){saveModifPopup(id_matprem);};
     save_button.style.display = "inline";
     document.getElementById("cancel_button_popup").style.display = "inline";
+
+    var image_preview = document.getElementById("image_preview");
+    image_preview.onclick = function(){document.getElementById("upload_image").click();};
+    $("#upload_image").change(function(){
+        readUploadFileURL(this);
+    });
+    image_preview.style.display = "inline";
+    document.getElementById("image_popup").style.display = "none";
 }
 
 function switch2Command(id_fournisseur)
@@ -383,9 +405,11 @@ function fillPopupDetails(data)
     else
         var image_addr = base_url + 'assets/images/empty.jpg';
 
+    popupContent += "<input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
     popupContent += '<table>';
     popupContent += '<tr>' +
-                            '<td colspan="2"><img src="' + image_addr + '"/></td>' +
+                            '<td colspan="2"><img id="image_popup" src="' + image_addr + '"/>' +
+                            '<img id="image_preview" src="' + image_addr + '" style="width: 128px; height: 128px; display: none;"/></td>' +
                     '</tr>';
     popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
     popupContent += '</table>';

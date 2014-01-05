@@ -101,7 +101,7 @@ class Matprem extends CI_Controller {
         $this->upload->do_upload($field_name);
         $info = $this->upload->data();
 
-        if($info === [])
+        if($info === [] || !file_exists($info["full_path"]))
         {
             echo(0);
             return;
