@@ -5,6 +5,7 @@ class Matprem extends CI_Controller {
         parent::__construct();
         $this->load->model('stocks/matprem_model','model_matprem');
         $this->load->helper('url');
+        date_default_timezone_set("Europe/Paris");
     }
 
     function index()

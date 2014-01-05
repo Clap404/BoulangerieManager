@@ -8,7 +8,7 @@ if(count($matprem) != 0)
 {
     ?>
     <!-- TODO CSS : Print on the same line text and button  -->
-    <table id="affichage"><tr><td>Masquer les matières non utilisées depuis plus d'1 mois :</td>
+    <table id="affichage"><tr><td>Afficher les matières non utilisées depuis plus d'un mois :</td>
     <td>
     <div class="switch round">
         <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList(false);">
