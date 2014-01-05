@@ -66,7 +66,7 @@ function sendModifCommand(data, errorMessage)
     xhr.send(JSON.stringify(data));
 }
 
-function deleteCommand(id_command)
+function sendDeleteCommand(id_command)
 {
     document.getElementById("delete_command_button_" + id_command).disabled = true;
     var base_url = document.getElementById("base_url").innerHTML;
@@ -92,6 +92,12 @@ function deleteCommand(id_command)
     };
 
     xhr.send();
+}
+
+function deleteCommand(id_command)
+{
+    var functionYes = function(){sendDeleteCommand(id_command);};
+    popupConfirmation("pop_up", "Confirmer la suppression de la commande ?", functionYes);
 }
 
 function saveCommand(id_fourn)
