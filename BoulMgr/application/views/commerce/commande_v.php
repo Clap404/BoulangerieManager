@@ -13,7 +13,7 @@
 
             foreach ($commandes as $value) {
                 if ($value->finished === "Y") {
-                    break;
+                    continue;
                 }
                 $this->table->add_row(
                     $value->date_livraison,
