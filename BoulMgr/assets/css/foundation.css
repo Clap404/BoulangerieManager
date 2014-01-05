@@ -5458,4 +5458,11 @@ div.switch.round {
     margin-bottom: 10px;
 }
 
-.pop_up
+#addproduct table tr{
+    background: none;
+}
+
+#submitaddproduct{
+    margin: 0;
+    padding: 0 45%;
+}
