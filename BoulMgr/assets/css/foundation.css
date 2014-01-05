@@ -5430,7 +5430,7 @@ table {
 p, code{
     text-align: center;
 }
-#tiquet, #addfourn, #addprod {
+#tiquet, #addfourn, #addprod, #addmatprem {
     margin: auto;
     text-align: center;
 }
@@ -5441,4 +5441,28 @@ p, code{
 
 .cart {
     width: 342px;
+}
+
+div.switch.round {
+    width: 60px;
+    margin: auto;
+}
+
+#affichage {
+    border: none;
+}
+
+#nom_add_matiere_premiere {
+    width: 200px;
+    margin-left: 180px;
+    margin-bottom: 10px;
+}
+
+#addproduct table tr{
+    background: none;
+}
+
+#submitaddproduct{
+    margin: 0;
+    padding: 0 45%;
 }

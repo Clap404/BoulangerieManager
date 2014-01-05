@@ -1,4 +1,4 @@
-<h3>Matières premières</h3>
+<h2>Matières premières</h2>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
 <div class="pop_up" id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
@@ -8,16 +8,16 @@ if(count($matprem) != 0)
 {
     ?>
     <!-- TODO CSS : Print on the same line text and button  -->
-    Afficher tout (même non en stock) :
+    <table id="affichage"><tr><td>Afficher tout (même non en stock) :</td><td>
     <div class="switch round">
         <input id="switchOff" name="switch-list" type="radio" checked onclick="switchButtonList(false);">
         <label for="switchOff">Off</label>
 
         <input id="switchOn" name="switch-list" type="radio" onclick="switchButtonList(true);">
         <label for="switchOn">On</label>
-    </div>
+    </div></td></tr></table>
 
-    <td><button id="add_matprem" onclick="popupAddButton();">Ajouter</button></td>
+    <div id="addmatprem"><button id="add_matprem" onclick="popupAddButton();">Ajouter</button></div>
 
     <!-- TODO CSS : Bold, or red color, something to alert the user !-->
     <div>
