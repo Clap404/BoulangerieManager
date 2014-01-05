@@ -262,6 +262,7 @@ function switchButtonList(buttonState)
     $('.matpremHiddenItem').css('display', prop);
     $('tr:visible:even').css('background-color', csseven);
     $('tr:visible:odd').css('background-color', cssodd);
+    $('.matpremHiddenItem').css('background-color', '#F7AB53');
 }
 
 function switch2ModifyPopup()
