@@ -17,6 +17,8 @@ class Produits extends CI_Controller {
 
     function remove($id) {
         $this->prod->remove_produit($id);
+        $filename = FCPATH.'assets/images/produit/'.$id.'.jpg';
+        unlink($filename);
         redirect('/stocks/produits/');
     }
 
