@@ -16,7 +16,7 @@
                 <button class="empty" onclick="addQtyToProduct(-99, <?=$produit['id_produit']?>);">0</button>
                 <br />
                 <span class="prix" value="<?=$produit['prix_produit']?>"></span>
-                <span class="dispo" value="<?=$produit['disponibilite_produit']?>"></span>
+                <span class="dispo" value="<?=max(0, $produit['disponibilite_produit'])?>"></span>
             </div>
             <?php endforeach; ?>
         </div>
