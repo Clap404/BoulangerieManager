@@ -106,7 +106,7 @@ function addQtyToProduct(qty, product) {
 }
 
 function checkDate(date) {
-    if (date.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/) !== null) {
+    if (date.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/) !== null) {
         return true;
     }
     alert("La date saisie n'est pas valide !");
