@@ -105,6 +105,34 @@ if(count($matprem) != 0)
         </table>
     </div>
 
+    <div>
+        <b>Est utilisé(e) pour :</b>
+        <table style="margin-top: 10px;">
+            <tr>
+                <th>Nom du produit</th>
+                <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
+            </tr>
+    <?php
+    foreach($produits as $result) {
+        $id_produit = $result['id_produit'];
+        ?>
+            <tr>
+                <td><?= $result['nom_produit'] ?></td>
+                <td><?= $result['quantite_matiere_premiere_produit'] ?></td>
+            </tr>
+        <?php
+    }
+    if($produits === [])
+    { ?>
+        <tr>
+           <td></td>
+           <td></td>
+        </tr>
+      <?php
+    }
+    ?>
+        </table>
+    </div>
     <?php
 }
 

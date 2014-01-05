@@ -22,6 +22,7 @@ class Matprem extends CI_Controller {
         $data['matprem'] = $this->model_matprem->printByID($id);
         $data['fournisseur'] = $this->model_matprem->printFournisseurs($id);
         $data['commandes'] = $this->model_matprem->printCommandesMatprem($id);
+        $data['produits'] = $this->model_matprem->printProduits($id);
 
         if(count($data['matprem']) != 0)
             $data['title'] = $data['matprem'][0]['nom_matiere_premiere'];

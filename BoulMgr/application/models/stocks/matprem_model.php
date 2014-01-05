@@ -59,6 +59,15 @@ class Matprem_model extends CI_Model {
         return $query->result_array();
     }
 
+    function printProduits($id)
+    {
+        $this->db->select("produit_est_compose_de_matiere_premiere.id_produit, nom_produit, quantite_matiere_premiere_produit");
+        $this->db->join('Produit', 'Produit.id_produit = produit_est_compose_de_matiere_premiere.id_produit');
+        $query = $this->db->get_where('produit_est_compose_de_matiere_premiere', array('produit_est_compose_de_matiere_premiere.id_matiere_premiere' => $id));
+
+        return $query->result_array();
+    }
+
     function printCommandesMatprem($id)
     {
         /* Select * from commande_matiere_premiere as com

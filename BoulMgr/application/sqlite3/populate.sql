@@ -306,6 +306,16 @@ INSERT INTO produit VALUES
     abs(((random() % 20) + 10) / 10.0),
     abs((random() % 100) + 20) );
 
+-- Composition des produits --
+INSERT INTO produit_est_compose_de_matiere_premiere VALUES
+    (1, 1, 0.5),
+    (1, 3, 0.2),
+    (3, 2, 2),
+    (2, 1, 1),
+    (4, 2, 2),
+    (5, 3, 0.2),
+    (5, 1, 1);
+
 -- Commandes Matières premières --
 INSERT INTO commande_matiere_premiere VALUES
     (null, datetime("now", "-100 day"), 50, 1.53, 1, 1),
