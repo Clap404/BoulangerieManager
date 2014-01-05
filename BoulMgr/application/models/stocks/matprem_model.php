@@ -21,7 +21,7 @@ class Matprem_model extends CI_Model {
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite; */
         $this->db->select('*, (SELECT IFNULL(SUM(com.quantite_matiere_premiere),0) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
-        $this->db->join('(select id_matiere_premiere, date_production as last_production from produit inner join produit_est_produit on produit_est_produit.id_produit = produit.id_produit inner join produit_est_compose_de_matiere_premiere on produit_est_compose_de_matiere_premiere.id_produit = produit.id_produit group by id_matiere_premiere) as subqueryDateProd', 'subqueryDateProd.id_matiere_premiere = matiere_premiere.id_matiere_premiere', 'inner');
+        $this->db->join('(select id_matiere_premiere, date_production as last_production from produit inner join produit_est_produit on produit_est_produit.id_produit = produit.id_produit inner join produit_est_compose_de_matiere_premiere on produit_est_compose_de_matiere_premiere.id_produit = produit.id_produit group by id_matiere_premiere) as subqueryDateProd', 'subqueryDateProd.id_matiere_premiere = matiere_premiere.id_matiere_premiere', 'left');
         $this->db->order_by("nom_matiere_premiere", "asc");
         $query = $this->db->get('Matiere_premiere');
         return $query->result_array();
