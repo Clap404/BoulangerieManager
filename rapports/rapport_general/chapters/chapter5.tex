@@ -14,6 +14,17 @@
         jamais en contact direct avec le modèle.
         Heureusement, nous avons réussi à nous y adapter après avoir étudié
         la documentation et lu des explications sur internet.
+
+    \paragraph{}
+        Nous avons décidé d'utiliser des requêtes SQL pour calculer tout ce qui
+        était calculable même si nous aurions pu utiliser des champs
+        supplémentaires.
+        Ceci nous a permis d'éviter les anomalies de données, mais s'est aussi
+        révélé être difficile à mettre en place, notamment pour calculer les 
+        disponibilités des matières premières, nécessitant un grand nombre de 
+        tables et plusieurs groupement de données différents, et les
+        disponibilités des produits, ayant plusieurs types d'évenement pouvant
+        décrémenter leurs disponibilité.
         
 \section{Problèmes de gestion}
     \paragraph{}
