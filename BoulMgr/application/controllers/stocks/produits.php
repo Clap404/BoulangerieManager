@@ -5,7 +5,6 @@ class Produits extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('stocks/produits_model','prod');
-        $this->load->helpers('url');
     }
 
     function index() {
@@ -18,6 +17,8 @@ class Produits extends CI_Controller {
 
     function remove($id) {
         $this->prod->remove_produit($id);
+        $filename = FCPATH.'assets/images/produit/'.$id.'.jpg';
+        unlink($filename);
         redirect('/stocks/produits/');
     }
 

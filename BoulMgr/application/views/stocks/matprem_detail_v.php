@@ -146,6 +146,7 @@ else
     <span id="base_url" style="display:none"><?= base_url() ?></span>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/stocks/matprem_detail.js") ?>"></script>
+    <script defer src="<?= base_url("/assets/js/popup_confirm.js") ?>"></script>
 <?php
 
 /* End of file matprem_v.php */

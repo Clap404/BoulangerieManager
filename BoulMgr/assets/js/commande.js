@@ -212,12 +212,12 @@ function updateAdresses(toSelect) {
         success : function(data) {
             var adresses = JSON.parse(data);
             var select = document.querySelector("#adresse");
-            select.innerHTML = "";
+            select.innerHTML = '<option value="null">-- Choisissez une adresse de livraison</option>';
             for (var i = 0; i < adresses.length; i += 1) {
                 var opt = document.createElement("option");
                 opt.value = adresses[i]["id_adresse"];
 
-                if (parseInt(opt, 10) === toSelect) {
+                if (parseInt(opt.value, 10) === toSelect) {
                     opt.selected = true;
                 }
                 opt.innerHTML = adresses[i]["numero_voie_adresse"] + ", " +

@@ -1,4 +1,3 @@
-<div id="large">
 <div class="row">
     <div class="small-8 columns">
         <div class="product-list">
@@ -65,7 +64,6 @@
                 </div>
         </div>
     </div>
-</div>
 </div>
 <script src="<?=$root?>/assets/js/vente.js"></script>
 <script defer>

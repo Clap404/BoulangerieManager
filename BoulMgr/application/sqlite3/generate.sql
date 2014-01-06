@@ -24,7 +24,7 @@ drop table if exists matiere_premiere_vendue_par_fournisseur; /* OK */
 drop table if exists client_joignable_telephone; /* OK */
 drop table if exists fournisseur_livre_depuis_adresse; /* OK */
 drop table if exists client_habite_adresse; /* OK */
-    drop table if exists produit_est_produit;
+drop table if exists produit_est_produit; /* OK */
 drop table if exists vente_comprend_produit; /* OK */
 
 

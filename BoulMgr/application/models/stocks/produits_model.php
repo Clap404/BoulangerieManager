@@ -63,6 +63,16 @@ class Produits_model extends CI_Model {
         $this->db->where("id_produit", $id);
         $this->db->update("produit", $donnees);
     }
+
+    function get_prod_for_select() {
+        $this->db->select('id_produit, nom_produit');
+        $query = $this->db->get('produit');
+        return $query->result_array();
+    }
+
+    function add_production($donnees) {
+        $this->db->insert('produit_est_produit', $donnees);
+    }
 }
 
 ?>

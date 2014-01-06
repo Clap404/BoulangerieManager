@@ -5346,9 +5346,7 @@ body {
     padding: 0;
 }
 
-#large {
-    min-width: 1100px;
-}
+
 
 footer {
   margin-top: 50px;
@@ -5412,13 +5410,6 @@ img:hover {
     margin-top: 81px;
 }
 
-#mobile {
-    position: fixed;
-    right: 10%;
-    bottom: 1px;
-    top: 120px;
-}
-
 #dim {
     width: 334px;
 }
@@ -5439,11 +5430,39 @@ table {
 p, code{
     text-align: center;
 }
-#tiquet, #addfourn, #addprod {
+#tiquet, #addfourn, #addprod, #addmatprem {
     margin: auto;
     text-align: center;
 }
 
 #addfourn {
     margin-top: 10px;
+}
+
+.cart {
+    width: 342px;
+}
+
+div.switch.round {
+    width: 60px;
+    margin: auto;
+}
+
+#affichage {
+    border: none;
+}
+
+#nom_add_matiere_premiere {
+    width: 200px;
+    margin-left: 180px;
+    margin-bottom: 10px;
+}
+
+#addproduct table tr{
+    background: none;
+}
+
+#submitaddproduct{
+    margin: 0;
+    padding: 0 45%;
 }
