@@ -281,32 +281,14 @@ INSERT INTO matiere_premiere VALUES
 
 -- Produits --
 INSERT INTO produit VALUES
-    (null,
-    "croissant",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20)),
-    (null,
-    "baguette",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20)),
-    (null,
-    "brioche",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20)),
-    (null,
-    "éclair au chocolat",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20)),
-    (null,
-    "éclair au café",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20)),
-    (null,
-    "pain au chocolat",
-    abs(((random() % 20) + 10) / 10.0),
-    abs((random() % 100) + 20) );
+    (null, "croissant", 1.2, 30),
+    (null, "baguette", 0.9, 120),
+    (null, "brioche", 3.3, 300),
+    (null, "éclair au chocolat", 1.3, 180),
+    (null, "éclair au café", 1.3, 180),
+    (null, "pain au chocolat", 0.7, 60);
 
--- Commandes Matières premières --
+-- production --
 INSERT INTO produit_est_produit VALUES
     (1, datetime("now", "-100 day"), 5),
     (2, datetime("now", "-10 day"),4),
@@ -316,7 +298,16 @@ INSERT INTO produit_est_produit VALUES
     (3, datetime("now", "-22 day"),3),
     (4, datetime("now", "-49 day"),4),
     (5, datetime("now", "-80 day"),1),
-    (6, datetime("now", "-2 day"),2);
+    (3, datetime("now", "-2 day"),12),
+    (5, datetime("now", "-2 day"),7),
+    (6, datetime("now", "-2 day"),9),
+    --production d'aujourd'hui --
+    (1, datetime("now"), 5),
+    (2, datetime("now"), 7),
+    -- pas de p3 --
+    (4, datetime("now"), 13),
+    (5, datetime("now"), 17),
+    (6, datetime("now"), 19);
 
 -- Composition des produits --
 INSERT INTO produit_est_compose_de_matiere_premiere VALUES
@@ -360,91 +351,35 @@ INSERT INTO client_habite_adresse VALUES
 
 -- ventes et produits associés--
 BEGIN TRANSACTION;
-INSERT INTO vente VALUES (null, datetime("now", "-2 day"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
+INSERT INTO vente VALUES (null, datetime("now", "-10 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 1, 2); /* reste 2 p2 il y a 10 jours */
 COMMIT;
 
 BEGIN TRANSACTION;
-INSERT INTO vente VALUES (null, datetime("now","-1 day"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
+INSERT INTO vente VALUES (null, datetime("now","-2 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (3, 2, 5); /* Reste 7 p3 il y a 2 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 2, 5); /* Reste 2 p5 il y a 2 jours */
+INSERT INTO vente_comprend_produit VALUES (6, 2, 9); /* Reste 0 p6 il y a 2 jours */
 COMMIT;
 
 BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
-INSERT INTO vente_comprend_produit VALUES (
-    (SELECT * FROM
-        (SELECT id_produit
-        FROM produit
-        EXCEPT
-        SELECT id_produit
-        FROM vente_comprend_produit
-        WHERE id_vente = (SELECT MAX(id_vente) from vente))
-    ORDER BY random()
-    LIMIT 1),
-    (SELECT MAX(id_vente) from vente),
-    abs(random() % 10) + 1
-);
+INSERT INTO vente_comprend_produit VALUES (2, 3, 7); /* Reste 0 p2 */
+INSERT INTO vente_comprend_produit VALUES (4, 3, 5); /* Reste 12 p4 */
+INSERT INTO vente_comprend_produit VALUES (6, 3, 4); /* Reste 15 p6 */
+COMMIT;
+
+-- Commandes et produits associés--
+BEGIN TRANSACTION;
+INSERT INTO commande VALUES
+    (null, 0, datetime("now", "-3 day"), datetime("now", "-2 day"), 2,  1);
+INSERT INTO commande_contient_produit VALUES (1, 3, 7); /* Reste 0 p3 il y a 2 jours */
+INSERT INTO commande_contient_produit VALUES (1, 5, 1); /* Reste 1 p5 il y a 2 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO commande VALUES
+    (null, 0, datetime("now", "-2 day"), datetime("now"), 3,  3);
+INSERT INTO commande_contient_produit VALUES (2, 4, 5); /* Reste 7 p4 */
+INSERT INTO commande_contient_produit VALUES (2, 5, 10); /* Reste 7 p5 */
 COMMIT;

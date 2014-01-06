@@ -6,21 +6,19 @@
 drop table if exists telephone; /* OK */
 drop table if exists adresse; /* OK */
 drop table if exists produit; /* OK */
-    drop table if exists commande;
-    drop table if exists commande_matiere_premiere;
+drop table if exists commande; /* OK */
+drop table if exists commande_matiere_premiere; /* OK */
 drop table if exists client; /* OK */
 drop table if exists fournisseur; /* OK */
-    drop table if exists categorie;
 drop table if exists matiere_premiere; /* OK */
 drop table if exists ville; /* OK */
 drop table if exists vente; /* OK */
 drop table if exists unite; /* OK */
 drop table if exists type_voie; /* OK */
 drop table if exists fournisseur_joignable_telephone; /* OK */
-    drop table if exists produit_est_compose_de_matiere_premiere;
+drop table if exists produit_est_compose_de_matiere_premiere; /* OK */
 drop table if exists matiere_premiere_vendue_par_fournisseur; /* OK */
-    drop table if exists produit_a_pour_categorie;
-    drop table if exists commande_contient_produit;
+drop table if exists commande_contient_produit; /* OK */
 drop table if exists client_joignable_telephone; /* OK */
 drop table if exists fournisseur_livre_depuis_adresse; /* OK */
 drop table if exists client_habite_adresse; /* OK */
@@ -129,13 +127,6 @@ create table fournisseur(
         text not null
 );
 
-create table categorie(
-    id_categorie
-        integer primary key autoincrement not null,
-    nom_categorie
-        text not null
-);
-
 create table matiere_premiere(
     id_matiere_premiere
         integer primary key autoincrement not null,
@@ -219,16 +210,6 @@ create table matiere_premiere_vendue_par_fournisseur(
     prix
         real not null,
     primary key (id_matiere_premiere, id_fournisseur)
-);
-
-create table produit_a_pour_categorie(
-    id_categorie
-        integer not null
-        references categorie(id_categorie),
-    id_produit
-        integer not null
-        references produit(id_produit),
-    primary key (id_produit, id_categorie)
 );
 
 create table commande_contient_produit(
