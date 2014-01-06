@@ -5494,3 +5494,15 @@ div.switch.round {
 #prod button {
     margin-top: 10px;
 }
+
+#confirm {
+    width: 100%;
+    margin: auto;
+    padding: 60px 120px 0 120px;
+}
+
+#confirm button {
+    margin: auto;
+    text-align: center;
+    margin: 34px;
+}
