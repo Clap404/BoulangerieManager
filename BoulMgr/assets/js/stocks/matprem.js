@@ -260,6 +260,7 @@ function switchButtonList(buttonState)
         prop = "none";
 
     $('.matpremHiddenItem').css('display', prop);
+    $('.matpremHiddenItem undispo').css('display', prop);
     $('tr:visible:even').css('background-color', csseven);
     $('tr:visible:odd').css('background-color', cssodd);
 }

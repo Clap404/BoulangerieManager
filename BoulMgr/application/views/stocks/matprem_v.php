@@ -40,11 +40,14 @@ if(count($matprem) != 0)
         $idMatprem = $result['id_matiere_premiere'];
         $dispo = $result['disponibilite_matiere_premiere'];
 
-        $dateMatprem = new DateTime($result['last_production']);
         $date1MonthAgo = new DateTime("now");
         date_sub($date1MonthAgo, date_interval_create_from_date_string('1 month'));
+        if(isset($result['last_production']))
+            $dateMatprem = new DateTime($result['last_production']);
+        else
+            $dateMatprem = $date1MonthAgo;
 
-        if($dispo == 0 && $dateMatprem < $date1MonthAgo)
+        if($dispo == 0 && $dateMatprem <= $date1MonthAgo)
             echo('<tr class="matpremHiddenItem undispo" style="display: none; background-color: #F7AB53;">');
         else if($dispo == 0)
             echo('<tr class="undispo" style="background-color: #F7AB53;">');
