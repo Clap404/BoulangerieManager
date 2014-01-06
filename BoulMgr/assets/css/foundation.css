@@ -1892,7 +1892,7 @@ meta.foundation-mq-topbar {
     .inline-list > li > * {
       display: block; }
 
-button, .button {
+button, .button, input[type="submit"] {
   cursor: pointer;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -1919,9 +1919,9 @@ button, .button {
   -webkit-appearance: none;
   border: none;
   font-weight: normal !important; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, .button:focus, input[type="submit"]:hover, input[type="submit"]:focus {
     background-color: #0079a1; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  button:hover, button:focus, .button:hover, .button:focus input[type="submit"]:hover, input[type="submit"]:focus {
     color: white; }
   button.secondary, .button.secondary {
     background-color: #e7e7e7;
@@ -5465,4 +5465,23 @@ div.switch.round {
 #submitaddproduct{
     margin: 0;
     padding: 0 45%;
+}
+
+.matpremHiddenitem.undispo {
+    display: none;
+    background-color: #F7AB53;
+}
+
+.undispo {
+    background-color: #F7AB53;
+}
+
+.matpremHiddenItem, #base_url {
+    display: none;
+}
+
+.smallbutton {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
 }

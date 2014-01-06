@@ -48,11 +48,11 @@ if(count($matprem) != 0)
             $dateMatprem = $date1MonthAgo;
 
         if($dispo == 0 && $dateMatprem <= $date1MonthAgo)
-            echo('<tr class="matpremHiddenItem undispo" style="display: none; background-color: #F7AB53;">');
+            echo('<tr class="matpremHiddenItem undispo">');
         else if($dispo == 0)
-            echo('<tr class="undispo" style="background-color: #F7AB53;">');
+            echo('<tr class="undispo">');
         else if($dateMatprem < $date1MonthAgo)
-            echo('<tr class="matpremHiddenItem" style="display: none">');
+            echo('<tr class="matpremHiddenItem">');
         else
             echo('<tr>');
         ?>
@@ -89,7 +89,7 @@ else
 
 ?>
 
-    <span id="base_url" style="display:none"><?= base_url() ?></span>
+    <span id="base_url"><?= base_url() ?></span>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/stocks/matprem.js") ?>"></script>
 
