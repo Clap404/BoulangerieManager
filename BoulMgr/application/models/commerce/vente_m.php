@@ -85,4 +85,15 @@ class Vente_m extends CI_Model {
             }
         }
     }
+
+    function todaysVente() {
+        $sql = "SELECT nom_produit, sum(quantite_produit_vente) as vendus
+                FROM vente
+                    NATURAL JOIN vente_comprend_produit
+                    NATURAL LEFT JOIN produit
+                WHERE date(date_vente) = date('now')
+                GROUP BY id_produit;";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 }

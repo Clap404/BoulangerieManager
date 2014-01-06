@@ -106,4 +106,39 @@ class Commande_m extends CI_Model {
             }
         }
     }
+
+    function allProductsForTodaysCommandes(){
+        $sql = "SELECT nom_produit, prod,
+                    sum(quantite_produit_commande) AS commande
+                FROM commande
+                    NATURAL JOIN commande_contient_produit
+                    NATURAL JOIN produit
+                    NATURAL LEFT JOIN (
+                        SELECT id_produit, sum(quantite_produit_produit) AS prod
+                        FROM produit_est_produit
+                        WHERE date(date_production) = date('now')
+                        GROUP BY id_produit)
+                WHERE date(date_livraison) = date('now')
+                GROUP BY id_produit;";
+
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+
+    function metainfoForTodaysCommandes() {
+        $sql = "SELECT time(date_livraison) as heure,
+                (prenom_client || ' ' ||nom_client) as client,
+                (numero_voie_adresse || ', ' || nom_type_voie || ' ' ||
+                nom_voie_adresse || ', ' || code_postal || ' ' || nom_ville)
+                    as adresse
+                FROM commande
+                    NATURAL JOIN client
+                    NATURAL JOIN adresse
+                    NATURAL JOIN type_voie
+                    NATURAL JOIN ville
+                WHERE date(date_livraison) = date('now');";
+        $query = $this->db->query($sql);
+        return $query->result();
+
+    }
 }
