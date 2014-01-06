@@ -26,12 +26,9 @@ class Production extends CI_Controller {
     function produire() {
         $this->load->library('input');
         $nbligne = $this->input->post('nbligne');
-        $date_prod = $this->input->post('date');
-        
-        foreach($_POST as $key => $value) {
-            echo "$key => $value <br/>";
-    }
-        /*for($i = 0 ; $i < $nbligne ; $i++) {
+        $date_prod = $this->input->post('date'); 
+    
+        for($i = 0 ; $i < $nbligne ; $i++) {
             $id_produit = $this->input->post('prod'.$i);
             $qte = $this->input->post('qte'.$i);
             
@@ -45,7 +42,6 @@ class Production extends CI_Controller {
         }
         
         redirect('/stocks/production');
-         */
     }
 }
 
