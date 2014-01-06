@@ -6,7 +6,7 @@ function fillConfirmationPopup(id_popup, title, functionYes, functionNo)
 
     popupContent += "<span id='error_confirmation_popup'></span><br>";
 
-    popupContent += "<div>" +
+    popupContent += "<div id='confirm'>" +
                         "<button id='yes_button_popup'>Oui</button> " +
                         "<button id='no_button_popup'>Non</button>" +
                     "</div>";
