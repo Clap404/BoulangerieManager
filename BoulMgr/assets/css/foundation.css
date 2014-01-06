@@ -5506,3 +5506,25 @@ div.switch.round {
     text-align: center;
     margin: 34px;
 }
+
+#commandepopup {
+    border: 1px solid red;
+}
+
+#pop_up {
+    display: none; width: 600px; height: 400px; padding: 20px; background-color: white;
+}
+
+#detailmatprem {
+    width: 1100px;
+    margin: auto;
+}
+
+.tablematprem {
+    margin-bottom: 30px;
+}
+
+caption {
+    text-align: left;
+    margin-bottom: 10px;
+}
