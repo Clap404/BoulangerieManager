@@ -3,7 +3,6 @@
 <style type="text/css">
     textarea {
         resize: none;
-        height: 2em;
     }
 </style>
 
@@ -13,25 +12,30 @@
     echo form_open("fournisseurs/save");
 
     ?>
+
+    <h4>Non du fournisseur</h4>
+    <!-- nom du fournisseur -->
+    <input id="nom_fournisseur" type="text" placeholder="nom du fournisseur" />
+
     <h4>Adresse</h4>
     <input type="text" id="numero_rue" style="width:10%; display:inline-block;" placeholder="numéro" />
 
     <!-- datalist avec passage de la ligne sélectionnée dans le champ input si pertinent -->
     <!-- sélection du type de rue -->
 
-    <input id="type_rue" list="type_rue_lst" style="width:20%; display:inline-block;" placeholder="type de voie" />
+    <input id="type_rue" type="text" list="type_rue_lst" style="width:20%; display:inline-block;" placeholder="type de voie" />
     <datalist id="type_rue_lst"></datalist>
 
     <!-- sélection du nom de rue -->
-    <input id="nom_rue" list="nom_rue_lst" style="width:60%; display:inline-block;" placeholder="nom de la rue" />
+    <input id="nom_rue" type="text" list="nom_rue_lst" style="width:60%; display:inline-block;" placeholder="nom de la rue" />
     <datalist id="nom_rue_lst"></datalist>
+
+    <!-- sélection de la ville -->
+    <input id="ville" type="text" list="ville_lst" style="width:60%; display:inline-block;" placeholder="ville" />
+    <datalist id="ville_lst"></datalist>
 
     <!-- code postal -->
     <input id="code_postal" type="text" style="width:30%; display:inline-block;" placeholder="code postal" />
-
-    <!-- sélection de la ville -->
-    <input id="ville" list="ville_lst" style="width:60%; display:inline-block;" placeholder="ville" />
-    <datalist id="ville_lst"></datalist>
     
     <textarea id="description_adresse" placeholder="description de l'adresse"></textarea>
 
@@ -40,14 +44,25 @@
     <input id="numero_telephone" type="text" placeholder="numéro de téléphone">
     <textarea id="description_numero" placeholder="description du numéro"></textarea>
 
-    <input type="reset" value="reset"/>
     <?php
     echo form_close();
-
     ?>
+
+    <button id="reset" type="reset">Reset</button>
+    <button id="add" type="button">Ajouter</button>
+
     <script type="text/javascript">
 
-        document.querySelector("div.pop_up form").reset();
+        var formElement = document.querySelector("div.pop_up form");
+        formElement.reset();
+
+        document.querySelector("button#reset").onclick = function(){
+            formElement.reset();
+        }
+
+        document.querySelector("button#add").onclick = function(){
+            sendForm( formElement, "<?= base_url('/index.php/fournisseurs/add') ?>" );
+        }
 
         var fields = {
             dl : {

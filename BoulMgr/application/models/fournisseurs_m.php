@@ -59,4 +59,18 @@ class Fournisseurs_m extends CI_Model {
         return $query->result();
     }
 
+    function add_fournisseur($nom_fournisseur){
+        $sql = "INSERT INTO fournisseur VALUES( NULL, ?);";
+        return $this->db->query($sql, array($nom_fournisseur));
+    }
+
+    function add_joignable($id_fournisseur, $id_telephone) {
+        $sql = "INSERT INTO fournisseur_joignable_telephone VALUES( NULL, ?, ?);";
+        return $this->db->query($sql, array($id_fournisseur, $id_telephone));
+    }
+
+    function add_livre($id_fournisseur, $id_adresse) {
+        $sql = "INSERT INTO fournisseur_livre_depuis_adresse VALUES( NULL, ?, ?);";
+        return $this->db->query($sql, array($id_fournisseur, $id_adresse));
+    }
 }
