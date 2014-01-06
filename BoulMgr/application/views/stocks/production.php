@@ -1,5 +1,5 @@
 <h2>Production</h2>
-
+<div id="prod">
 <?php
 
 
@@ -28,5 +28,5 @@ $date = date('Y-m-d');
 echo form_close();
 
 ?>
-
+</div>
 <script defer src="<?= base_url("/assets/js/stocks/production.js") ?>"></script>
