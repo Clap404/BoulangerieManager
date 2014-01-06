@@ -55,7 +55,7 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
     var popup = document.querySelector(popupSelector);
 
     //TODO, un CSS pour les popups avec l'id "pop_up" pour fonctionner avec la lib anthony 
-    // popup.setAttribute("style", "display: none; width: 640px; padding: 20px; background-color: white;");
+    popup.setAttribute("style", "display: none; width: 640px; padding: 20px; background-color: white;");
 
     $(popup).bPopup({
         opacity: opacity,
@@ -130,4 +130,30 @@ var firstCharChanged = function(input) {
     }
 
     return false;
+}
+
+var sendForm = function(form, url) {
+    var results = {};
+
+    console.log(form);
+
+    for (var i = form.length - 1; i >= 0; i--) {
+        console.log(form[i].id, form[i].value);
+        results[form[i].id] = form[i].value;
+    };
+
+    xhr = new XMLHttpRequest();
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function(oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status == 200){
+            alert(xhr.responseText);
+        }
+
+    };
+
+    xhr.send(JSON.stringify(results));
 }
