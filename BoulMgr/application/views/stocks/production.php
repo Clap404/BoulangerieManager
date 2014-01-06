@@ -15,7 +15,8 @@ $date = date('Y-m-d');
     <tr>
         <td>Produit</td>
         <td>Quantité</td>
-    <tr>
+        <td></td>
+    </tr>
 </table>
 
 <?= form_hidden('nbligne', 0); ?>

@@ -3,10 +3,11 @@ var nb_ligne = 0;
 function add_line() {
     
     //récuperation de la table
-    var table = document.getElementsByTagName('table')[0];
+    var table = document.getElementsByTagName('tbody')[0];
 
     //Création de la ligne
     var tr = document.createElement('tr');
+    tr.setAttribute('name','line'+nb_ligne);
 
     //Select pour les produits
     var td_prod = document.createElement('td');
@@ -19,6 +20,11 @@ function add_line() {
     input_qte.setAttribute('type', 'text');
     input_qte.setAttribute('name', 'qte'+nb_ligne);
     
+    //Bouton remove
+    var td_rmv = document.createElement('td');
+    td_rmv.setAttribute('onclick', 'remove_line('+nb_ligne+')');
+    td_rmv.innerHTML = "X";
+
     //Nouvelle ligne
     var tr_add_line = document.querySelector('#addline');
     if(tr_add_line != null) {
@@ -27,6 +33,7 @@ function add_line() {
     tr_add_line = document.createElement('tr');
     tr_add_line.setAttribute('id','addline');
     var td_vide = document.createElement('td');
+    var td_vide2 = document.createElement('td');
     var td_add = document.createElement('td');
     var span = document.createElement('span');
     span.setAttribute('onclick','add_line()');
@@ -41,10 +48,13 @@ function add_line() {
     tr.appendChild(td_qte);
     td_qte.appendChild(input_qte);
 
+    tr.appendChild(td_rmv);
+
     table.appendChild(tr_add_line);
     tr_add_line.appendChild(td_vide);
     tr_add_line.appendChild(td_add);
     td_add.appendChild(span);
+    tr_add_line.appendChild(td_vide2);
     
     //Peuplement du select
     var url = document.location.href;
@@ -79,6 +89,27 @@ function setSelectOptions(datalistToFill, requestUrl, putInValue, putInId) {
     xhr.open("GET", requestUrl, true);
     xhr.send();
 }
+
+function recalcule() {
+    
+    var select = document.querySelectorAll('select');
+    var qte = document.querySelectorAll('input[type=text');
+
+    for(var i = 0 ; i < select.length ; i++) {
+        select[i].setAttribute('name', 'prod'+i);
+        qte[i].setAttribute('name', 'qte'+i);
+    }
+}
+
+function remove_line(id) {
+
+    var deleted_line = document.querySelector('tr[name=line'+id+']');
+    deleted_line.parentNode.removeChild(deleted_line);
+
+    recalcule();
+    nb_ligne--;
+}
+
 
 add_line();
 
