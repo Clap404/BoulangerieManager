@@ -114,7 +114,7 @@ class Matprem_model extends CI_Model {
     function getIdUniteByName($abbreviation_unite)
     {
         $this->db->select('id_unite');
-        $query = $this->db->get_where('unite', array('abbreviation_unite' => $abbreviation_unite));
+        $query = $this->db->get_where('unite', array('LOWER(abbreviation_unite)' => strtolower($abbreviation_unite)));
 
         return $query->result_array();
     }
