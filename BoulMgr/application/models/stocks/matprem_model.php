@@ -156,6 +156,50 @@ class Matprem_model extends CI_Model {
         $error = $this->db->update('commande_matiere_premiere');
         return $error;
     }
+
+    function listLowMatprem() {
+        //nom_matprem, nom_fournisseur, prix quand dispo faible
+
+        //Minimum de dispo pour warn
+        $pallier = 10;
+
+        //les dispos
+        $sq1 = "SELECT id_matiere_premiere, (possede - utilise) AS dispo
+                FROM (SELECT id_matiere_premiere, sum(utilise) as utilise
+                        FROM (SELECT m.id_matiere_premiere,
+                                ifnull(quantite_matiere_premiere_produit
+                                    * sum(quantite_produit_produit), 0.0) AS utilise
+                            FROM matiere_premiere m
+                                NATURAL LEFT JOIN (produit_est_produit
+                                           NATURAL JOIN produit_est_compose_de_matiere_premiere)
+                            GROUP BY m.id_matiere_premiere, id_produit)
+                    GROUP BY id_matiere_premiere)
+                    NATURAL LEFT JOIN (SELECT id_matiere_premiere,
+                            ifnull(sum(quantite_matiere_premiere),0.0) AS possede
+                        FROM matiere_premiere
+                            NATURAL LEFT JOIN commande_matiere_premiere
+                        GROUP BY id_matiere_premiere)
+                GROUP BY id_matiere_premiere";
+
+
+        //Les fournisseurs les moins cher par matprem
+        $sq2 = "SELECT nom_matiere_premiere,
+                    id_matiere_premiere,
+                    nom_fournisseur, 
+                    min(prix) AS minprix
+                FROM matiere_premiere_vendue_par_fournisseur
+                    NATURAL JOIN matiere_premiere
+                    NATURAL JOIN fournisseur
+                GROUP BY id_matiere_premiere";
+
+        //l'union des deux avec selectio selon le pallier
+        $sql = "SELECT nom_matiere_premiere, nom_fournisseur, minprix
+                FROM ($sq1) NATURAL JOIN ($sq2)
+                WHERE dispo < $pallier;";
+
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 }
 
 ?>
