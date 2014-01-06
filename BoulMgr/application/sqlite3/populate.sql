@@ -216,9 +216,9 @@ INSERT INTO client VALUES
 
 -- Fournisseurs --
 INSERT INTO fournisseur VALUES
-    (null,"farine corp inc."),
-    (null,"bons oeufs SARL"),
-    (null,"centre agricole général");
+    (null,"Farine corp inc."),
+    (null,"Bons oeufs SARL"),
+    (null,"Centre agricole général");
 
 -- Adresses --
 INSERT INTO adresse VALUES
@@ -238,11 +238,11 @@ INSERT INTO fournisseur_livre_depuis_adresse VALUES
 
 -- Téléphones --
 INSERT INTO telephone VALUES
-    (null, "0100000000", "téléphone principal"),
-    (null, "0200000000", "téléphone portable"),
+    (null, "0100000000", "Téléphone principal"),
+    (null, "0200000000", "Téléphone portable"),
     (null, "0300000000", null),
     (null, "0400000000", null),
-    (null, "0500000000", "numéro personnel - n'appeler qu'en cas de problème"),
+    (null, "0500000000", "Numéro personnel - N'appeler qu'en cas de problème"),
     (null, "0600000000", null);
 
 -- Attribution des numéros fournisseurs --
@@ -281,12 +281,12 @@ INSERT INTO matiere_premiere VALUES
 
 -- Produits --
 INSERT INTO produit VALUES
-    (null, "croissant", 1.2, 30),
-    (null, "baguette", 0.9, 120),
-    (null, "brioche", 3.3, 300),
-    (null, "éclair au chocolat", 1.3, 180),
-    (null, "éclair au café", 1.3, 180),
-    (null, "pain au chocolat", 0.7, 60);
+    (null, "Croissant", 1.2, 30),
+    (null, "Baguette", 0.9, 120),
+    (null, "Brioche", 3.3, 300),
+    (null, "Éclair au chocolat", 1.3, 180),
+    (null, "Éclair au café", 1.3, 180),
+    (null, "Pain au chocolat", 0.7, 60);
 
 -- production --
 INSERT INTO produit_est_produit VALUES
@@ -302,7 +302,7 @@ INSERT INTO produit_est_produit VALUES
     (5, datetime("now", "-2 day"),7),
     (6, datetime("now", "-2 day"),9),
     --production d'aujourd'hui --
-    (1, datetime("now"), 5),
+    (3, datetime("now"), 5),
     (2, datetime("now"), 7),
     -- pas de p3 --
     (4, datetime("now"), 13),
@@ -323,8 +323,10 @@ INSERT INTO produit_est_compose_de_matiere_premiere VALUES
 INSERT INTO commande_matiere_premiere VALUES
     (null, datetime("now", "-100 day"), 50, 1.53, 1, 1),
     (null, datetime("now", "-10 day"), 13, 2.4, 2, 1),
-    (null, datetime("now", "-20 day"), 20, 4, 4, 2),
-    (null, datetime("now", "-32 day"), 35, 2.21, 5, 3);
+    (null, datetime("now", "-20 day"), 15, 4, 4, 2),
+    (null, datetime("now", "-32 day"), 35, 2.21, 5, 3),
+    (null, datetime("now"), 20, 1.02, 4, 2),
+    (null, datetime("now"), 50, 3.0, 3, 1);
 
 -- Vendu par --
 INSERT INTO matiere_premiere_vendue_par_fournisseur VALUES
