@@ -10,7 +10,7 @@
 <h3>Nouveau fournisseur</h3>
 <?php
 
-    echo form_open("fournisseurs/save");
+    echo form_open("fournisseurs/add");
 
     ?>
 

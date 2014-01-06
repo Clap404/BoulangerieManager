@@ -133,6 +133,9 @@ var firstCharChanged = function(input) {
 }
 
 var sendForm = function(form, url, messageZone) {
+    messageZone.setAttribute("style", "color:#008CBA;");
+    messageZone.innerHTML = "Patientez…";
+
     var results = {};
 
     console.log(form);
@@ -155,7 +158,7 @@ var sendForm = function(form, url, messageZone) {
                 messageZone.innerHTML = "Succès";
                 window.setTimeout(
                     function(){ window.location.reload(); },
-                    3000
+                    500
                 );
             }
             else {
@@ -167,4 +170,24 @@ var sendForm = function(form, url, messageZone) {
     };
 
     xhr.send(JSON.stringify(results));
+}
+
+var rm_from_bdd = function(url, elem){
+    xhr = new XMLHttpRequest;
+    xhr.open("GET", url, true);
+
+    xhr.onreadystatechange = function(oEvent)
+    {
+        if (xhr.readyState == 4 && xhr.status == 200){
+            if(xhr.responseText === "OK" ){
+                while(elem.tagName !== "TR"){
+                    elem = elem.parentNode
+                }
+                elem.remove();
+            }
+        }
+
+    };
+
+    xhr.send();
 }

@@ -154,6 +154,7 @@ class Matprem_model extends CI_Model {
         $error = $this->db->update('commande_matiere_premiere');
         return $error;
     }
+
 }
 
 ?>

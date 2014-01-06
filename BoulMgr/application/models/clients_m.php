@@ -21,7 +21,8 @@ class Clients_m extends CI_Model {
                     natural join adresse
                     natural join client_joignable_telephone
                     natural join client_habite_adresse
-                GROUP BY id_client ;";
+                GROUP BY id_client
+                ORDER BY nom_client ;";
         $query = $this->db->query($sql);
         return $query->result();
     }

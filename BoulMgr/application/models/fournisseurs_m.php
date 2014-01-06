@@ -15,7 +15,8 @@ class Fournisseurs_m extends CI_Model {
                     natural join fournisseur_joignable_telephone
                     natural join telephone
                     natural join fournisseur_livre_depuis_adresse
-                GROUP BY id_fournisseur ;";
+                GROUP BY id_fournisseur
+                ORDER BY nom_fournisseur ;";
 
         $query = $this->db->query($sql);
         return $query->result();
@@ -72,5 +73,41 @@ class Fournisseurs_m extends CI_Model {
     function add_livre($id_fournisseur, $id_adresse) {
         $sql = "INSERT INTO fournisseur_livre_depuis_adresse VALUES( ?, ?);";
         return $this->db->query($sql, array($id_fournisseur, $id_adresse));
+    }
+
+    function add_update_matprem($id_fournisseur, $id_matprem, $prix) {
+        
+        $sql = "UPDATE matiere_premiere_vendue_par_fournisseur
+            SET prix = ?
+            WHERE id_fournisseur = ?
+            AND id_matiere_premiere = ? ;";
+        $query = $this->db->query($sql, array($prix, $id_fournisseur, $id_matprem));
+        $update_success = ( $query == 1 );
+
+        if(!$update_success){
+            return 1;
+        }
+
+        $sql = "SELECT COUNT(*) AS count FROM fournisseur WHERE id_fournisseur = ?;";
+        $query = $this->db->query($sql, array($id_fournisseur));
+        $fournisseur_exists = ( $query->result_array()[0]["count"] == 1 );
+
+        $sql = "SELECT COUNT(*) AS count FROM matiere_premiere WHERE id_matiere_premiere = ?;";
+        $query = $this->db->query($sql, array($id_matprem));
+        $matiere_premiere_exists = ( $query->result_array()[0]["count"] == 1 );
+
+        if( $fournisseur_exists && $matiere_premiere_exists ){
+            $sql = "INSERT INTO matiere_premiere_vendue_par_fournisseur VALUES( ?, ?, ?);";
+            return $this->db->query($sql, array($id_matprem, $id_fournisseur, $prix));
+        }
+        else
+            return 0;
+    }
+
+    function rm_matprem($id_matprem, $id_fournisseur) {
+        $sql = "DELETE FROM matiere_premiere_vendue_par_fournisseur
+            WHERE id_fournisseur = ?
+            AND id_matiere_premiere = ? ;";
+        return $this->db->query($sql, array( $id_fournisseur, $id_matprem));
     }
 }

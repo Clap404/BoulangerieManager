@@ -43,19 +43,35 @@
 <h3>produits vendus</h3>
 <div class="fournisseur">
 <?php
-    $this->table->set_heading('id', 'Matiere Premiere', 'prix fournisseur');
+    $this->table->set_heading('id', 'Matiere Premiere', 'prix fournisseur', '');
 
     foreach ($matieres_premieres as $value) {
         $this->table->add_row(
             $value->id_matiere_premiere,
             $value->nom_matiere_premiere,
-            $value->prix
-
+            $value->prix,
+            "<button class='smallbutton' rmurl='".$rm_url.$value->id_matiere_premiere."' >X</button>"
         );
     }
 
     echo $this->table->generate(); 
 ?>
+
 </div>
+
+<div id="addmatprem">
+    <button class="button radius round" onclick="popupFormDiv('div.pop_up', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
+</div>
+
 </div>
     </div>
+
+<script type="text/javascript">
+    var rmbuttons = document.querySelectorAll("button[rmurl]");
+
+    for (var i = rmbuttons.length - 1; i >= 0; i--) {
+        rmbuttons[i].onclick = function() {
+            rm_from_bdd(this.getAttribute("rmurl"), this);
+        }
+    };
+</script>

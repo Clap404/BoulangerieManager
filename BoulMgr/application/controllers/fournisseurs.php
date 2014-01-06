@@ -28,23 +28,72 @@ class Fournisseurs extends CI_Controller {
     }
 
     function profil($id_fournisseur) {
+        $this->load->helper("form");
+        $this->load->model('stocks/matprem_model','matprem');
+        $data['matprem'] = $this->matprem->print_all();
         $data['infos'] = $this->fournisseurs->infos_fournisseur($id_fournisseur);
+        $data['id_fournisseur'] = $id_fournisseur;
         $data['adresses'] = $this->fournisseurs->adresses_fournisseur($id_fournisseur);
         $data['telephones'] = $this->fournisseurs->telephones_fournisseur($id_fournisseur);
         $data['matieres_premieres'] = $this->fournisseurs->matieres_premieres($id_fournisseur);
         $data['title'] = "profil de ".$data['infos']['nom_fournisseur'];
+        $data['rm_url'] = base_url("/index.php/fournisseurs/rm_matprem/".$id_fournisseur)."/";
         $this->load->view('templates/header', $data);
         $this->load->view('fournisseurs/profil_fournisseur_v', $data);
+        $this->load->view('fournisseurs/add_modif_matprem_v');
         $this->load->view('templates/footer');
     }
 
-    function add() {
-        $this->load->model('adresses_m','adresses');
+    function add_matprem() {
+        $this->load->library('form_validation');
 
         $json = trim(file_get_contents('php://input'));
         $_POST = json_decode($json, true);
 
+        $four = $this->fournisseurs;
+        $config = array(
+            array(
+                'field' => 'id_fournisseur',
+                'label' => 'id_fournisseur',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id_matprem',
+                'label' => 'Matière première',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'prix',
+                'label' => 'Prix',
+                'rules' => 'required|is_natural'
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            // if ( $four->add_matprem($_POST["id_fournisseur"], $_POST["id_matprem"]) != 0 )
+            if ( $four->add_update_matprem($_POST["id_fournisseur"], $_POST["id_matprem"], $_POST["prix"]) === 0 )
+                echo "La matière première ou le fournisseur n'existe pas.";
+            else
+                echo "OK";
+        }
+    }
+
+    function add() {
+        $this->load->model('adresses_m','adresses');
         $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
         
         $addr = $this->adresses;
         $four = $this->fournisseurs;
@@ -171,6 +220,13 @@ class Fournisseurs extends CI_Controller {
             
             echo "OK";
         }
+    }
+
+    function rm_matprem($id_fournisseur, $id_matprem) {
+        if ( $this->fournisseurs->rm_matprem($id_matprem, $id_fournisseur) == 1 )
+            echo "OK";
+        else
+            echo "NOK";
     }
 }
 
