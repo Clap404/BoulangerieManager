@@ -38,7 +38,15 @@ class Production extends CI_Controller {
                 'quantite_produit_produit' => $qte
             );
 
-            $this->prod->add_production($donnees);
+            $exist = $this->prod->get_production($donnees['id_produit'], $donnees['date_production']);
+
+            if(count($exist) === 0)
+            {
+                $this->prod->add_production($donnees);
+            }
+            else {
+                $this->prod->update_production($donnees, $exist[0]['quantite_produit_produit']);
+            }
         }
         
         redirect('/stocks/production');

@@ -73,6 +73,22 @@ class Produits_model extends CI_Model {
     function add_production($donnees) {
         $this->db->insert('produit_est_produit', $donnees);
     }
+
+    function get_production($id_produit, $date_prod) {
+        $this->db->where('id_produit', $id_produit);
+        $this->db->where('date_production', $date_prod);
+        $query = $this->db->get('produit_est_produit');
+        return $query->result_array();   
+    }
+
+    function update_production($donnees, $qte_base) {
+        $nqte = $donnees['quantite_produit_produit'] + $qte_base;
+
+        $this->db->where('id_produit',$donnees['id_produit']);
+        $this->db->where('date_production', $donnees['date_production']);
+        $this->db->update('produit_est_produit', array('quantite_produit_produit' => $nqte));
+    }   
+
 }
 
 ?>
