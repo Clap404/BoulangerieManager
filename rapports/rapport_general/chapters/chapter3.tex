@@ -1,6 +1,65 @@
 \chapter{Analyse}
 
 \section{Données}
+    \paragraph{}
+        Afin de trouver un modèle adapté à notre problématique nous avons étudié
+        les besoins spécifiques de la profession de boulanger.
+        Nous en avons déduit les informations que nous devions être capables de
+        traiter.
+    \subsection{commerce}
+        Le commerce se divise selon notre analyse en deux parties bien
+        distinctes. 
+        Les ventes, effectuées par des clients en magasin et les commandes,
+        effectuées éventuellement par téléphone, par des clients désireux d'être
+        livrés dans un avenir proche pour des produits qui seront réservés.
+        Les ventes doivent prendre en compte les disponibilités du jour,
+        permettant de savoir si un produit a été produit et n'a pas été réservé
+        pour une commande livrable le jour même.
+        Les commandes en revanche peuvent être effectuées sans se soucier des 
+        disponibilités : le boulanger s'occupera de produire les produits
+        réservés le jour de la livraison.
+    \subsection{stock}
+        Ici encore nous avons mis en évidence deux types de stocks : les stocks
+        de matières premières et les stocks de produits. Ces deux catégories 
+        sont intimement liées puisqu'à la création d'un produit, on utilise
+        les stocks des matières premières. Elles ont cependant des différences
+        notables.
+        Par exemple les stocks de matières premières ne peuvent se remplir
+        qu'en passant des commandes à des fournisseurs.
+        Les stocks de produits en revanche résultent de la transformation de
+        matières premières.
+        Les produits ont aussi la caractéristique d'être éphémères.
+        En effet, nous avons considéré qu'un produit ne pouvait se conserver
+        plus longtemps qu'une journée, suivant le cas général des artisans 
+        boulangers.
+        Il est donc nécessaire pour un boulanger d'éviter les invendus en
+        produisant suffisamment pour répondre à la demande de ses clients mais
+        suffisamment peu pour éviter de gaspiller ses précieuses matières 
+        premières en les transformant en produits invendus.
+        Nous avons imaginé un cycle d'approvisionnement des matières premières
+        en flux tendu et n'avons pas jugé utile de considérer leur péremption.
+        Il aurait toutefois été possible de le faire en considérant les
+        ressources les plus périssables, telles que les œufs.
+    \subsection{acteurs}
+        Nous avons identifié deux types d'acteurs jouant un rôle important dans
+        la boulangerie : les fournisseurs et les clients.
+        Les fournisseurs sont des personnes, souvent morales, qu'il s'agisse
+        de petites et moyennes entreprises, de coopératives ou autre, qui
+        fournissent des matières premières à la boulangerie.
+        Les clients, en revanche, sont les personnes, souvent physiques, qui
+        achètent les produits de la boulangerie.
+        Nous avons décidé, afin de refléter la réalité de la profession, de 
+        ne garder de trace que des clients voulant passer des commandes, et des
+        clients qui désireraient bénéficier d'un programme de fidélisation
+        éventuellement mis en place par la boulangerie.
+        Il est donc possible pour un client d'effectuer des ventes en magasin
+        sans dévoiler son identité.
+        nous avons en revanche prévu qu'on client passant une commande devrait
+        s'identifier auprès du personnel de la boulangerie et donner, son
+        adresse de livraison et un numéro de téléphone par lequel il pourra être
+        joignable.
+
+
 
 \section{Outils graphiques}
     \paragraph{}

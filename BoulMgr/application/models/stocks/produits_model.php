@@ -73,6 +73,46 @@ class Produits_model extends CI_Model {
     function add_production($donnees) {
         $this->db->insert('produit_est_produit', $donnees);
     }
+
+    function get_production($id_produit, $date_prod) {
+        $this->db->where('id_produit', $id_produit);
+        $this->db->where('date_production', $date_prod);
+        $query = $this->db->get('produit_est_produit');
+        return $query->result_array();   
+    }
+
+    function update_production($donnees, $qte_base) {
+        $nqte = $donnees['quantite_produit_produit'] + $qte_base;
+
+        $this->db->where('id_produit',$donnees['id_produit']);
+        $this->db->where('date_production', $donnees['date_production']);
+        $this->db->update('produit_est_produit', array('quantite_produit_produit' => $nqte));
+    }   
+
+    function trending() {
+        //retourne les 3 plus gros produits du jour de la semaine
+        $sql = "SELECT id_produit, nom_produit, sum(qte) AS vendus
+                FROM produit
+                    NATURAL JOIN ( SELECT id_produit,
+                            date_vente AS date,
+                            quantite_produit_vente AS qte
+                        FROM vente
+                            NATURAL JOIN vente_comprend_produit
+                        UNION
+
+                        SELECT id_produit,
+                            date_livraison AS date,
+                            quantite_produit_commande AS qte
+                        FROM commande
+                            NATURAL JOIN commande_contient_produit )
+
+                WHERE strftime('%w', date) = strftime('%w', 'now')
+                GROUP BY id_produit
+                ORDER BY sum(qte) DESC
+                LIMIT 3;";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 }
 
 ?>

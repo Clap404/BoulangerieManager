@@ -19,9 +19,10 @@ class Matprem_model extends CI_Model {
     {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite; */
-        $this->db->select('matiere_premiere.id_matiere_premiere, nom_matiere_premiere, matiere_premiere.id_unite, abbreviation_unite, nom_unite, last_production, (SELECT IFNULL(SUM(com.quantite_matiere_premiere),0) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
+        $this->db->select('matiere_premiere.id_matiere_premiere, nom_matiere_premiere, matiere_premiere.id_unite, abbreviation_unite, nom_unite, last_production, dispo AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
         $this->db->join('(select id_matiere_premiere, date_production as last_production from produit inner join produit_est_produit on produit_est_produit.id_produit = produit.id_produit inner join produit_est_compose_de_matiere_premiere on produit_est_compose_de_matiere_premiere.id_produit = produit.id_produit group by id_matiere_premiere) as subqueryDateProd', 'subqueryDateProd.id_matiere_premiere = matiere_premiere.id_matiere_premiere', 'left');
+        $this->db->join('(SELECT id_matiere_premiere, (possede - utilise) AS dispo FROM (SELECT id_matiere_premiere, sum(utilise) as utilise FROM (SELECT m.id_matiere_premiere, ifnull(quantite_matiere_premiere_produit * sum(quantite_produit_produit), 0.0) AS utilise FROM matiere_premiere m NATURAL LEFT JOIN (produit_est_produit NATURAL JOIN produit_est_compose_de_matiere_premiere) GROUP BY m.id_matiere_premiere, id_produit) GROUP BY id_matiere_premiere) NATURAL LEFT JOIN (SELECT id_matiere_premiere, ifnull(sum(quantite_matiere_premiere),0.0) AS possede FROM matiere_premiere NATURAL LEFT JOIN commande_matiere_premiere GROUP BY id_matiere_premiere) GROUP BY id_matiere_premiere) as subQueryDispo', 'subqueryDispo.id_matiere_premiere = matiere_premiere.id_matiere_premiere', 'left');
         $this->db->order_by("nom_matiere_premiere", "asc");
         $query = $this->db->get('Matiere_premiere');
         return $query->result_array();
@@ -32,9 +33,10 @@ class Matprem_model extends CI_Model {
         /* Select * from Matiere_premiere
          * inner join unite as u on u.id_unite = matiere_premiere.id_unite;
          * where id_matiere_premiere = $id; */
-        $this->db->select('*, (SELECT IFNULL(SUM(com.quantite_matiere_premiere),0) FROM commande_matiere_premiere com WHERE com.id_matiere_premiere=matiere_premiere.id_matiere_premiere) AS disponibilite_matiere_premiere');
+        $this->db->select('matiere_premiere.id_matiere_premiere, nom_matiere_premiere, matiere_premiere.id_unite, abbreviation_unite, nom_unite, dispo AS disponibilite_matiere_premiere');
         $this->db->join('unite', 'unite.id_unite = matiere_premiere.id_unite');
-        $query = $this->db->get_where('Matiere_premiere', array('id_matiere_premiere' => $id));
+        $this->db->join('(SELECT id_matiere_premiere, (possede - utilise) AS dispo FROM (SELECT id_matiere_premiere, sum(utilise) as utilise FROM (SELECT m.id_matiere_premiere, ifnull(quantite_matiere_premiere_produit * sum(quantite_produit_produit), 0.0) AS utilise FROM matiere_premiere m NATURAL LEFT JOIN (produit_est_produit NATURAL JOIN produit_est_compose_de_matiere_premiere) GROUP BY m.id_matiere_premiere, id_produit) GROUP BY id_matiere_premiere) NATURAL LEFT JOIN (SELECT id_matiere_premiere, ifnull(sum(quantite_matiere_premiere),0.0) AS possede FROM matiere_premiere NATURAL LEFT JOIN commande_matiere_premiere GROUP BY id_matiere_premiere) GROUP BY id_matiere_premiere) as subQueryDispo', 'subqueryDispo.id_matiere_premiere = matiere_premiere.id_matiere_premiere', 'left');
+        $query = $this->db->get_where('Matiere_premiere', array('matiere_premiere.id_matiere_premiere' => $id));
         return $query->result_array();
     }
 
@@ -153,6 +155,50 @@ class Matprem_model extends CI_Model {
         $this->db->where('id_commande_matiere_premiere', $array['id_commande_matiere_premiere']);
         $error = $this->db->update('commande_matiere_premiere');
         return $error;
+    }
+
+    function listLowMatprem() {
+        //nom_matprem, nom_fournisseur, prix quand dispo faible
+
+        //Minimum de dispo pour warn
+        $pallier = 10;
+
+        //les dispos
+        $sq1 = "SELECT id_matiere_premiere, (possede - utilise) AS dispo
+                FROM (SELECT id_matiere_premiere, sum(utilise) as utilise
+                        FROM (SELECT m.id_matiere_premiere,
+                                ifnull(quantite_matiere_premiere_produit
+                                    * sum(quantite_produit_produit), 0.0) AS utilise
+                            FROM matiere_premiere m
+                                NATURAL LEFT JOIN (produit_est_produit
+                                           NATURAL JOIN produit_est_compose_de_matiere_premiere)
+                            GROUP BY m.id_matiere_premiere, id_produit)
+                    GROUP BY id_matiere_premiere)
+                    NATURAL LEFT JOIN (SELECT id_matiere_premiere,
+                            ifnull(sum(quantite_matiere_premiere),0.0) AS possede
+                        FROM matiere_premiere
+                            NATURAL LEFT JOIN commande_matiere_premiere
+                        GROUP BY id_matiere_premiere)
+                GROUP BY id_matiere_premiere";
+
+
+        //Les fournisseurs les moins cher par matprem
+        $sq2 = "SELECT nom_matiere_premiere,
+                    id_matiere_premiere,
+                    nom_fournisseur, 
+                    min(prix) AS minprix
+                FROM matiere_premiere_vendue_par_fournisseur
+                    NATURAL JOIN matiere_premiere
+                    NATURAL JOIN fournisseur
+                GROUP BY id_matiere_premiere";
+
+        //l'union des deux avec selectio selon le pallier
+        $sql = "SELECT nom_matiere_premiere, nom_fournisseur, minprix
+                FROM ($sq1) NATURAL JOIN ($sq2)
+                WHERE dispo < $pallier;";
+
+        $query = $this->db->query($sql);
+        return $query->result();
     }
 
 }
