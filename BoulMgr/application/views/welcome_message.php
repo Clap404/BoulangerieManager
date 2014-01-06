@@ -42,7 +42,7 @@
       <div class="panel">
         <h3><a href="<?=$root?>index.php/stocks/produits">Produits</a></h3>
         <?php if (count($prodtip) === 0) :?>
-        <p> Pas de vente cette semaine ! </p>
+        <p> Pas de vente ce jour de la semaine ! </p>
         <?php else :?>
         <p> Les meilleures vente de ce jour de la semaine sont : </p>
         <?php endif; ?>
@@ -92,6 +92,4 @@
       </div>
     </div>
   </div>
-
-
 </div>
