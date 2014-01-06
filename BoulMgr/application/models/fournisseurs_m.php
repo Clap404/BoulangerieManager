@@ -65,12 +65,12 @@ class Fournisseurs_m extends CI_Model {
     }
 
     function add_joignable($id_fournisseur, $id_telephone) {
-        $sql = "INSERT INTO fournisseur_joignable_telephone VALUES( NULL, ?, ?);";
+        $sql = "INSERT INTO fournisseur_joignable_telephone VALUES( ?, ?);";
         return $this->db->query($sql, array($id_fournisseur, $id_telephone));
     }
 
     function add_livre($id_fournisseur, $id_adresse) {
-        $sql = "INSERT INTO fournisseur_livre_depuis_adresse VALUES( NULL, ?, ?);";
+        $sql = "INSERT INTO fournisseur_livre_depuis_adresse VALUES( ?, ?);";
         return $this->db->query($sql, array($id_fournisseur, $id_adresse));
     }
 }

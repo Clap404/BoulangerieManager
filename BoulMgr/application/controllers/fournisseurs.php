@@ -45,6 +45,9 @@ class Fournisseurs extends CI_Controller {
         $_POST = json_decode($json, true);
 
         $this->load->library('form_validation');
+        
+        $addr = $this->adresses;
+        $four = $this->fournisseurs;
 
         $config = array(
             array(
@@ -53,28 +56,8 @@ class Fournisseurs extends CI_Controller {
                 'rules' => 'required'
             ),
             array(
-                'field' => 'description_numero',
-                'label' => 'Description du numéro',
-                'rules' => ''
-            ),
-            array(
-                'field' => 'numero_telephone',
-                'label' => 'Numéro de téléphone',
-                'rules' => 'required|is_natural'
-            ),
-            array(
-                'field' => 'description_adresse',
-                'label' => 'Description de l\'adresse',
-                'rules' => ''
-            ),
-            array(
-                'field' => 'ville',
-                'label' => 'Ville',
-                'rules' => 'required'
-            ),
-            array(
-                'field' => 'code_postal',
-                'label' => 'Code postal',
+                'field' => 'numero_rue',
+                'label' => 'Numéro dans la rue',
                 'rules' => 'required|is_natural'
             ),
             array(
@@ -88,21 +71,43 @@ class Fournisseurs extends CI_Controller {
                 'rules' => 'required'
             ),
             array(
-                'field' => 'numero_rue',
-                'label' => 'Numéro dans la rue',
+                'field' => 'ville',
+                'label' => 'Ville',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'code_postal',
+                'label' => 'Code postal',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'description_adresse',
+                'label' => 'Description de l\'adresse',
+                'rules' => ''
+            ),
+            array(
+                'field' => 'description_numero',
+                'label' => 'Description du numéro',
+                'rules' => ''
+            ),
+            array(
+                'field' => 'numero_telephone',
+                'label' => 'Numéro de téléphone',
                 'rules' => 'required|is_natural'
             )
         );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
 
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE)
         {
-            echo "raté";
+            echo validation_errors();
         }
         else
         {
-            $addr = $this->adresses;
             
             // check for if that type of road exists
             $id_type_rue = exist_offset0_field(
@@ -158,9 +163,14 @@ class Fournisseurs extends CI_Controller {
                 );
                 $id_telephone = $this->db->insert_id();
             }
+
+            $four->add_fournisseur($_POST["nom_fournisseur"]);
+            $id_fournisseur = $this->db->insert_id();
+            $four->add_joignable($id_fournisseur, $id_telephone);
+            $four->add_livre($id_fournisseur, $id_adresse);
             
+            echo "OK";
         }
-        print_r( $_POST);
     }
 }
 

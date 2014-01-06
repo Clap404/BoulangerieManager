@@ -5,7 +5,8 @@
         resize: none;
     }
 </style>
-
+<table>
+<tr><td>
 <h3>Nouveau fournisseur</h3>
 <?php
 
@@ -50,7 +51,10 @@
 
     <button id="reset" type="reset">Reset</button>
     <button id="add" type="button">Ajouter</button>
-
+</td><td>
+    <div id="status"></div>
+</td></tr>
+</table>
     <script type="text/javascript">
 
         var formElement = document.querySelector("div.pop_up form");
@@ -61,7 +65,11 @@
         }
 
         document.querySelector("button#add").onclick = function(){
-            sendForm( formElement, "<?= base_url('/index.php/fournisseurs/add') ?>" );
+            sendForm(
+                formElement,
+                "<?= base_url('/index.php/fournisseurs/add') ?>",
+                document.querySelector("#status")
+            );
         }
 
         var fields = {
