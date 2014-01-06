@@ -55,4 +55,18 @@ class Clients_m extends CI_Model {
         return $query->result();
     }
 
+    function add_client($nom_client, $prenom_client){
+        $sql = "INSERT INTO client VALUES( NULL, ?, ?);";
+        return $this->db->query($sql, array($nom_client, $prenom_client));
+    }
+
+    function add_joignable($id_client, $id_telephone) {
+        $sql = "INSERT INTO client_joignable_telephone VALUES( ?, ?);";
+        return $this->db->query($sql, array($id_client, $id_telephone));
+    }
+
+    function add_habite($id_client, $id_adresse) {
+        $sql = "INSERT INTO client_habite_adresse VALUES( ?, ?);";
+        return $this->db->query($sql, array($id_client, $id_adresse));
+    }
 }
