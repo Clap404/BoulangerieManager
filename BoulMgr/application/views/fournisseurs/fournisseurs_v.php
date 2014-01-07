@@ -9,7 +9,7 @@
             $value->nom_fournisseur,
             $value->nom_ville,
             $value->numero_telephone,
-            anchor(array("fournisseurs", "profil", $value->id_fournisseur), "<button>Profil</button>")
+            anchor(array("fournisseurs", "profil", $value->id_fournisseur), "<button class='smallbutton'>Profil</button>")
         );
     }
 

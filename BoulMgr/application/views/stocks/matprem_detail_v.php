@@ -1,12 +1,13 @@
-<h3><?= $title ?></h3>
+<h2><?= $title ?></h2>
 
 <!-- TODO CSS : popup like this one : http://dinbror.dk/bpopup/  -->
-<div class="pop_up" id="pop_up" style="display: none; width: 600px; height: 400px; padding: 20px; background-color: white;"></div>
-
+<div class="pop_up" id="pop_up"></div>
+<div id="detailmatprem">
 <?php
 if(count($matprem) != 0)
 {
     ?>
+    <table class="tablematprem"><tr><td>
     <table>
         <?php
             $imgpath = "assets/images/matprem/".$matprem[0]['id_matiere_premiere'].".jpg";
@@ -25,12 +26,13 @@ if(count($matprem) != 0)
     <div>
         <span id="error"></span>
     </div>
-
-    <table style="margin-top: 10px;">
+    </td><td>
+    <table>
         <tr>
             <th>ID Fournisseur</th>
             <th>Fournisseur</th>
             <th>Prix (en €)</th>
+            <th></th>
         </tr>
     <?php
 
@@ -57,17 +59,18 @@ if(count($matprem) != 0)
     }
     ?>
     </table>
-
+    </td></tr></table>
     <div>
-        <b>Commandes</b>
-        <table style="margin-top: 10px;">
+
+        <table class="tablematprem">
+            <caption><b>Commandes</b></caption>
             <tr>
                 <th>Numéro de commande</th>
                 <th>Date commande</th>
                 <th>Fournisseur</th>
                 <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
                 <th>Prix à l'unité<br>(en € par <?= $matprem[0]['nom_unite'] ?>)</th>
-                <th>Prix total<br>(en €)</th>
+                <th>Prix total<br>(en €)</th><th></th>
             </tr>
     <?php
 
@@ -106,8 +109,9 @@ if(count($matprem) != 0)
     </div>
 
     <div>
-        <b>Est utilisé(e) pour :</b>
-        <table style="margin-top: 10px;">
+
+        <table class="tablematprem">
+            <caption><b>Est utilisé(e) pour :</b></caption>
             <tr>
                 <th>Nom du produit</th>
                 <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
@@ -142,6 +146,7 @@ else
 }
 
 ?>
+    </div>
     <span id="idMatprem" style="display: none;"><?= $matprem[0]["id_matiere_premiere"] ?></span>
     <span id="base_url" style="display:none"><?= base_url() ?></span>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
