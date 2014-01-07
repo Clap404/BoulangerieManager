@@ -5566,3 +5566,17 @@ caption {
 #commandfin {
     margin-top: 30px;
 }
+
+.profil {
+    display: inline-block;
+}
+
+#profils {
+    width: 80%;
+    min-width: 800px;
+    margin: auto;
+}
+
+#profilbutton a#modif{
+    padding: 40px;
+}

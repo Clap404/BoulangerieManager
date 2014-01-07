@@ -16,7 +16,7 @@ Il faudra également qu'au survol de la souris le background devienne bleu fonc�
     </div>
 </a>
 </div>
-
+<div id="profils">
 <?php foreach($produits as $info): ?>
 
 
@@ -30,10 +30,10 @@ Il faudra également qu'au survol de la souris le background devienne bleu fonc�
                         Prix : <?= $info['prix_produit'] ?> €<br />
                         Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
                         Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
-                    </div></td></td></tr><tr><td>
-                    <a href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a> </td><td><a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a></td></tr>
+                    </div></td></td></tr><tr><td colspan="2" id="profilbutton">
+                    <a id="modif" href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a><a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a></td></tr>
         </table>
     </div>
 
 <?php endforeach; ?>
-
+</div>
