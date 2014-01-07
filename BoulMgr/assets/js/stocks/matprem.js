@@ -417,12 +417,12 @@ function fillPopupDetails(data)
 
     if(en_vente)
     {
-        popupContent += "<p><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
+        popupContent += "<p class='matpremtext'><b>Prix le plus bas : </b><span id='prix_min'>" + fournisseur["prix"] + "</span>€/" + matprem["abbreviation_unite"] + "<br/>";
         popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
         popupContent += "<div id='div_command' style='display: none;'>" +
-                            "<p><b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input></p><br>" +
-                            "<p><b>Prix total : </b><span id='prix_total_command'>0.00€</span></p>" +
+                            "<p class='matpremtext'><b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input></p><br>" +
+                            "<p class='matpremtext'><b>Prix total : </b><span id='prix_total_command'>0.00€</span></p>" +
                         "</div>";
     }
 

@@ -185,24 +185,31 @@ function fillPopup(id_fourn)
     fournisseur.id = "fournisseur_command";
     b = document.createElement("b");
     b.appendChild(document.createTextNode("Fournisseur : "));
-    fournisseur.appendChild(b);
-    fournisseur.appendChild(document.createTextNode(html_fournisseur));
-    fournisseur.appendChild(document.createElement("br"));
-    div.appendChild(fournisseur);
-
+    var p1 = document.createElement("p");
+    p1.setAttribute("class","commandtext");
+    fournisseur.appendChild(p1);
+    p1.appendChild(b);
+    p1.appendChild(document.createTextNode(html_fournisseur));
+    p1.appendChild(document.createElement("br"));
+    div.appendChild(p1);
+    var p2 = document.createElement("p");
+    p2.setAttribute("class","commandtext");
     var prix = document.createElement("b");
     prix.appendChild(document.createTextNode("Prix unitaire : "));
-    div.appendChild(prix);
+    p2.appendChild(prix);
     var prix_result = document.createElement("span");
     prix_result.appendChild(document.createTextNode(html_prix));
     prix_result.id = "prix_command";
-    div.appendChild(prix_result);
-    div.appendChild(document.createTextNode("€"));
-    div.appendChild(document.createElement("br"));
+    p2.appendChild(prix_result)
+    p2.appendChild(document.createTextNode("€"));
+    p2.appendChild(document.createElement("br"));
+    div.appendChild(p2);
 
+    var p3 = document.createElement("p");
+    p3.setAttribute("class","commandtext");
     var qte = document.createElement("b");
     qte.appendChild(document.createTextNode("Quantité (en " + document.getElementById("abrev_unite").innerHTML + ") : "));
-    div.appendChild(qte);
+    p3.appendChild(qte);
     var qte_input = document.createElement("input");
     qte_input.id = "qte_command";
     qte_input.onkeydown = function(event){
@@ -210,16 +217,20 @@ function fillPopup(id_fourn)
             document.getElementById("save_command").click();
     }
     qte_input.onkeyup = function(){refreshTotalPrice();};
-    div.appendChild(qte_input);
-    div.appendChild(document.createElement("br"));
+    p3.appendChild(qte_input);
+    p3.appendChild(document.createElement("br"));
+    div.appendChild(p3);
 
+    var p4 = document.createElement("p");
+    p4.setAttribute("class","commandtext")
     prix_total = document.createElement("b");
     prix_total.appendChild(document.createTextNode("Prix total : "));
-    div.appendChild(prix_total);
+    p4.appendChild(prix_total);
     var prix_total_result = document.createElement("span");
     prix_total_result.id = "prix_total_command";
     prix_total_result.appendChild(document.createTextNode("0.00€"));
-    div.appendChild(prix_total_result);
+    p4.appendChild(prix_total_result);
+    div.appendChild(p4);
 
     popup.appendChild(div);
 

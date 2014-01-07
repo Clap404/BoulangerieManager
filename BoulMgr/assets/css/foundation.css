@@ -5521,7 +5521,6 @@ div.switch.round {
 }
 
 #confirm button {
-    margin: auto;
     text-align: center;
     margin: 34px;
 }
@@ -5529,9 +5528,8 @@ div.switch.round {
     margin-top: 50px;
 }
 
-#commandepopup {
-    border: 1px solid red;
-}
+
+
 
 #pop_up {
     display: none; width: 600px; height: 400px; padding: 20px; background-color: white;
@@ -5556,7 +5554,7 @@ caption {
     margin-right: 10%;
 }
 
-#pop_up p{
+#pop_up p.matpremtext{
     padding-left: 240px;
     text-align: left;
 }
@@ -5588,3 +5586,21 @@ caption {
 #invendus {
     margin-top: 50px;
 }
+
+#commandepopup {
+    margin-top: 30px;
+    padding: 0;
+    text-align: center;
+}
+
+#pop_up p.commandtext {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 120px;
+}
+
+#save_command {
+    margin-left: 220px;
+    margin-top: 40px;
+}
+
