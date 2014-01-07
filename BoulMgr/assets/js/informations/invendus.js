@@ -1,49 +1,14 @@
-var infosGraphiques;
-
-function infosGraphique()
-{
-    var base_url = document.getElementById("base_url").innerHTML;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", base_url + "index.php/informations/invendus/jsonTotalPerDay", false);
-
-    var errorMessage = document.getElementById("error");
-    var stringError = "Erreur lors de l'affichage des invendus";
-
-    xhr.onreadystatechange = function (oEvent)
-    {
-        if (xhr.readyState == 4 && xhr.status != 200)
-            errorMessage.innerHTML = stringError;
-    };
-
-    xhr.onloadend = function () {
-        if (xhr.readyState == 4 && xhr.status == 200)
-        {
-            var response = JSON.parse(xhr.responseText);
-            console.log("Response : " + response);
-            infosGraphiques = response;
-        }
-        else
-            errorMessage.innerHTML = stringError;
-    };
-
-    xhr.send();
-}
-
-function test()
-{
-    console.log(infosGraphiques);
-}
+var infosGraphiques = JSON.parse(document.getElementById("json_total").innerHTML);
 
 $(document).ready(function(){
     var line1 = [];
     for(var i in infosGraphiques)
-        line1.push([infosGraphiques[i]["date_invendu"], parseInt(infosGraphiques[i]["sum_quantite"])]);
+        line1.push([infosGraphiques[6 - i]["date_invendu"], parseInt(infosGraphiques[6 - i]["sum_quantite"])]);
 
     var plot1 = $.jqplot('chartdiv', [line1], {
-        title: 'Évolution des invendus dans la semaine',
+        title: 'Évolution des invendus durant les 7 derniers jours',
         series:[{renderer:$.jqplot.BarRenderer}],
         axesDefaults: {
-            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
             tickRenderer: $.jqplot.CanvasAxisTickRenderer,
             tickOptions: {
                 angle: -30,
@@ -54,10 +19,19 @@ $(document).ready(function(){
         },
         axes: {
           xaxis: {
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
             renderer: $.jqplot.CategoryAxisRenderer,
             syncTicks: true
           },
           yaxis: {
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+            tickOptions: {
+                angle: 0,
+                fontSize: '12pt',
+            },
+            labelOptions: {
+                fontSize: '12pt'
+            },
             autoscale:true
           }
         },
@@ -65,8 +39,6 @@ $(document).ready(function(){
             show: true,
             sizeAdjust: 5.5,
             tooltipSeparator: ' : '
-        }
+        },
     });
 });
-
-infosGraphique();

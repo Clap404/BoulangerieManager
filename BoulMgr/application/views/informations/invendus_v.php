@@ -12,6 +12,29 @@ if(count($invendus) != 0)
 
     <div id="chartdiv" style="height:400px;width:900px; margin-left: auto; margin-right: auto;"></div>
 
+    <table id='days'><thead>
+        <tr>
+    <?php
+    for($i = 0; $i < count($total); $i++)
+    {
+        if($total[6-$i]["sum_quantite"] == 0)
+        {
+            ?>
+            <th><?= ucwords(strftime('%A', strtotime($total[6 - $i]["date_invendu"]))) ?></th>
+            <?php
+        }
+        else
+        {
+            ?>
+            <th><a href="#"><?= ucwords(strftime('%A', strtotime($total[6 - $i]["date_invendu"]))) ?></a></th>
+            <?php
+        }
+    }
+    ?>
+        </tr>
+        </thead>
+    </table>
+
     <table id='invendus'><thead>
         <tr>
             <th>Produits</th>
@@ -19,7 +42,6 @@ if(count($invendus) != 0)
             <th>Date Production</th>
         </tr></thead>
     <?php
-
     foreach($invendus as $result)
     {
         ?>
@@ -41,7 +63,9 @@ else
 ?>
 
     <span id="base_url" style="display:none"><?= base_url() ?></span>
-    <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+    <span id="json_total" style="display:none"><?= json_encode($total) ?></span>
+    <span id="json_invendus" style="display:none"><?= json_encode($invendus) ?></span>
+    <link rel="stylesheet" type="text/css" href="<?= base_url("/assets/js/jqplot/jquery.jqplot.css") ?>" />
     <script defer src="<?= base_url("/assets/js/informations/invendus.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/jquery.jqplot.min.js") ?>"></script>
