@@ -8,16 +8,18 @@
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/normalize.css") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/foundation.css") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/style.css") ?>">
-        <script type="text/javascript" src="<?= base_url("/assets/js/foundation/foundation.topbar.js") ?>"></script>
+
 
     </head>
 
     <body>
+    <div class="fixed">
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
                     <h1><a href=<?= '"'.site_url().'"'?>>Boulangerie Manager</a></h1>
                 </li>
+                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
             </ul>
 
             <section class="top-bar-section">
@@ -85,4 +87,5 @@
                 </ul>
             </section>
         </nav>
+        </div>
         <div id="content">
