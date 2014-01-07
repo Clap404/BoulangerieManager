@@ -14,7 +14,7 @@
         <ul>
         <?php foreach($lowmatprem as $lm) :?>
           <li><?=$lm->nom_matiere_premiere?></li>
-          <ul><li>Achetez en à <?=$lm->nom_fournisseur?> pour <?=$lm->minprix?> €</li></ul>
+          <ul><li>Achetez en à <?=$lm->nom_fournisseur?> pour <?=$lm->minprix?> € par <?=$lm->unit?></li></ul>
         <?php endforeach; ?>
         </ul>
       </div>      
