@@ -37,10 +37,14 @@ class Fournisseurs extends CI_Controller {
         $data['telephones'] = $this->fournisseurs->telephones_fournisseur($id_fournisseur);
         $data['matieres_premieres'] = $this->fournisseurs->matieres_premieres($id_fournisseur);
         $data['title'] = "profil de ".$data['infos']['nom_fournisseur'];
-        $data['rm_url'] = base_url("/index.php/fournisseurs/rm_matprem/".$id_fournisseur)."/";
+        $data['rm_url'] = array(
+            "matprem" => base_url("/index.php/fournisseurs/rm_matprem/".$id_fournisseur)."/",
+            "telephone" => base_url("/index.php/fournisseurs/rm_joignable/".$id_fournisseur)."/"
+        );
         $this->load->view('templates/header', $data);
         $this->load->view('fournisseurs/profil_fournisseur_v', $data);
-        $this->load->view('fournisseurs/add_modif_matprem_v');
+        $this->load->view('fournisseurs/add_modif_matprem_v', $data);
+        $this->load->view('fournisseurs/add_joignable_v', $data);
         $this->load->view('templates/footer');
     }
 
@@ -222,9 +226,78 @@ class Fournisseurs extends CI_Controller {
         }
     }
 
+    function add_joignable() {
+        $this->load->model('adresses_m','adresses');
+        $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+
+        $addr = $this->adresses;
+        $four = $this->fournisseurs;
+        $config = array(
+            array(
+                'field' => 'id_fournisseur',
+                'label' => 'id_fournisseur',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'numero_telephone',
+                'label' => 'Numéro de téléphone',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'description_numero',
+                'label' => 'Description du numéro',
+                'rules' => ''
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            // telephone exists
+            $id_telephone = exist_offset0_field(
+                $addr->existe_telephone(
+                    $_POST["numero_telephone"]
+                ),
+                "id_telephone"
+            );
+
+            if($id_telephone === -1){
+                $addr->add_telephone(
+                    $_POST["numero_telephone"], $_POST["description_numero"]
+                );
+                $id_telephone = $this->db->insert_id();
+            }
+
+            $four->add_joignable($_POST["id_fournisseur"], $id_telephone);
+        }
+        echo "OK";
+    }
+
     function rm_matprem($id_fournisseur, $id_matprem) {
         if ( $this->fournisseurs->rm_matprem($id_matprem, $id_fournisseur) == 1 )
             echo "OK";
+        else
+            echo "NOK";
+    }
+
+    function rm_joignable($id_fournisseur, $id_telephone) {
+        //décommenter pour supprimer les numéros orphelins
+        // $this->load->model('adresses_m','adresses');
+        if ( $this->fournisseurs->rm_joignable($id_telephone, $id_fournisseur) == 1 ){   
+            // $this->adresses->rm_if_orphaned_telephone($id_telephone);
+            echo "OK";
+        }
         else
             echo "NOK";
     }

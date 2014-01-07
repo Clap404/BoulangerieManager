@@ -1,4 +1,4 @@
-<div class="pop_up" style="display:none;">
+<div class="pop_up" id="matprem" style="display:none;">
 
 <style type="text/css">
     textarea {
@@ -40,24 +40,25 @@
 </td></tr>
 </table>
     <script type="text/javascript">
+    var matprem_callbacks = function(){
 
-        var formElement = document.querySelector("div.pop_up form");
+        var formElement = document.querySelector("#matprem form");
         formElement.reset();
 
-        document.querySelector("button#reset").onclick = function(){
+        document.querySelector("#matprem button#reset").onclick = function(){
             formElement.reset();
         }
 
-        document.querySelector("button#add").onclick = function(){
+        document.querySelector("#matprem button#add").onclick = function(){
             sendForm(
                 formElement,
                 "<?= base_url('/index.php/fournisseurs/add_matprem') ?>",
-                document.querySelector("#status")
+                document.querySelector("#matprem #status")
             );
         }
+    };
+
+    matprem_callbacks();
 
     </script>
 </div>
-
-<script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
-<script defer src="<?= base_url("/assets/js/popup_form.js") ?>"></script>
