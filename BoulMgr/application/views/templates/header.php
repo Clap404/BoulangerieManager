@@ -43,7 +43,7 @@
                             </li>
 
                             <li>
-                                <a href="#">Invendus</a>
+                                <a href="<?=site_url("informations/invendus")?>">Invendus</a>
                             </li>
                         </ul>
                     </li>
@@ -59,7 +59,7 @@
                             <li>
                                 <?= '<a href="'.site_url().'/stocks/produits">Produits</a>' ?>
                             </li>
-                            
+
                             <li>
                                 <?= '<a href="'.site_url().'/stocks/production">Production</a>' ?>
 
