@@ -55,7 +55,7 @@ function popupFormDiv(popupSelector, closeButtonSelector, opacity, positionStyle
     var popup = document.querySelector(popupSelector);
 
     //TODO, un CSS pour les popups avec l'id "pop_up" pour fonctionner avec la lib anthony 
-    popup.setAttribute("style", "display: none; min-width: 640px; padding: 20px; background-color: white;");
+    popup.setAttribute("id", "pop_up");
 
     $(popup).bPopup({
         opacity: opacity,
