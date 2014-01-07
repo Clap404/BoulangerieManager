@@ -282,8 +282,9 @@ class Fournisseurs extends CI_Controller {
             }
 
             $four->add_joignable($_POST["id_fournisseur"], $id_telephone);
+            
+            echo "OK";
         }
-        echo "OK";
     }
 
     function add_adresse() {
@@ -296,6 +297,11 @@ class Fournisseurs extends CI_Controller {
         $addr = $this->adresses;
         $four = $this->fournisseurs;
         $config = array(
+            array(
+                'field' => 'id_fournisseur',
+                'label' => 'id_fournisseur',
+                'rules' => 'required'
+            ),
             array(
                 'field' => 'numero_rue',
                 'label' => 'Numéro dans la rue',
@@ -380,8 +386,9 @@ class Fournisseurs extends CI_Controller {
             }
 
             $four->add_livre($_POST["id_fournisseur"], $id_adresse);
+            
+            echo "OK";
         }
-        echo "OK";
     }
 
     function rm_matprem($id_fournisseur, $id_matprem) {
