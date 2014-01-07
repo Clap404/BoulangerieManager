@@ -40,7 +40,7 @@
 
                         <ul class="dropdown">
                             <li>
-                                <a href="#">Statistiques</a>
+                                <a href="<?=site_url("informations/stats")?>">Statistiques</a>
                             </li>
 
                             <li>

@@ -20,7 +20,7 @@ class Stats extends CI_Controller {
     }
     $data['grand_total'] = $total; 
     $this->load->view('templates/header', $data);
-    $this->load->view('stats_v', $data);
+    $this->load->view('informations/stats_v', $data);
     $this->load->view('templates/footer');
     }
 }
