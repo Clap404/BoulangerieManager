@@ -38,8 +38,8 @@ if(count($invendus) != 0)
     </table>
 <dl class="accordion" data-accordion>
     <dd>
-        <a href="#panel1">Accordion 1</a>
-        <div id="panel1" class="content active">
+        <a href="#panel1">Tableau des invendus</a>
+        <div id="panel1" class="content">
     <table id='invendus'><thead>
         <tr>
             <th>Produits</th>
