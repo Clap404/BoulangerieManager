@@ -1,3 +1,280 @@
-\chapter{Détail}
+\chapter{Détail des fichiers}
 
 \paragraph{}
+    Il est à noter qu'il existe un certain niveau d'incohérence dans les
+    conventions de nommage de nos fichiers qui, même si l'on peut regretter
+    sa présence, ne nuit pas au fonctionnement ni à la bonne compréhension
+    des fonctionnalités du programme.
+
+\section{Modèles, Vues et Contrôleurs}
+    \subsection{Modèles}
+    \paragraph{}
+        Il existe dans notre projet les classes PHP de type modèle suivantes :
+        \begin{description}
+            \item[adresses\_m.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                adresses (ville, code postal, type de voie, ...) avec les
+                différents contrôleurs impliqués : client et fournisseurs.
+            \item[clients\_m.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                clients (nom, prénom, ...) avec le contrôleur dédié aux client
+                .
+            \item[fournisseurs\_m.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                fournisseurs (prix des fournitures, matières premières
+                proposées) avec le contrôleur dédié aux fournisseurs.
+            \item[stats\_m.php]\hfill \\
+                Cette classe permet de récupérer de la base de données des
+                données permettant de calculer des statistiques faisant appel
+                à un trop grand nombre de tables pour appartenir aux autres
+                modèles.
+            \item[commande\_m.php]\hfill \\
+                Cette classe permet de récupérer des informations le lien
+                entre les données des commandes avec le contrôleur dédié aux
+                commandes. contrôleurs.
+            \item[vente\_m.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                ventes avec le contrôleurs dédié aux ventes.
+            \item[matprem\_model.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                matières premières avec le contrôleur dédié aux matières
+                premières.
+            \item[produits\_model.php]\hfill \\
+                Cette classe permet de faire le lien entre les données des
+                produits avec le contrôleur dédié aux produits.
+        \end{description}
+
+
+    \subsection{Vues}
+    \paragraph{}
+        Nos vue sont les suivantes :
+        \begin{description}
+            \item[header.php]\hfill \\
+                Cette vue contient les parties générales incluses dans chaque
+                page, comme la barre de navigation.
+            \item[footer.php]\hfill \\
+                Cette vue contient le footer inclus dans chaque page.
+            \item[welcome\_message.php]\hfill \\
+                Cette vue contient la page d'accueil de notre application.
+                Elle comprend un tableau de bord permettant à l'utilisateur
+                de gagner en visibilité et d'accéder facilement à toutes les
+                pages du site.
+            \item[clients/clients\_v.php]\hfill \\
+                Cette vue contient l'interface principale de l'interaction
+                entre l'utilisateur et les données concernant les clients
+            \item[clients/profil\_client\_v.php]\hfill \\
+                Cette vue permet d'afficher le détail d'un client.
+            \item[clients/add\_adresse\_v.php]\hfill \\
+                Cette vue est rendue lorsque l'utilisateur veut ajouter une
+                adresse d'un client dans la base de donnée.
+            \item[clients/add\_joignable\_v.php]\hfill \\
+                Cette vue est rendue lorsque l'utilisateur veut ajouter un
+                numéro de téléphone auquel un client est joignable.
+            \item[clients/add\_client\_v.php]\hfill \\
+                Cette vue est rendue lorsque l'utilisateur veut ajouter un
+                nouveau client dans la base de donnée.
+            \item[clients/modif\_nom\_v.php]\hfill \\
+                Cette vue est rendue lorsque l'utilisateur veut modifier le
+                nom d'un client.
+            \item[fournisseurs/fournisseurs\_v.php]\hfill \\  
+                Cette vue contient l'interface principale de l'interaction
+                entre l'utilisateur et les données concernant les fournisseurs
+            \item[fournisseurs/profil\_fournisseur\_v.php]\hfill \\
+                Cette vue permet d'afficher le détail d'un fournisseur.
+            \item[fournisseurs/add\_adresse\_v.php]\hfill \\      
+                Cette vue est rendue lorsque l'utilisateur veut ajouter une
+                adresse d'un fournisseur dans la base de donnée.
+            \item[fournisseurs/add\_joignable\_v.php]\hfill \\      
+                Cette vue est rendue lorsque l'utilisateur veut ajouter un
+                numéro de téléphone auquel un fournisseur est joignable.
+            \item[fournisseurs/add\_fournisseur\_v.php]\hfill \\  
+                Cette vue est rendue lorsque l'utilisateur veut ajouter un
+                nouveau fournisseur dans la base de donnée.
+            \item[fournisseurs/add\_modif\_matprem\_v.php]\hfill \\  
+                Cette page est rendue lorsque l'utilisateur veut mettre à
+                jour la liste des matières premières offertes par un
+                fournisseur.
+            \item[fournisseurs/modif\_nom\_v.php]\hfill \\
+                Cette vue est rendue lorsque l'utilisateur veut modifier le
+                nom d'un client.
+            \item[informations/invendus\_v.php]\hfill \\
+                Cette vue permet d'afficher les statistiques particulières
+                concernant les produits invendus de l'utilisateur. La
+                singularité de cette vue est motivée par l'importance de ces
+                statistiques pour la profession à laquelle ce logiciel est
+                destiné.
+            \item[informations/stats\_v.php]\hfill \\
+                Cette vue permet d'afficher des statistiques générales quant
+                à l'activité de l'utilisateur
+            \item[stocks/matprem\_v.php]\hfill \\
+                Cette vue permet d'afficher une liste de matières premières.
+            \item[stocks/matprem\_detail\_v.php]\hfill \\
+                Cette vue permet d'afficher le détail d'une matière première.
+            \item[stocks/produits\_v.php]\hfill \\
+                Cette vue permet d'afficher la liste des produits enregistrés
+                dans la base de données.
+            \item[stocks/production.php]\hfill \\
+                Cette vue permet d'accéder à l'interface de production de
+                produits, centrale à la présente solution logicielle.
+            \item[stocks/produits\_add.php]\hfill \\
+                Cette vue permet d'afficher l'interface d'ajout de produit
+                dans la base de données.
+            \item[stocks/produits\_modif.php]\hfill \\
+                Cette vue permet de mettre à jour les détails d'un produit
+                dans la base de données.
+        \end{description}
+
+    \subsection{contrôleurs}
+    \paragraph{}
+        Nos classes PHP de type contrôleur sont les suivantes :
+        \begin{description}
+            \item[welcome.php]\hfill \\
+                Ce contrôleur contient la logique permettant d'afficher le
+                tableau de bord.
+                Il communique avec différents modèle pour récupérer ses données
+                et les affiche dans la vue welcome\_message.php.
+            \item[fournisseurs.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux fournisseurs, et de choisir la vue
+                appropriée pour agir en tant qu'interface de communication 
+                avec l'utilisateur.
+            \item[adresses.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                adresses des clients et fournisseurs, et de choisir la vue
+                appropriée pour les afficher.
+            \item[informations/stats.php]\hfill \\
+                Ce contrôleur contient la logique permettant de mettre au
+                points les statistiques générales, et de les afficher en
+                en rendant la vue informations/invendus\_v.php.
+            \item[informations/invendus.php]\hfill \\
+                Ce contrôleur contient la logique permettant de mettre au
+                point les statistiques concernant les invendus et de les 
+                afficher en randant la vue informations/stats\_v.php.
+            \item[stocks/produits.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux produits, et de choisir la vue appropriée
+                pour agir en tant qu'interface de communication avec
+                l'utilisateur.
+            \item[stocks/matprem.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux matières premières, et de choisir la vue
+                appropriée pour agir en tant qu'interface de communication
+                avec l'utilisateur.
+            \item[stocks/production.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées à la production, et de les afficher et modifier
+                en utilisant la vue stocks/production.php comme interface.
+            \item[clients.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux clients, et de choisir la vue appropriée
+                pour agir en tant qu'interface de communication avec
+                l'utilisateur.
+            \item[commerce/commande.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux commandes, et de choisir la vue appropriée
+                pour agir en tant qu'interface de communication avec
+                l'utilisateur.
+            \item[commerce/vente.php]\hfill \\
+                Ce contrôleur contient la logique permettant de manipuler les
+                données liées aux ventes, et de choisir la vue appropriée pour
+                agir en tant qu'interface de communication avec l'utilisateur.
+        \end{description}
+
+\section{Base de données}
+    \paragraph{}
+        Utilisant le logiciel de gestion de base de données relationelles
+        SQLite, notre base de données est contenue dans un fichier facilement
+        distribuable.
+        Les fichiers en relation directe avec notre base de données sont les
+        suivants :
+        \begin{description}
+            \item[BlMgr.sdb]\hfill \\
+                La base de données en tant que telle, contenant toutes les
+                données enregistrées par le logiciel.
+            \item[generate.sql]\hfill \\
+                Script de génération de la base de données, contenant son
+                schéma en langage SQL.
+            \item[populate.sql]\hfill \\
+                Script de population de la base de données, contenant des
+                données de test.
+                Il n'est pas utile ni recommandé d'utiliser ce script en
+                production.
+        \end{description}
+\section{Feuilles de style et script}
+    \paragraph{}
+        Le reste des fichiers déterminant le comportement de notre application
+        est divisé en feuilles de styles et scripts javascript.
+    \subsection{Feuilles de style}
+        \paragraph{}
+            Les feuilles de style permettant d'ajouter une touche graphique à
+            cette application sont les suivantes :
+        \begin{description}
+            \item[foundation.css]\hfill \\
+                Cette feuille de style est la version de développement du
+                framework foundation.
+                Son utilisation n'est conseillée que durant le développement : 
+                en effet, pour la mise en production, nous recommandons
+                l'utilisation de son équivalent "minifié", réduisant la taille
+                du fichier sans perdre de contenu, plus apte à offrir de bonnes
+                performances à l'application.
+            \item[foundation.min.css]\hfill \\
+                Version minifiée du fichier sus-décrit.
+            \item[jquery.datetimepicker.css]\hfill \\
+                Feuilles de style permettant de styliser le sélecteur de
+                jour et heure utilisé dans la partie commande.
+            \item[normalize.css]\hfill \\
+                Feuille de style dont le framework foundation dépend.
+            \item[style.css]\hfill \\
+                Feuille de style propre à notre application, et développée
+                pour celle ci.
+        \end{description}
+    \subsection{Scripts}
+        \paragraph{}
+            L'application utilise les scripts suivant pour permettre une plus
+            grande facilité et convivialité d'utilisation pour les
+            utilisateurs :
+        \begin{description}
+            \item[popup\_form.js]\hfill \\
+                Ce script permet d'ouvrir un popup servant de formulaire pour
+                différents composant de l'application
+            \item[popup\_confirm.js]\hfill \\
+
+
+            \item[vente.js]\hfill \\
+                Ce script permet de rendre la saisie des ventes par 
+                l'utilisateur plus agréable et interactive.
+            \item[commande.js]\hfill \\
+                Ce script permet de rendre la saisie des commandes par 
+                l'utilisateur plus agréable et interactive.
+            \item[stocks/matprem.js]\hfill \\
+                Ce script permet de rendre l'interface de gestion des matières
+                premières plus agréable et interactive.
+            \item[stocks/matprem\_detail.js]\hfill \\
+                Ce script permet de rendre la page de détail des matières
+                premières plus agréable et interactive.
+            \item[stocks/production.js]\hfill \\
+                Ce script permet de rendre l'interface de production de
+                produits plus agréable et interactive.
+            \item[informations/invendus.js]\hfill \\
+                Ce script permet de rendre la page des invendus plus facile
+                à lire par la création de graphiques personnalisés.
+            \item[foundation.min.js, modernizr.js, foundation/, vendor/]\hfill \\
+                Ces fichiers et repertoires sont des dépendances du framework
+                Foundation.
+            \item[jquery.js]\hfill \\
+                Ce fichier est la bibiliothèque, utilisée par le framework
+                Foundation et nous même pour rendre les pages web plus faciles
+                à manipuler et permettre une plus grande compatibilité entre
+                différents navigateurs.
+            \item[jqplot/]\hfill \\
+                Ce répertoire contient la bibliothèque jqplot, permettant
+                de facilement créer des graphiques personalisés.
+            \item[bpopup.min.js]\hfill \\
+                Ce fichier contient une bibliothèque permettant de créer des
+                popups peu encombrants.
+            \item[jquery.datetimepicker.js]\hfill \\
+                Ce fichier contient une addition à la bibliothèque jQuery, lui
+                permettant de créer des sélecteurs de date et heure.
+        \end{description}
+
+
