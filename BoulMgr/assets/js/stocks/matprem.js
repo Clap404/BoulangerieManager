@@ -392,7 +392,7 @@ function fillPopupDetails(data)
 
     popupContent += "<span id='error_popup'></span>";
 
-    popupContent += "<div style='float: right; margin-right: 10%;'>" +
+    popupContent += "<div id='incon1'>" +
                         "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button> ";
     if(en_vente)
         popupContent += "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br> ";
@@ -421,8 +421,8 @@ function fillPopupDetails(data)
         popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
         popupContent += "<div id='div_command' style='display: none;'>" +
-                            "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
-                            "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
+                            "<p><b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input></p><br>" +
+                            "<p><b>Prix total : </b><span id='prix_total_command'>0.00€</span></p>" +
                         "</div>";
     }
 
@@ -439,20 +439,20 @@ function fillPopupAdd()
     popupContent += "<span id='error_popup'></span><br>";
 
     // TODO CSS : Mettre l'input plus long, et mettre la police plus grosse
-    popupContent += "<input id='nom_add_matiere_premiere' placeholder='Nom de la matière première'>";
-    popupContent += "<input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
+    popupContent += "<table id='popup_add_matprem'><tr><td><input id='nom_add_matiere_premiere' placeholder='Nom de la matière première'></td>";
+    popupContent += "<td rowspan='2'><input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
     popupContent += '<table>';
     popupContent += '<tr>' +
                             '<td colspan="2"><img id="image_preview" src="' + base_url + 'assets/images/empty.jpg" style="width: 128px; height: 128px;"/></td>' +
                     '</tr>';
-    popupContent += '</table>';
+    popupContent += '</table></td></tr><tr><td>';
 
-    popupContent += "<b>Unité : </b><input list='list_unite' type='text' id='unite_input'>"
+    popupContent += "<input list='list_unite' type='text' id='unite_input' placeholder='Unité'></td></tr><tr>"
 
-    popupContent += "<div>" +
-                        "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button> " +
-                        "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button>" +
-                    "</div>";
+    popupContent += "<td>" +
+                        "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button></td><td> " +
+                        "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button></td></tr>" +
+                    "</table>";
 
     popup.innerHTML = popupContent;
 }

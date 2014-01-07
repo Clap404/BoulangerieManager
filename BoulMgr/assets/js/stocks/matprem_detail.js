@@ -180,7 +180,7 @@ function fillPopup(id_fourn)
     popup.appendChild(error);
 
     var div = document.createElement("div");
-
+    div.setAttribute("id","commandepopup");
     var fournisseur = document.createElement("span");
     fournisseur.id = "fournisseur_command";
     b = document.createElement("b");
