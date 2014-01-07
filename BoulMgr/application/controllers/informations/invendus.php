@@ -13,7 +13,10 @@ class Invendus extends CI_Controller {
         for($i = 1; $i < 8; $i++)
         {
             foreach($this->model_produits->affiche_invendu_ago($i) as $result)
-            $data['invendus'][] = $result;
+                $data['invendus'][] = $result;
+
+            foreach($this->model_produits->affiche_somme_invendu_ago($i) as $result)
+                $data["total_par_jour"][] = $result;
         }
 
         $data['title'] = "Invendus";
@@ -23,8 +26,4 @@ class Invendus extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    function test($day)
-    {
-        print_r($this->model_produits->affiche_invendu_ago($day));
-    }
 }

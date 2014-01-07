@@ -144,6 +144,36 @@ class Produits_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    function affiche_somme_invendu_ago($ago) {
+        $sql = "SELECT date('now', '-".$ago." days') as date_invendu, ifnull(sum(prod_ajd - (comm_ajd + vendu_ajd)),0) as sum_quantite
+                FROM (
+                    SELECT p1.*,
+                        ifnull(sum(quantite_produit_produit), 0) as prod_ajd,
+                        ifnull(sum(quantite_produit_commande), 0) as comm_ajd,
+                        ifnull(sum(quantite_produit_vente), 0) as vendu_ajd
+                    FROM produit p1 NATURAL LEFT JOIN
+                        produit p2
+                            NATURAL LEFT JOIN (
+                                SELECT *
+                                FROM produit_est_produit
+                                WHERE date(date_production) = date('now', '-".$ago." days'))
+                            NATURAL LEFT JOIN (
+                                SELECT ccp.*
+                                FROM commande_contient_produit ccp
+                                    NATURAL JOIN commande
+                                WHERE date(date_livraison) = date('now', '-".$ago." days'))
+                            NATURAL LEFT JOIN (
+                                SELECT vcp.*
+                                FROM vente_comprend_produit vcp
+                                    NATURAL JOIN vente
+                                WHERE date(date_vente) = date('now', '-".$ago." days'))
+                    GROUP BY p1.id_produit)
+                    WHERE (prod_ajd - (comm_ajd + vendu_ajd)) > 0;";
+
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }
 
 ?>
