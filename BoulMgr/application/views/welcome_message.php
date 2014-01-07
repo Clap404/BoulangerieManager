@@ -7,17 +7,16 @@
       <div class="panel">
         <h3><a href="<?=$root?>index.php/stocks/matprem">Matières premières</a></h3>
         <?php if (count($lowmatprem) === 0) :?>
-        <p>
-          Toutes vos matières premières sont disponibles en quantité suffisante
-        </p>
+        <p> Toutes vos matières premières sont disponibles en quantité suffisante </p>
+        <?php else: ?>
+        <p> Les matières premières suivantes viennent à manquer :</p>
         <?php endif; ?>
+        <ul>
         <?php foreach($lowmatprem as $lm) :?>
-        <p>
-          Vous manquez  de <?=$lm->nom_matiere_premiere?> :
-          achetez en à <?=$lm->nom_fournisseur?>
-          pour <?=$lm->minprix?> €
-        </p>
+          <li><?=$lm->nom_matiere_premiere?></li>
+          <ul><li>Achetez en à <?=$lm->nom_fournisseur?> pour <?=$lm->minprix?> €</li></ul>
         <?php endforeach; ?>
+        </ul>
       </div>      
     </div>
     <div class="large-6 columns">
