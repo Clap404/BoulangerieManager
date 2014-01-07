@@ -12,12 +12,12 @@ if(count($invendus) != 0)
 
     <div id="chartdiv" style="height:400px;width:900px; margin-left: auto; margin-right: auto;"></div>
 
-    <table>
+    <table id='invendus'><thead>
         <tr>
             <th>Produits</th>
             <th>Invendus</th>
             <th>Date Production</th>
-        </tr>
+        </tr></thead>
     <?php
 
     foreach($invendus as $result)
