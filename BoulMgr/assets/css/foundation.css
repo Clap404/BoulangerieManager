@@ -5516,13 +5516,17 @@ div.switch.round {
 #confirm {
     width: 100%;
     margin: auto;
-    padding: 60px 120px 0 120px;
+    padding-left: 110px;
+    /*padding: 60px 120px 0 120px;*/
 }
 
 #confirm button {
     margin: auto;
     text-align: center;
     margin: 34px;
+}
+#pop_up h3 {
+    margin-top: 50px;
 }
 
 #commandepopup {
