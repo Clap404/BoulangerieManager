@@ -11,6 +11,6 @@
 		((number_format($line["somme_produit"]/$grand_total,2))*100)." %");
 	}
 	
-	$this->table->add_row("Total", $grand_total." €");
+	$this->table->add_row("Total", $grand_total." €","");
 	echo $this->table->generate(); 
 ?>
