@@ -1,6 +1,33 @@
 var infosGraphiques = JSON.parse(document.getElementById("json_total").innerHTML);
+var infosPie = JSON.parse(document.getElementById("json_invendus").innerHTML);
 
-$(document).ready(function(){
+function drawPie(day, dayname)
+{
+    document.getElementById("chartdiv").innerHTML = "";
+    var data = [];
+    for(var i in infosPie[6 - day])
+        data.push([infosPie[6 - day][i]["nom_produit"], parseInt(infosPie[6 - day][i]["quantite"])]);
+
+    var plot1 = jQuery.jqplot ('chartdiv', [data],
+    {
+        title: 'Répartition des ventes de ' + dayname,
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show:true, location: 'e' }
+    }
+  );
+}
+
+function drawBar()
+{
+    document.getElementById("chartdiv").innerHTML = "";
     var line1 = [];
     for(var i in infosGraphiques)
         line1.push([infosGraphiques[6 - i]["date_invendu"], parseInt(infosGraphiques[6 - i]["sum_quantite"])]);
@@ -41,4 +68,6 @@ $(document).ready(function(){
             tooltipSeparator: ' : '
         },
     });
-});
+}
+
+$(document).ready(drawBar());

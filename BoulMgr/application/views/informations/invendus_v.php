@@ -17,20 +17,22 @@ if(count($invendus) != 0)
     <?php
     for($i = 0; $i < count($total); $i++)
     {
+        $dayname = strftime('%A', strtotime($total[6 - $i]["date_invendu"]));
         if($total[6-$i]["sum_quantite"] == 0)
         {
             ?>
-            <th><?= ucwords(strftime('%A', strtotime($total[6 - $i]["date_invendu"]))) ?></th>
+            <th><?= ucwords($dayname) ?></th>
             <?php
         }
         else
         {
             ?>
-            <th><a href="#"><?= ucwords(strftime('%A', strtotime($total[6 - $i]["date_invendu"]))) ?></a></th>
+            <th><a href="#" onclick="drawPie(<?= $i.",'".$dayname."'"?>);"><?= ucwords($dayname) ?></a></th>
             <?php
         }
     }
     ?>
+        <th><a href="#" onclick="drawBar();">Total</a></th>
         </tr>
         </thead>
     </table>
@@ -42,15 +44,18 @@ if(count($invendus) != 0)
             <th>Date Production</th>
         </tr></thead>
     <?php
-    foreach($invendus as $result)
+    foreach($invendus as $day)
     {
-        ?>
-        <tr>
-            <td><?= $result["nom_produit"] ?></td>
-            <td><?= $result["quantite"] ?></td>
-            <td><?= $result["date_invendu"] ?></td>
-        </tr>
-        <?php
+        foreach($day as $result)
+        {
+            ?>
+            <tr>
+                <td><?= $result["nom_produit"] ?></td>
+                <td><?= $result["quantite"] ?></td>
+                <td><?= $result["date_invendu"] ?></td>
+            </tr>
+            <?php
+        }
     }
     echo('</table>');
 }
@@ -66,7 +71,6 @@ else
     <span id="json_total" style="display:none"><?= json_encode($total) ?></span>
     <span id="json_invendus" style="display:none"><?= json_encode($invendus) ?></span>
     <link rel="stylesheet" type="text/css" href="<?= base_url("/assets/js/jqplot/jquery.jqplot.css") ?>" />
-    <script defer src="<?= base_url("/assets/js/informations/invendus.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/jquery.jqplot.min.js") ?>"></script>
     <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/excanvas.js") ?>"></script>
@@ -76,6 +80,9 @@ else
     <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js") ?>"></script>
     <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js") ?>"></script>
     <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.barRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.pieRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.donutRenderer.min.js") ?>"></script>
+    <script defer src="<?= base_url("/assets/js/informations/invendus.js") ?>"></script>
 
 <?php
 /* End of file invendus_v.php */

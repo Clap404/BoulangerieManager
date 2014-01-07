@@ -14,8 +14,8 @@ class Invendus extends CI_Controller {
     {
         for($i = 1; $i < 8; $i++)
         {
-            foreach($this->model_produits->affiche_invendu_ago($i) as $result)
-                $data['invendus'][] = $result;
+            $invendus_ago = $this->model_produits->affiche_invendu_ago($i);
+            $data['invendus'][] = $invendus_ago;
 
             foreach($this->model_produits->affiche_somme_invendu_ago($i) as $result)
                 $data['total'][] = $result;
