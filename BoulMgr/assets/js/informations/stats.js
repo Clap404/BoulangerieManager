@@ -8,7 +8,7 @@ function drawPie(infos, titleGraph)
     document.getElementById("chartdiv").innerHTML = "";
     var data = [];
     for(var i in infos)
-        data.push([infos[i]["nom_produit"], parseInt(infos[i]["somme_produit"])]);
+        data.push([infos[i]["nom_produit"], parseFloat(infos[i]["somme_produit"])]);
 
     var plot1 = jQuery.jqplot ('chartdiv', [data],
     {
