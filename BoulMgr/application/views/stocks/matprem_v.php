@@ -18,7 +18,7 @@ if(count($matprem) != 0)
         <label for="switchOn">On</label>
     </div></td></tr></table>
 
-    <div id="addmatprem"><button id="add_matprem" onclick="popupAddButton();">Ajouter</button></div>
+    <div id="addmatprem"><button id="add_matprem" class="button radius round" onclick="popupAddButton();">Ajouter</button></div>
 
     <!-- TODO CSS : Bold, or red color, something to alert the user !-->
     <div>
@@ -62,9 +62,9 @@ if(count($matprem) != 0)
                 </td>
                 <td><?= $dispo." ".$result["abbreviation_unite"] ?></td>
                 <td>
-                    <button id="modif_button_<?= $idMatprem ?>" onclick="switch2Modify('<?= $idMatprem ?>');">Modifier</button>
-                    <button style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif('<?= $idMatprem ?>');">Sauvegarder</button>
-                    <button style="display:none" id="cancel_button_<?= $idMatprem ?>" onclick="back2Normal('<?= $idMatprem ?>');">Annuler</button>
+                    <button class="smallbutton" id="modif_button_<?= $idMatprem ?>" onclick="switch2Modify('<?= $idMatprem ?>');">Modifier</button>
+                    <button class="smallbutton" style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif('<?= $idMatprem ?>');">Sauvegarder</button>
+                    <button class="smallbutton" style="display:none" id="cancel_button_<?= $idMatprem ?>" onclick="back2Normal('<?= $idMatprem ?>');">Annuler</button>
                 </td>
             </tr>
         <?php
