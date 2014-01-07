@@ -32,6 +32,7 @@ class Clients extends CI_Controller {
         $data['adresses'] = $this->clients->adresses_client($id_client);
         $data['telephones'] = $this->clients->telephones_client($id_client);
         $data['title'] = "profil de ".$data['infos']['prenom_client']." ".$data['infos']['nom_client'];
+        $data['commandes'] = $this->clients->get_commandes_client($id_client);
         $this->load->view('templates/header', $data);
         $this->load->view('clients/profil_client_v', $data);
         $this->load->view('templates/footer');
