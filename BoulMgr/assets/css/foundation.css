@@ -2307,6 +2307,7 @@ div.switch {
   div.switch input:last-of-type + label,
   div.switch input:last-of-type + span + label {
     right: -50%;
+    top: -34px;
     left: auto;
     text-align: right; }
   div.switch input:last-of-type:checked + label,
