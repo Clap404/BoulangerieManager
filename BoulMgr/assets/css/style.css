@@ -292,3 +292,9 @@ table#days thead {
     color: red;
     font-weight: bolder;
 }
+
+dl {
+    margin-top: 50px;
+    text-align: center;
+    font-weight: bolder;
+}
