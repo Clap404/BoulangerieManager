@@ -1,14 +1,7 @@
 <h2>Produits</h2>
 
-<!-- INFO pour le CSS de cette page
-Il faudrait que chaque "produit" soit représenté sous la forme d'une vignette contenant
-le nom en haut, la photo en dessous à gauche et les différentes caractéristiques à gauche de la photo.
+<div class="pop_up" id="pop_up" style="display: none;"></div>
 
-Pour le lien "ajouter un nouveaux produit" il faut qu'il fasse la même taille que "les vignettes produit", que le background soit du même bleu
-que les boutons modifier et supprimer, que les corners soit arrondis et que le texte soit centré, écrit plus gros et avec une police sympa.
-Il faudra également qu'au survol de la souris le background devienne bleu foncé (toujours comme les boutons).
-
--->
 <div id="addprod">
 <a class="button radius round" href=<?='"'.site_url().'/stocks/produits/ajoutproduit"'?>>
     <div class="profil" width="400" height="200">
@@ -31,9 +24,13 @@ Il faudra également qu'au survol de la souris le background devienne bleu fonc�
                         Quantité : <?= $info['disponibilite_produit'] ?> pièces<br/>
                         Temps de préparation : <?= $info['temps_preparation_produit'] ?> minutes<br/>
                     </div></td></td></tr><tr><td colspan="2" id="profilbutton">
-                    <a id="modif" href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a><a href=<?= '"'.site_url().'/stocks/produits/remove/'.$info['id_produit'].'"'?>><button>Supprimer</button></a></td></tr>
+                    <a id="modif" href=<?= '"'.site_url().'/stocks/produits/modifproduit/'.$info['id_produit'].'"'?>><button>Modifier</button></a><a onclick="deleteProduct(<?= "'".site_url()."/stocks/produits/remove/".$info['id_produit']."'"?>);"><button>Supprimer</button></a></td></tr>
         </table>
     </div>
 
 <?php endforeach; ?>
 </div>
+
+<script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
+<script defer src="<?= base_url("/assets/js/popup_confirm.js") ?>"></script>
+<script defer src="<?= base_url("/assets/js/stocks/produits.js") ?>"></script>
