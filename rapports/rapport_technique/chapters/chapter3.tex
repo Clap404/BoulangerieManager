@@ -4,9 +4,9 @@
     Il est à noter qu'il existe un certain niveau d'incohérence dans les
     conventions de nommage de nos fichiers qui, même si l'on peut regretter
     sa présence, ne nuit pas au fonctionnement ni à la bonne compréhension
-    des fonctionalités du programme.
+    des fonctionnalités du programme.
 
-\section{Modèles, Vues et Controlleurs}
+\section{Modèles, Vues et Contrôleurs}
     \subsection{Modèles}
     \paragraph{}
         Il existe dans notre projet les classes PHP de type modèle suivantes :
@@ -14,7 +14,7 @@
             \item[adresses\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
                 adresses (ville, code postal, type de voie, ...) avec les
-                différents controleurs impliqués : client et fournisseurs.
+                différents contrôleurs impliqués : client et fournisseurs.
             \item[clients\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
                 clients (nom, prénom, ...) avec le contrôleur dédié aux client
@@ -31,16 +31,16 @@
             \item[commande\_m.php]\hfill \\
                 Cette classe permet de récupérer des informations le lien
                 entre les données des commandes avec le contrôleur dédié aux
-                commandes. controleurs.
+                commandes. contrôleurs.
             \item[vente\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                ventes avec le controleurs dédié aux ventes.
+                ventes avec le contrôleurs dédié aux ventes.
             \item[matprem\_model.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
                 matières premières avec le contrôleur dédié aux matières
                 premières.
             \item[produits\_model.php]\hfill \\
-                Cette classe premet de faire le lien entre les données des
+                Cette classe permet de faire le lien entre les données des
                 produits avec le contrôleur dédié aux produits.
         \end{description}
 
@@ -57,7 +57,7 @@
             \item[welcome\_message.php]\hfill \\
                 Cette vue contient la page d'accueil de notre application.
                 Elle comprend un tableau de bord permettant à l'utilisateur
-                de gagner en visibilité et d'acceder facilement à toutes les
+                de gagner en visibilité et d'accéder facilement à toutes les
                 pages du site.
             \item[clients/clients\_v.php]\hfill \\
                 Cette vue contient l'interface principale de l'interaction
@@ -92,7 +92,7 @@
                 nouveau fournisseur dans la base de donnée.
             \item[fournisseurs/add\_modif\_matprem\_v.php]\hfill \\  
                 Cette page est rendue lorsque l'utilisateur veut mettre à
-                jour la liste des matières premièes offertes par un
+                jour la liste des matières premières offertes par un
                 fournisseur.
             \item[fournisseurs/modif\_nom\_v.php]\hfill \\
                 Cette vue est rendue lorsque l'utilisateur veut modifier le
@@ -109,12 +109,12 @@
             \item[stocks/matprem\_v.php]\hfill \\
                 Cette vue permet d'afficher une liste de matières premières.
             \item[stocks/matprem\_detail\_v.php]\hfill \\
-                Cette vue permet d'afficher le détail d'une matière premiere.
+                Cette vue permet d'afficher le détail d'une matière première.
             \item[stocks/produits\_v.php]\hfill \\
                 Cette vue permet d'afficher la liste des produits enregistrés
                 dans la base de données.
             \item[stocks/production.php]\hfill \\
-                Cette vue permet d'acceder à l'interface de production de
+                Cette vue permet d'accéder à l'interface de production de
                 produits, centrale à la présente solution logicielle.
             \item[stocks/produits\_add.php]\hfill \\
                 Cette vue permet d'afficher l'interface d'ajout de produit
@@ -181,7 +181,25 @@
         \end{description}
 
 \section{Base de données}
-
+    \paragraph{}
+        Utilisant le logiciel de gestion de base de données relationelles
+        SQLite, notre base de données est contenue dans un fichier facilement
+        distribuable.
+        Les fichiers en relation directe avec notre base de données sont les
+        suivants :
+        \begin{description}
+            \item[BlMgr.sdb]\hfill \\
+                La base de données en tant que telle, contenant toutes les
+                données enregistrées par le logiciel.
+            \item[generate.sql]\hfill \\
+                Script de génération de la base de données, contenant son
+                schéma en langage SQL.
+            \item[populate.sql]\hfill \\
+                Script de population de la base de données, contenant des
+                données de test.
+                Il n'est pas utile ni recommandé d'utiliser ce script en
+                production.
+        \end{description}
 \section{Feuilles de style et script}
     \paragraph{}
         Le reste des fichiers déterminant le comportement de notre application
@@ -196,13 +214,13 @@
                 framework foundation.
                 Son utilisation n'est conseillée que durant le développement : 
                 en effet, pour la mise en production, nous recommandons
-                l'utilisation de son équivalent minifié, réduisant la taille du
-                fichier sans perdre de contenu, plus apte à offrir de bonnes
+                l'utilisation de son équivalent "minifié", réduisant la taille
+                du fichier sans perdre de contenu, plus apte à offrir de bonnes
                 performances à l'application.
             \item[foundation.min.css]\hfill \\
                 Version minifiée du fichier sus-décrit.
             \item[jquery.datetimepicker.css]\hfill \\
-                Feuilles de style permettant de styliser le selecteur de
+                Feuilles de style permettant de styliser le sélecteur de
                 jour et heure utilisé dans la partie commande.
             \item[normalize.css]\hfill \\
                 Feuille de style dont le framework foundation dépend.
@@ -213,7 +231,50 @@
     \subsection{Scripts}
         \paragraph{}
             L'application utilise les scripts suivant pour permettre une plus
-            grande facilité et agréabilité d'utilisation pour les
+            grande facilité et convivialité d'utilisation pour les
             utilisateurs :
         \begin{description}
+            \item[popup\_form.js]\hfill \\
+                Ce script permet d'ouvrir un popup servant de formulaire pour
+                différents composant de l'application
+            \item[popup\_confirm.js]\hfill \\
+
+
+            \item[vente.js]\hfill \\
+                Ce script permet de rendre la saisie des ventes par 
+                l'utilisateur plus agréable et interactive.
+            \item[commande.js]\hfill \\
+                Ce script permet de rendre la saisie des commandes par 
+                l'utilisateur plus agréable et interactive.
+            \item[stocks/matprem.js]\hfill \\
+                Ce script permet de rendre l'interface de gestion des matières
+                premières plus agréable et interactive.
+            \item[stocks/matprem\_detail.js]\hfill \\
+                Ce script permet de rendre la page de détail des matières
+                premières plus agréable et interactive.
+            \item[stocks/production.js]\hfill \\
+                Ce script permet de rendre l'interface de production de
+                produits plus agréable et interactive.
+            \item[informations/invendus.js]\hfill \\
+                Ce script permet de rendre la page des invendus plus facile
+                à lire par la création de graphiques personnalisés.
+            \item[foundation.min.js, modernizr.js, foundation/, vendor/]\hfill \\
+                Ces fichiers et repertoires sont des dépendances du framework
+                Foundation.
+            \item[jquery.js]\hfill \\
+                Ce fichier est la bibiliothèque, utilisée par le framework
+                Foundation et nous même pour rendre les pages web plus faciles
+                à manipuler et permettre une plus grande compatibilité entre
+                différents navigateurs.
+            \item[jqplot/]\hfill \\
+                Ce répertoire contient la bibliothèque jqplot, permettant
+                de facilement créer des graphiques personalisés.
+            \item[bpopup.min.js]\hfill \\
+                Ce fichier contient une bibliothèque permettant de créer des
+                popups peu encombrants.
+            \item[jquery.datetimepicker.js]\hfill \\
+                Ce fichier contient une addition à la bibliothèque jQuery, lui
+                permettant de créer des sélecteurs de date et heure.
         \end{description}
+
+
