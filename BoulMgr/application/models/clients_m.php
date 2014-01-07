@@ -82,4 +82,38 @@ class Clients_m extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    function rm_joignable($id_telephone, $id_client) {
+
+        $sql = "SELECT COUNT(*) as count FROM client_joignable_telephone
+            WHERE id_client = ? ;";
+        $query = $this->db->query($sql, array($id_client));
+
+        if ($query->result_array()[0]["count"] > 1 ){
+
+            $sql = "DELETE FROM client_joignable_telephone
+                WHERE id_client = ?
+                AND id_telephone = ? ;";
+            $this->db->query($sql, array($id_client, $id_telephone));
+
+            return 1;
+        }
+        return 0;
+    }
+
+    function rm_habite($id_client, $id_adresse) {
+        $sql = "SELECT COUNT(*) AS count FROM client_habite_adresse
+            WHERE id_client = ? ;";
+        $query = $this->db->query($sql, array($id_client));
+
+        if ($query->result_array()[0]["count"] > 1 ){
+        
+            $sql = "DELETE FROM client_habite_adresse
+                WHERE id_client = ?
+                AND id_adresse = ? ;";
+            $this->db->query($sql, array( $id_client, $id_adresse));
+            return 1;
+        }
+        return 0;
+    }
 }

@@ -35,8 +35,8 @@ class Clients extends CI_Controller {
         $data['telephones'] = $this->clients->telephones_client($id_client);
         $data['title'] = "Profil de ".$data['infos']['prenom_client']." ".$data['infos']['nom_client'];
         $data['rm_url'] = array(
-            "telephone" => base_url("/index.php/client/rm_joignable/".$id_client)."/",
-            "adresse" => base_url("/index.php/client/rm_habite/".$id_client)."/"
+            "telephone" => base_url("/index.php/clients/rm_joignable/".$id_client)."/",
+            "adresse" => base_url("/index.php/clients/rm_habite/".$id_client)."/"
         );
         $data['commandes'] = $this->clients->get_commandes_client($id_client);
         $this->load->view('templates/header', $data);
@@ -347,6 +347,25 @@ class Clients extends CI_Controller {
             
             echo "OK";
         }
+    }
+
+    function rm_joignable($id_client, $id_telephone) {
+        //décommenter pour supprimer les numéros orphelins
+        // $this->load->model('adresses_m','adresses');
+        if ( $this->clients->rm_joignable($id_telephone, $id_client) == 1 ){   
+            // $this->adresses->rm_if_orphaned_telephone($id_telephone);
+            echo "OK";
+        }
+        else
+            echo "NOK";
+    }
+
+    function rm_habite($id_client, $id_adresse) {
+        if ( $this->clients->rm_habite($id_client, $id_adresse) == 1 ){   
+            echo "OK";
+        }
+        else
+            echo "NOK";
     }
 }
 
