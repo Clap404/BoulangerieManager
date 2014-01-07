@@ -14,9 +14,9 @@
 
     foreach ($ventes as $value) {
         if ($value->today === "Y") {
-            $action = '<a href="'.site_url().'/commerce/vente/form/'.$value->id_vente.'"> <button>modifier</button> </a>';
+            $action = '<a href="'.site_url().'/commerce/vente/form/'.$value->id_vente.'"> <button class="smallbutton">modifier</button> </a>';
         } else {
-            $action = '<a href="'.site_url().'/commerce/vente/archive/'.$value->id_vente.'"> <button>afficher</button> </a>';
+            $action = '<a href="'.site_url().'/commerce/vente/archive/'.$value->id_vente.'"> <button class="smallbutton">afficher</button> </a>';
         }
 
         $this->table->add_row(

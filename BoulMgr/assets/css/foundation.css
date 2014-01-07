@@ -5556,3 +5556,13 @@ caption {
     padding-left: 240px;
     text-align: left;
 }
+
+#commandes {
+    min-width: 700px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+#commandfin {
+    margin-top: 30px;
+}

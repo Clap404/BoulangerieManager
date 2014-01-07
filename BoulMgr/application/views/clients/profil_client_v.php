@@ -20,24 +20,7 @@
 </div>
     </div>
 
-<h3>Commandes</h3>
-<div class="fournisseur">
-<?php
-    $this->table->set_heading('Numero','Prix','Date de la commande', 'Date de livraison', 'Adresse de livraison');
 
-    foreach($commandes as $value) {
-        $this->table->add_row (
-            $value['id_commande'],
-            $value['prix_total'].'€',
-            $value['date_commande'],
-            $value['date_livraison'],
-            $value['numero_voie_adresse'].' '.$value['nom_type_voie'].' '.$value['nom_voie_adresse'].', '.$value['code_postal'].' '.$value['nom_ville']
-        );
-    }
-
-    echo $this->table->generate();
-?>
-</div>
 
 
     <div class="small-4 large-4 columns">
@@ -58,5 +41,28 @@
 ?>
 
 </div>
+</div>
+
+</div>
+
+
+<h3>Commandes</h3>
+<div id="commandes">
+<div class="fournisseur">
+    <?php
+    $this->table->set_heading('Numero','Prix','Date de la commande', 'Date de livraison', 'Adresse de livraison');
+
+    foreach($commandes as $value) {
+        $this->table->add_row (
+            $value['id_commande'],
+            $value['prix_total'].'€',
+            $value['date_commande'],
+            $value['date_livraison'],
+            $value['numero_voie_adresse'].' '.$value['nom_type_voie'].' '.$value['nom_voie_adresse'].', '.$value['code_postal'].' '.$value['nom_ville']
+        );
+    }
+
+    echo $this->table->generate();
+    ?>
 </div>
 </div>

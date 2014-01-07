@@ -28,12 +28,13 @@ if(count($matprem) != 0)
     </div>
     </td><td>
     <table>
+        <thead>
         <tr>
             <th>ID Fournisseur</th>
             <th>Fournisseur</th>
             <th>Prix (en €)</th>
             <th></th>
-        </tr>
+        </tr></thead>
     <?php
 
     foreach($fournisseur as $result) {
@@ -64,6 +65,7 @@ if(count($matprem) != 0)
 
         <table class="tablematprem">
             <caption><b>Commandes</b></caption>
+            <thead>
             <tr>
                 <th>Numéro de commande</th>
                 <th>Date commande</th>
@@ -71,7 +73,7 @@ if(count($matprem) != 0)
                 <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
                 <th>Prix à l'unité<br>(en € par <?= $matprem[0]['nom_unite'] ?>)</th>
                 <th>Prix total<br>(en €)</th><th></th>
-            </tr>
+            </tr></thead>
     <?php
 
     foreach($commandes as $result) {
@@ -112,10 +114,10 @@ if(count($matprem) != 0)
 
         <table class="tablematprem">
             <caption><b>Est utilisé(e) pour :</b></caption>
-            <tr>
+            <thead><tr>
                 <th>Nom du produit</th>
                 <th>Quantité<br>(en <?= $matprem[0]['nom_unite'] ?>)</th>
-            </tr>
+            </tr></thead>
     <?php
     foreach($produits as $result) {
         $id_produit = $result['id_produit'];

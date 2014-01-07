@@ -20,7 +20,7 @@
                     $value->date_commande,
                     $value->prix_total,
                     $value->nom_client." ".$value->prenom_client,
-                    '<a href="'.site_url().'/commerce/commande/form/'.$value->id_commande.'"> <button>Modifier</button> </a>'
+                    '<a href="'.site_url().'/commerce/commande/form/'.$value->id_commande.'"> <button class="smallbutton">Modifier</button> </a>'
                 );
             }
 
@@ -28,7 +28,7 @@
             $this->table->clear();
         ?>
     </div>
-    <div>
+    <div id="commandfin">
         <h3>Commandes finalisées</h3>
         <?php
             $this->table->set_heading('Date livraison', 'Date commande', 'Prix total', 'Client', 'Action');
@@ -42,7 +42,7 @@
                     $value->date_commande,
                     $value->prix_total,
                     $value->nom_client." ".$value->prenom_client,
-                    '<a href="'.site_url().'/commerce/commande/archive/'.$value->id_commande.'"> <button>Visualiser</button> </a>'
+                    '<a href="'.site_url().'/commerce/commande/archive/'.$value->id_commande.'"> <button class="smallbutton">Visualiser</button> </a>'
                 );
             }
             echo $this->table->generate(); 
