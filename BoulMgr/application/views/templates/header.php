@@ -44,7 +44,7 @@
 
                         <ul class="dropdown">
                             <li>
-                                <a href="<?=site_url("stats")?>">Statistiques</a>
+                                <a href="<?=site_url("informations/stats")?>">Statistiques</a>
                             </li>
 
                             <li>
