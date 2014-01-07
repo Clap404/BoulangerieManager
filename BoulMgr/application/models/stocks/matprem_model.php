@@ -90,19 +90,27 @@ class Matprem_model extends CI_Model {
         if($error)
             return 0;
 
+        if(array_key_exists("id_unite", $array))
+            $this->db->set('id_unite', $array['id_unite']);
+
         $this->db->set('nom_matiere_premiere', $array['nom_matiere_premiere']);
         $this->db->where('id_matiere_premiere', $array['id_matiere_premiere']);
         $error = $this->db->update('matiere_premiere');
         return $error;
     }
 
-    function matpremNameAlreadyExists($name)
+    function matpremNameAlreadyExists($name, $id = -1)
     {
-        $this->db->select('nom_matiere_premiere');
+        $this->db->select('nom_matiere_premiere, id_matiere_premiere');
         $query = $this->db->get_where('matiere_premiere', array('nom_matiere_premiere' => $name));
 
         $result = $query->result_array();
-        return !($result === []);
+        if($result === [])
+            return false;
+        else if($result[0]["id_matiere_premiere"] == $id)
+            return false;
+
+        return true;
     }
 
     function getFournPrice($idMatprem, $idFourn)
@@ -185,7 +193,7 @@ class Matprem_model extends CI_Model {
         //Les fournisseurs les moins cher par matprem
         $sq2 = "SELECT nom_matiere_premiere,
                     id_matiere_premiere,
-                    nom_fournisseur, 
+                    nom_fournisseur,
                     min(prix) AS minprix,
                     id_unite
                 FROM matiere_premiere_vendue_par_fournisseur

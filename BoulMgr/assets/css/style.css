@@ -213,9 +213,11 @@ caption {
 }
 
 #pop_up p.matpremtext{
-    padding-left: 240px;
+    padding-left: 140px;
     text-align: left;
+    margin-bottom: 3px;
 }
+
 
 #commandes {
     min-width: 700px;
@@ -288,7 +290,7 @@ table#days thead {
     background: none;
 }
 
-#error {
+#error, #error_popup {
     color: red;
     font-weight: bolder;
 }
@@ -307,4 +309,8 @@ dl {
 
 p.contact {
     text-align: justify;
+}
+
+h3#matpremname {
+    margin-top: 0;
 }

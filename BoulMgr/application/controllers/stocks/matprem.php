@@ -79,14 +79,38 @@ class Matprem extends CI_Controller {
     function modify()
     {
         $json = trim(file_get_contents('php://input'));
-        $changes = json_decode($json, true);
-        $changes = $this->security->xss_clean($changes);
+        $array = json_decode($json, true);
+        $array = $this->security->xss_clean($array);
 
-        // Check if $array is unidimensional
-        if(is_array($changes) && count($changes, COUNT_RECURSIVE) == count($changes) && count($changes) != 0)
-            echo($this->model_matprem->updateMatprem($changes));
-        else
-            echo(0);
+        if($this->model_matprem->matpremNameAlreadyExists($array["nom_matiere_premiere"], $array["id_matiere_premiere"]))
+        {
+            echo(-1);
+            return;
+        }
+
+        if(array_key_exists("abbreviation_unite", $array))
+        {
+            $id = $this->model_matprem->getIdUniteByName($array["abbreviation_unite"]);
+            if($id === [])
+            {
+                $unite = [];
+                $unite["abbreviation_unite"] = $array["abbreviation_unite"];
+                $unite["nom_unite"] = $unite["abbreviation_unite"];
+                $matprem["id_unite"] = $this->model_matprem->insertUnite($unite);
+                if($matprem["id_unite"] === -1)
+                {
+                    echo(0);
+                    return;
+                }
+            }
+            else
+                $matprem["id_unite"] = $id[0]["id_unite"];
+        }
+
+        $matprem["nom_matiere_premiere"] = $array["nom_matiere_premiere"];
+        $matprem["id_matiere_premiere"] = $array["id_matiere_premiere"];
+
+        echo($this->model_matprem->updateMatprem($matprem));
     }
 
     function uploadMatpremImage($id_newmatprem)
