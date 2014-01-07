@@ -34,7 +34,7 @@ class Stats extends CI_Controller {
         
 
          $this->load->view('templates/header', $data);
-         $this->load->view('stats_v', $data);
+         $this->load->view('informations/stats_v', $data);
          $this->load->view('templates/footer');
    }
 }
