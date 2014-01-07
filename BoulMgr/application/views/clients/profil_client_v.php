@@ -76,3 +76,14 @@
     <a href="<?= base_url('/index.php/commerce/commande/form')?>"><button class="button radius round">Passer une commande</button></a>
 </div>
 </div>
+
+<script type="text/javascript">
+    //ajoute les croix de supression et les callbacks
+    var rmbuttons = document.querySelectorAll("button[rmurl]");
+
+    for (var i = rmbuttons.length - 1; i >= 0; i--) {
+        rmbuttons[i].onclick = function() {
+            rm_from_bdd(this.getAttribute("rmurl"), this);
+        }
+    };
+</script>

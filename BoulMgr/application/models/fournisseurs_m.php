@@ -155,9 +155,18 @@ class Fournisseurs_m extends CI_Model {
     }
 
     function rm_livre($id_fournisseur, $id_adresse) {
-        $sql = "DELETE FROM fournisseur_livre_depuis_adresse
-            WHERE id_fournisseur = ?
-            AND id_adresse = ? ;";
-        return $this->db->query($sql, array( $id_fournisseur, $id_adresse));
+        $sql = "SELECT COUNT(*) AS count FROM fournisseur_livre_depuis_adresse
+            WHERE id_fournisseur = ? ;";
+        $query = $this->db->query($sql, array($id_fournisseur));
+
+        if ($query->result_array()[0]["count"] > 1 ){
+        
+            $sql = "DELETE FROM fournisseur_livre_depuis_adresse
+                WHERE id_fournisseur = ?
+                AND id_adresse = ? ;";
+            $this->db->query($sql, array( $id_fournisseur, $id_adresse));
+            return 1;
+        }
+        return 0;
     }
 }
