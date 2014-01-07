@@ -36,7 +36,10 @@ if(count($invendus) != 0)
         </tr>
         </thead>
     </table>
-
+<dl class="accordion" data-accordion>
+    <dd>
+        <a href="#panel1">Accordion 1</a>
+        <div id="panel1" class="content active">
     <table id='invendus'><thead>
         <tr>
             <th>Produits</th>
@@ -66,7 +69,9 @@ else
 }
 
 ?>
-
+        </div>
+    </dd>
+</dl>
     <span id="base_url" style="display:none"><?= base_url() ?></span>
     <span id="json_total" style="display:none"><?= json_encode($total) ?></span>
     <span id="json_invendus" style="display:none"><?= json_encode($invendus) ?></span>

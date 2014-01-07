@@ -9,7 +9,6 @@
     <p>Pour tout contact ou problème : <a href="#">Contact</a></p>
 </footer>
 
-        <script type="text/javascript" src="<?= base_url("/assets/js/jquery.js") ?>"></script>
-        <script type="text/javascript" src="<?= base_url("/assets/js/foundation.min.js") ?>"></script>
+
 
 </body>
