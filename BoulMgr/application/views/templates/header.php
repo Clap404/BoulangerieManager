@@ -13,11 +13,13 @@
     </head>
 
     <body>
+    <div class="fixed">
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
                     <h1><a href=<?= '"'.site_url().'"'?>>Boulangerie Manager</a></h1>
                 </li>
+                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
             </ul>
 
             <section class="top-bar-section">
@@ -85,4 +87,5 @@
                 </ul>
             </section>
         </nav>
+        </div>
         <div id="content">
