@@ -10,6 +10,8 @@ if(count($invendus) != 0)
         <span id="error"></span>
     </div>
 
+    <div id="chartdiv" style="height:400px;width:900px; margin-left: auto; margin-right: auto;"></div>
+
     <table>
         <tr>
             <th>Produits</th>
@@ -29,25 +31,6 @@ if(count($invendus) != 0)
         <?php
     }
     echo('</table>');
-
-    ?>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Total Par jour</th>
-        </tr>
-    <?php
-
-    foreach($total_par_jour as $result)
-    {
-        ?>
-        <tr>
-            <td><?= $result["date_invendu"] ?></td>
-            <td><?= $result["sum_quantite"] ?></td>
-        </tr>
-        <?php
-    }
-    echo('</table>');
 }
 
 else
@@ -59,13 +42,16 @@ else
 
     <span id="base_url" style="display:none"><?= base_url() ?></span>
     <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+    <script defer src="<?= base_url("/assets/js/informations/invendus.js") ?>"></script>
     <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
-    <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
-    <script defer type="text/javascript" src="../src/plugins/jqplot.dateAxisRenderer.min.js"></script>
-    <script defer type="text/javascript" src="../src/plugins/jqplot.canvasTextRenderer.min.js"></script>
-    <script defer type="text/javascript" src="../src/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-    <script defer type="text/javascript" src="../src/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-    <script defer type="text/javascript" src="../src/plugins/jqplot.barRenderer.min.js"></script>
+    <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/jquery.jqplot.min.js") ?>"></script>
+    <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/excanvas.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.highlighter.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.canvasTextRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js") ?>"></script>
+    <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.barRenderer.min.js") ?>"></script>
 
 <?php
 /* End of file invendus_v.php */
