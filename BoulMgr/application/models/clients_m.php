@@ -70,4 +70,16 @@ class Clients_m extends CI_Model {
         $sql = "INSERT INTO client_habite_adresse VALUES( ?, ?);";
         return $this->db->query($sql, array($id_client, $id_adresse));
     }
+
+    function get_commandes_client($id_client) {
+        $this->db->where('id_client', $id_client);
+        $this->db->select('id_commande,prix_total, strftime("%d/%m/%Y", date_commande) as date_commande, strftime("%d/%m/%Y", date_livraison) as date_livraison, adresse.nom_voie_adresse, adresse.numero_voie_adresse, ville.nom_ville, ville.code_postal, type_voie.nom_type_voie');
+        $this->db->from('commande');
+        $this->db->join('adresse','adresse.id_adresse = commande.id_adresse');
+        $this->db->join('ville', 'ville.id_ville = adresse.id_ville');
+        $this->db->join('type_voie', 'type_voie.id_type_voie = adresse.id_type_voie');
+        $this->db->order_by('date_commande');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
