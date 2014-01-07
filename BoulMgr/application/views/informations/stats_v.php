@@ -12,5 +12,6 @@
 	}
 	
 	$this->table->add_row("Total", $grand_total." €", "");
+
 	echo $this->table->generate(); 
 ?>
