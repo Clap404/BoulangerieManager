@@ -2,7 +2,7 @@
 
 <?php
 
-	$this->table->set_heading("Produit", "Ventes", "% des ventes");
+	$this->table->set_heading("Produit", "Total des Ventes", "% des ventes");
 	foreach ($total as $line) 
 	{
 		$this->table->add_row(

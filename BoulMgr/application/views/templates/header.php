@@ -87,5 +87,5 @@
                 </ul>
             </section>
         </nav>
-        </div>
+    </div>
         <div id="content">

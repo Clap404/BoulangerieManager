@@ -10,7 +10,8 @@
 </footer>
 
 <script type="text/javascript" src="<?= base_url("/assets/js/jquery.js") ?>"></script>
-<script type="text/javascript" src="<?= base_url("/assets/js/foundation/foundation.js") ?>"></script>
-<script type="text/javascript" src="<?= base_url("/assets/js/foundation/foundation.accordion.js") ?>"></script>
-
+<script type="text/javascript" src="<?= base_url("/assets/js/foundation.min.js") ?>"></script>
+<script>
+    $(document).foundation();
+</script>
 </body>
