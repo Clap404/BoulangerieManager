@@ -169,4 +169,11 @@ class Fournisseurs_m extends CI_Model {
         }
         return 0;
     }
+
+    function modif_nom($id_fournisseur, $nom_fournisseur) {
+        $sql = "UPDATE fournisseur
+            SET nom_fournisseur = ?
+            WHERE id_fournisseur = ? ;";
+        return $this->db->query($sql, array($nom_fournisseur, $id_fournisseur));
+    }
 }

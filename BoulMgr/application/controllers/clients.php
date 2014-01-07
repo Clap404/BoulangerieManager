@@ -43,6 +43,7 @@ class Clients extends CI_Controller {
         $this->load->view('clients/profil_client_v', $data);
         $this->load->view('clients/add_joignable_v', $data);
         $this->load->view('clients/add_adresse_v', $data);
+        $this->load->view('clients/modif_nom_v', $data);
         $this->load->view('templates/footer');
     }
 
@@ -366,6 +367,50 @@ class Clients extends CI_Controller {
         }
         else
             echo "NOK";
+    }
+
+    function modif_nom() {
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+
+        $this->load->library('form_validation');
+        $clie = $this->clients;
+
+        $config = array(
+            array(
+                'field' => 'id_client',
+                'label' => 'id_client',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'nom_client',
+                'label' => 'Nom du client',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'prenom_client',
+                'label' => 'Prénom du client',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            $clie->modif_nom($_POST["id_client"], $_POST["nom_client"], $_POST["prenom_client"]);
+            
+            echo "OK";
+        }
+
     }
 }
 

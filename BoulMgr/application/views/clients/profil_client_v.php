@@ -2,6 +2,9 @@
 <script defer src="<?= base_url("/assets/js/popup_form.js") ?>"></script>
 <div id="client">
 <h2><?=$title?></h2>
+<div id="addmatprem">
+    <button class="button round radius" onclick="popupFormDiv('#modifnom', null, 0.6, 'fixed' )" >Renommer</button>
+</div>
 <div class="row">
     <div class="small-6 large-6 columns">
 <h3>adresses</h3>

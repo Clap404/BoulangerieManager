@@ -116,4 +116,11 @@ class Clients_m extends CI_Model {
         }
         return 0;
     }
+
+    function modif_nom($id_client, $nom_client, $prenom_client) {
+        $sql = "UPDATE client
+            SET nom_client = ?, prenom_client = ?
+            WHERE id_client = ? ;";
+        return $this->db->query($sql, array($nom_client, $prenom_client, $id_client));
+    }
 }

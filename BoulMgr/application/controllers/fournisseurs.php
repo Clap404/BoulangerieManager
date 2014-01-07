@@ -47,6 +47,7 @@ class Fournisseurs extends CI_Controller {
         $this->load->view('fournisseurs/add_modif_matprem_v', $data);
         $this->load->view('fournisseurs/add_joignable_v', $data);
         $this->load->view('fournisseurs/add_adresse_v', $data);
+        $this->load->view('fournisseurs/modif_nom_v', $data);
         $this->load->view('templates/footer');
     }
 
@@ -386,6 +387,43 @@ class Fournisseurs extends CI_Controller {
             }
 
             $four->add_livre($_POST["id_fournisseur"], $id_adresse);
+            
+            echo "OK";
+        }
+    }
+
+    function modif_nom() {
+        $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+        
+        $four = $this->fournisseurs;
+
+        $config = array(
+            array(
+                'field' => 'id_fournisseur',
+                'label' => 'id_fournisseur',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'nom_fournisseur',
+                'label' => 'Non du fournisseur',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            $four->modif_nom($_POST["id_fournisseur"], $_POST["nom_fournisseur"]);
             
             echo "OK";
         }

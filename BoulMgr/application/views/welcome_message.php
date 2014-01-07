@@ -1,5 +1,5 @@
 <div id="container">
-	<h1>Bienvenue à la boulanger</h1>
+  <h1>Bienvenue à la boulangerie</h1>
   <h2>Tableau de bord</h2>
 
   <div class="row">
@@ -7,17 +7,16 @@
       <div class="panel">
         <h3><a href="<?=$root?>index.php/stocks/matprem">Matières premières</a></h3>
         <?php if (count($lowmatprem) === 0) :?>
-        <p>
-          Toutes vos matières premières sont disponibles en quantité suffisante
-        </p>
+        <p> Toutes vos matières premières sont disponibles en quantité suffisante </p>
+        <?php else: ?>
+        <p> Les matières premières suivantes viennent à manquer :</p>
         <?php endif; ?>
+        <ul>
         <?php foreach($lowmatprem as $lm) :?>
-        <p>
-          Vous manquez  de <?=$lm->nom_matiere_premiere?> :
-          achetez en à <?=$lm->nom_fournisseur?>
-          pour <?=$lm->minprix?> €
-        </p>
+          <li><?=$lm->nom_matiere_premiere?></li>
+          <ul><li>Achetez en à <?=$lm->nom_fournisseur?> pour <?=$lm->minprix?> € par <?=$lm->unit?></li></ul>
         <?php endforeach; ?>
+        </ul>
       </div>      
     </div>
     <div class="large-6 columns">

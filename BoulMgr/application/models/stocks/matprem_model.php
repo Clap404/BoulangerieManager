@@ -186,15 +186,16 @@ class Matprem_model extends CI_Model {
         $sq2 = "SELECT nom_matiere_premiere,
                     id_matiere_premiere,
                     nom_fournisseur, 
-                    min(prix) AS minprix
+                    min(prix) AS minprix,
+                    id_unite
                 FROM matiere_premiere_vendue_par_fournisseur
                     NATURAL JOIN matiere_premiere
                     NATURAL JOIN fournisseur
                 GROUP BY id_matiere_premiere";
 
         //l'union des deux avec selectio selon le pallier
-        $sql = "SELECT nom_matiere_premiere, nom_fournisseur, minprix
-                FROM ($sq1) NATURAL JOIN ($sq2)
+        $sql = "SELECT nom_matiere_premiere, nom_fournisseur, minprix, abbreviation_unite as unit
+                FROM ($sq1) NATURAL JOIN ($sq2) NATURAL JOIN unite
                 WHERE dispo < $pallier;";
 
         $query = $this->db->query($sql);
