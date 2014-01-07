@@ -8,9 +8,7 @@
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/normalize.css") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/foundation.css") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/style.css") ?>">
-        <script type="text/javascript" src="<?= base_url("/assets/js/jquery.js") ?>"></script>
-        <script type="text/javascript" src="<?= base_url("/assets/js/foundation/foundation.js") ?>"></script>
-        <script type="text/javascript" src="<?= base_url("/assets/js/foundation/foundation.accordion.js") ?>"></script>
+
 
     </head>
 
