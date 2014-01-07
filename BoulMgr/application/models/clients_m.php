@@ -47,7 +47,7 @@ class Clients_m extends CI_Model {
     }
 
     function telephones_client($id_client){
-        $sql = "SELECT numero_telephone, description_telephone
+        $sql = "SELECT numero_telephone, description_telephone, id_telephone
                 FROM Telephone
                     natural join client_joignable_telephone
                     natural join client

@@ -28,13 +28,21 @@ class Clients extends CI_Controller {
     }
 
     function profil($id_client) {
+        $this->load->helper("form");
         $data['infos'] = $this->clients->infos_client($id_client);
+        $data['id_client'] = $id_client;
         $data['adresses'] = $this->clients->adresses_client($id_client);
         $data['telephones'] = $this->clients->telephones_client($id_client);
         $data['title'] = "Profil de ".$data['infos']['prenom_client']." ".$data['infos']['nom_client'];
+        $data['rm_url'] = array(
+            "telephone" => base_url("/index.php/client/rm_joignable/".$id_client)."/",
+            "adresse" => base_url("/index.php/client/rm_habite/".$id_client)."/"
+        );
         $data['commandes'] = $this->clients->get_commandes_client($id_client);
         $this->load->view('templates/header', $data);
         $this->load->view('clients/profil_client_v', $data);
+        $this->load->view('clients/add_joignable_v', $data);
+        $this->load->view('clients/add_adresse_v', $data);
         $this->load->view('templates/footer');
     }
 
@@ -173,6 +181,169 @@ class Clients extends CI_Controller {
             $id_client = $this->db->insert_id();
             $clie->add_joignable($id_client, $id_telephone);
             $clie->add_habite($id_client, $id_adresse);
+            
+            echo "OK";
+        }
+    }
+
+    function add_joignable() {
+        $this->load->model('adresses_m','adresses');
+        $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+
+        $addr = $this->adresses;
+        $clie = $this->clients;
+        $config = array(
+            array(
+                'field' => 'id_client',
+                'label' => 'id_client',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'numero_telephone',
+                'label' => 'Numéro de téléphone',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'description_numero',
+                'label' => 'Description du numéro',
+                'rules' => ''
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            // telephone exists
+            $id_telephone = exist_offset0_field(
+                $addr->existe_telephone(
+                    $_POST["numero_telephone"]
+                ),
+                "id_telephone"
+            );
+
+            if($id_telephone === -1){
+                $addr->add_telephone(
+                    $_POST["numero_telephone"], $_POST["description_numero"]
+                );
+                $id_telephone = $this->db->insert_id();
+            }
+
+            $clie->add_joignable($_POST["id_client"], $id_telephone);
+            
+            echo "OK";
+        }
+    }
+
+    function add_adresse() {
+        $this->load->model('adresses_m','adresses');
+        $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+
+        $addr = $this->adresses;
+        $clie = $this->clients;
+        $config = array(
+            array(
+                'field' => 'id_client',
+                'label' => 'id_client',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'numero_rue',
+                'label' => 'Numéro dans la rue',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'nom_rue',
+                'label' => 'Nom de la rue',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'type_rue',
+                'label' => 'Type de rue',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'ville',
+                'label' => 'Ville',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'code_postal',
+                'label' => 'Code postal',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'description_adresse',
+                'label' => 'Description de l\'adresse',
+                'rules' => ''
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            // check for if that type of road exists
+            $id_type_rue = exist_offset0_field(
+                $addr->existe_type_rue( $_POST["type_rue"] ),
+                "id_type_voie"
+            );
+
+            if($id_type_rue === -1){
+                $addr->add_type_voie( $_POST["type_rue"] );
+                $id_type_rue = $this->db->insert_id();
+            }
+
+            // check city
+            $id_ville = exist_offset0_field(
+                $addr->existe_ville( $_POST["ville"] ),
+                "id_ville"
+            );
+
+            if($addr->existe_ville_with_postal($_POST["ville"], $_POST["code_postal"]) == 0 ){
+                $addr->add_ville( $_POST["ville"], $_POST["code_postal"] );
+                $id_ville = $this->db->insert_id();
+            }
+
+            // check adress already exists
+            $id_adresse = exist_offset0_field(
+                $addr->adresse_existe(
+                    $_POST["nom_rue"],
+                    $_POST["numero_rue"],
+                    $id_ville,
+                    $id_type_rue
+                ),
+                "id_adresse"
+            );
+
+            if($id_adresse === -1){
+                $addr->add_adresse(
+                    $_POST["numero_rue"], $_POST["nom_rue"], $id_ville, $id_type_rue, $_POST["description_adresse"]
+                );
+                $id_adresse = $this->db->insert_id();
+            }
+
+            $clie->add_habite($_POST["id_client"], $id_adresse);
             
             echo "OK";
         }
