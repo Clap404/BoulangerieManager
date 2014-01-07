@@ -439,20 +439,20 @@ function fillPopupAdd()
     popupContent += "<span id='error_popup'></span><br>";
 
     // TODO CSS : Mettre l'input plus long, et mettre la police plus grosse
-    popupContent += "<input id='nom_add_matiere_premiere' placeholder='Nom de la matière première'>";
-    popupContent += "<input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
+    popupContent += "<table id='popup_add_matprem'><tr><td><input id='nom_add_matiere_premiere' placeholder='Nom de la matière première'></td>";
+    popupContent += "<td rowspan='2'><input type='file' name='upload_image' id='upload_image' size='100' style='display:none;'/>";
     popupContent += '<table>';
     popupContent += '<tr>' +
                             '<td colspan="2"><img id="image_preview" src="' + base_url + 'assets/images/empty.jpg" style="width: 128px; height: 128px;"/></td>' +
                     '</tr>';
-    popupContent += '</table>';
+    popupContent += '</table></td></tr><tr><td>';
 
-    popupContent += "<b>Unité : </b><input list='list_unite' type='text' id='unite_input'>"
+    popupContent += "<input list='list_unite' type='text' id='unite_input' placeholder='Unité'></td></tr><tr>"
 
-    popupContent += "<div>" +
-                        "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button> " +
-                        "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button>" +
-                    "</div>";
+    popupContent += "<td>" +
+                        "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button></td><td> " +
+                        "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button></td></tr>" +
+                    "</table>";
 
     popup.innerHTML = popupContent;
 }

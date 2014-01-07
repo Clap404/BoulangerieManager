@@ -5452,11 +5452,28 @@ div.switch.round {
     border: none;
 }
 
-#nom_add_matiere_premiere {
-    width: 200px;
-    margin-left: 180px;
-    margin-bottom: 10px;
+#popup_add_matprem {
+    border: none;
 }
+
+#popup_add_matprem tr {
+    background: none;
+}
+
+#nom_add_matiere_premiere, #unite_input {
+    width: 210px;
+    height: 40px;
+    /*margin-left: 180px;
+    margin-bottom: 10px;*/
+}
+
+#nom_add_matiere_premiere::-webkit-input-placeholder { font-size: 120%;  }
+#nom_add_matiere_premiere::-moz-placeholder { font-size: 120%; }
+#nom_add_matiere_premiere:-ms-input-placeholder { font-size: 120%; }
+
+#unite_input::-webkit-input-placeholder { font-size: 120%; }
+#unite_input::-moz-placeholder { font-size: 120%; }
+#unite_input:-ms-input-placeholder { font-size: 120%; }
 
 #addproduct table tr{
     background: none;
@@ -5479,6 +5496,7 @@ div.switch.round {
 .matpremHiddenItem, #base_url {
     display: none;
 }
+
 
 .smallbutton {
     padding-top: 10px;
