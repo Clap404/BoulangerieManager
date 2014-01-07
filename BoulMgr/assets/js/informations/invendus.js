@@ -10,7 +10,7 @@ function drawPie(day, dayname)
 
     var plot1 = jQuery.jqplot ('chartdiv', [data],
     {
-        title: 'Répartition des ventes de ' + dayname,
+        title: 'Répartition des invendus de ' + dayname,
         seriesDefaults: {
             // Make this a pie chart.
             renderer: jQuery.jqplot.PieRenderer,
