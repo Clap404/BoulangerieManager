@@ -5604,3 +5604,11 @@ caption {
     margin-top: 40px;
 }
 
+.clientbutton, .fournbutton {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#client td:last-child {
+    text-align: right;
+}

@@ -1,9 +1,9 @@
 <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
 <script defer src="<?= base_url("/assets/js/popup_form.js") ?>"></script>
-
+<div id="client">
 <h2><?=$title?></h2>
 <div class="row">
-    <div class="small-6 large-4 columns">
+    <div class="small-6 large-6 columns">
 <h3>adresses</h3>
 <div class="fournisseur">
 <?php
@@ -15,7 +15,7 @@
             $value->code_postal,
             $value->nom_ville,
             $value->description_adresse,
-            "<button class='smallbutton' rmurl='".$rm_url["adresse"].$value->id_adresse."' >X</button>"
+            "<button class='smallbutton ' rmurl='".$rm_url["adresse"].$value->id_adresse."' >X</button>"
         );
     }
 
@@ -23,11 +23,11 @@
 ?>
 </div>
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('#adresse', null, 0.6, 'fixed' )" >Ajouter une adresse</button>
+    <button class="button radius round clientbutton" onclick="popupFormDiv('#adresse', null, 0.6, 'fixed' )" >Ajouter une adresse</button>
 </div>
     </div>
 
-    <div class="small-4 large-4 columns">
+    <div class="small-6 large-6 columns">
 <h3>numéros de téléphone</h3>
 <div class="fournisseur">
   
@@ -47,7 +47,7 @@
 
 </div>
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro de téléphone</button>
+    <button class="button radius round clientbutton" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro de téléphone</button>
 </div>
 </div>
 </div>
@@ -73,10 +73,10 @@
     ?>
 </div>
 <div id="addmatprem">
-    <a href="<?= base_url('/index.php/commerce/commande/form')?>"><button class="button radius round">Passer une commande</button></a>
+    <a href="<?= base_url('/index.php/commerce/commande/form')?>"><button class="button radius round clientbutton">Passer une commande</button></a>
 </div>
 </div>
-
+</div>
 <script type="text/javascript">
     //ajoute les croix de supression et les callbacks
     var rmbuttons = document.querySelectorAll("button[rmurl]");

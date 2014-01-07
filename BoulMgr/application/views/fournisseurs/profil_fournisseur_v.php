@@ -23,7 +23,7 @@
 ?>
 </div>
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('#adresse', null, 0.6, 'fixed' )" >Ajouter une adresse</button>
+    <button class="button radius round fournbutton" onclick="popupFormDiv('#adresse', null, 0.6, 'fixed' )" >Ajouter une adresse</button>
 </div>
     </div>
 
@@ -47,7 +47,7 @@
 
 </div>
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro</button>
+    <button class="button radius round fournbutton" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro</button>
 </div>
     </div>
     <div class="small-2 large-4 columns">
@@ -71,7 +71,7 @@
 </div>
 
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('#matprem', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
+    <button class="button radius round fournbutton" onclick="popupFormDiv('#matprem', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
 </div>
 
 </div>
