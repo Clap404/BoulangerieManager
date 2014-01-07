@@ -29,7 +29,7 @@ class Fournisseurs_m extends CI_Model {
 
     function adresses_fournisseur($id_fournisseur){
         $sql = "SELECT numero_voie_adresse, nom_type_voie, nom_voie_adresse,
-                    description_adresse, code_postal, nom_ville
+                    description_adresse, code_postal, nom_ville, id_adresse
                 FROM fournisseur
                     natural join fournisseur_livre_depuis_adresse
                     natural join adresse
@@ -152,5 +152,12 @@ class Fournisseurs_m extends CI_Model {
             return 1;
         }
         return 0;
+    }
+
+    function rm_livre($id_fournisseur, $id_adresse) {
+        $sql = "DELETE FROM fournisseur_livre_depuis_adresse
+            WHERE id_fournisseur = ?
+            AND id_adresse = ? ;";
+        return $this->db->query($sql, array( $id_fournisseur, $id_adresse));
     }
 }

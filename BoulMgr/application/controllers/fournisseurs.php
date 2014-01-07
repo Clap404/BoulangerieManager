@@ -39,12 +39,14 @@ class Fournisseurs extends CI_Controller {
         $data['title'] = "profil de ".$data['infos']['nom_fournisseur'];
         $data['rm_url'] = array(
             "matprem" => base_url("/index.php/fournisseurs/rm_matprem/".$id_fournisseur)."/",
-            "telephone" => base_url("/index.php/fournisseurs/rm_joignable/".$id_fournisseur)."/"
+            "telephone" => base_url("/index.php/fournisseurs/rm_joignable/".$id_fournisseur)."/",
+            "adresse" => base_url("/index.php/fournisseurs/rm_livre/".$id_fournisseur)."/"
         );
         $this->load->view('templates/header', $data);
         $this->load->view('fournisseurs/profil_fournisseur_v', $data);
         $this->load->view('fournisseurs/add_modif_matprem_v', $data);
         $this->load->view('fournisseurs/add_joignable_v', $data);
+        $this->load->view('fournisseurs/add_adresse_v', $data);
         $this->load->view('templates/footer');
     }
 
@@ -284,6 +286,104 @@ class Fournisseurs extends CI_Controller {
         echo "OK";
     }
 
+    function add_adresse() {
+        $this->load->model('adresses_m','adresses');
+        $this->load->library('form_validation');
+
+        $json = trim(file_get_contents('php://input'));
+        $_POST = json_decode($json, true);
+
+        $addr = $this->adresses;
+        $four = $this->fournisseurs;
+        $config = array(
+            array(
+                'field' => 'numero_rue',
+                'label' => 'Numéro dans la rue',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'nom_rue',
+                'label' => 'Nom de la rue',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'type_rue',
+                'label' => 'Type de rue',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'ville',
+                'label' => 'Ville',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'code_postal',
+                'label' => 'Code postal',
+                'rules' => 'required|is_natural'
+            ),
+            array(
+                'field' => 'description_adresse',
+                'label' => 'Description de l\'adresse',
+                'rules' => ''
+            )
+        );
+
+        $this->form_validation->set_message("required", "\"%s\" est obligatoire.");
+        $this->form_validation->set_message("is_natural", "\"%s\" doit contenir uniquement des chiffres.");
+
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            echo validation_errors();
+        }
+        else
+        {
+            // check for if that type of road exists
+            $id_type_rue = exist_offset0_field(
+                $addr->existe_type_rue( $_POST["type_rue"] ),
+                "id_type_voie"
+            );
+
+            if($id_type_rue === -1){
+                $addr->add_type_voie( $_POST["type_rue"] );
+                $id_type_rue = $this->db->insert_id();
+            }
+
+            // check city
+            $id_ville = exist_offset0_field(
+                $addr->existe_ville( $_POST["ville"] ),
+                "id_ville"
+            );
+
+            if($addr->existe_ville_with_postal($_POST["ville"], $_POST["code_postal"]) == 0 ){
+                $addr->add_ville( $_POST["ville"], $_POST["code_postal"] );
+                $id_ville = $this->db->insert_id();
+            }
+
+            // check adress already exists
+            $id_adresse = exist_offset0_field(
+                $addr->adresse_existe(
+                    $_POST["nom_rue"],
+                    $_POST["numero_rue"],
+                    $id_ville,
+                    $id_type_rue
+                ),
+                "id_adresse"
+            );
+
+            if($id_adresse === -1){
+                $addr->add_adresse(
+                    $_POST["numero_rue"], $_POST["nom_rue"], $id_ville, $id_type_rue, $_POST["description_adresse"]
+                );
+                $id_adresse = $this->db->insert_id();
+            }
+
+            $four->add_livre($_POST["id_fournisseur"], $id_adresse);
+        }
+        echo "OK";
+    }
+
     function rm_matprem($id_fournisseur, $id_matprem) {
         if ( $this->fournisseurs->rm_matprem($id_matprem, $id_fournisseur) == 1 )
             echo "OK";
@@ -296,6 +396,14 @@ class Fournisseurs extends CI_Controller {
         // $this->load->model('adresses_m','adresses');
         if ( $this->fournisseurs->rm_joignable($id_telephone, $id_fournisseur) == 1 ){   
             // $this->adresses->rm_if_orphaned_telephone($id_telephone);
+            echo "OK";
+        }
+        else
+            echo "NOK";
+    }
+
+    function rm_livre($id_fournisseur, $id_adresse) {
+        if ( $this->fournisseurs->rm_livre($id_fournisseur, $id_adresse) == 1 ){   
             echo "OK";
         }
         else

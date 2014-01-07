@@ -7,19 +7,23 @@
 <h3>adresses</h3>
 <div class="fournisseur">
 <?php
-    $this->table->set_heading('Adresse', 'Code postal', 'Ville', 'Description');
+    $this->table->set_heading('Adresse', 'Code postal', 'Ville', 'Description', "");
 
     foreach ($adresses as $value) {
         $this->table->add_row(
             $value->numero_voie_adresse ." ". $value->nom_type_voie ." ". $value->nom_voie_adresse,
             $value->code_postal,
             $value->nom_ville,
-            $value->description_adresse
+            $value->description_adresse,
+            "<button class='smallbutton' rmurl='".$rm_url["adresse"].$value->id_adresse."' >X</button>"
         );
     }
 
     echo $this->table->generate(); 
 ?>
+</div>
+<div id="addmatprem">
+    <button class="button radius round" onclick="popupFormDiv('#adresse', null, 0.6, 'fixed' )" >Ajouter une adresse</button>
 </div>
     </div>
 
@@ -73,7 +77,9 @@
 </div>
     </div>
 
+
 <script type="text/javascript">
+    //ajoute les croix de supression et les callbacks
     var rmbuttons = document.querySelectorAll("button[rmurl]");
 
     for (var i = rmbuttons.length - 1; i >= 0; i--) {
