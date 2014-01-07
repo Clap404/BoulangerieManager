@@ -1,0 +1,69 @@
+\chapter{Pré-requis et outils}
+
+\section{Pré-requis matériels}
+    \paragraph{}
+        Cette solution logicielle peut théoriquement être hébergée sur tout
+        support matériel de type ordinateur qui supporte les pré-requis
+        logiciels.
+        En d'autre terme notre application n'apporte aucune contrainte
+        matérielle autre que celles imposées pour les outils que nous
+        utilisons.
+        Il est toutefois à noter qu'il est nécessaire que la machine abritant
+        l'application dispose d'une connectivité réseau pour que l'application
+        ait un sens.
+    \paragraph{}
+        En particulier, nous avons réalisé notre développement en utilisant des plateformes x86\_64, ARMv6 et ARMv7. Ces architectures ne poseront de problème ni d'installation ni d'utilisation lié au matériel.
+
+    \paragraph{}
+        Pour son utilisation, la machine recevant les informations du serveur
+        devra disposer de matériel permettant de se connecter à un réseau et
+        de faire fonctionner un navigateur tel que décrit dans la section
+        suivante.
+
+\section{Pré-requis logiciels}
+    \paragraph{}
+        Cette solution logicielle nécessite pour son installation :
+        \begin{description}
+            \item[PHP version 5]\hfill \\
+                Testé avec les versions 5.5.0 et 5.5.7 utilisant le moteur Zend Engine
+            \item[Le plugin php5-json.]\hfill \\
+                Nécessaire pour les distributions de PHP qui ne l'incluent pas
+            \item[Un serveur web proposant une interface CGI standard]\hfill \\
+                Testé avec lightppd 1.4.33, apache 2.4.4 et nginx 1.4.4
+            \item[SQLite version 3]\hfill \\
+                Testé avec la version 3.8.2
+            \item[Un systeme d'exploitation permettant d'utiliser les logiciels précités]\hfill \\
+                Testé sous Microsoft Windows 8, Ubuntu 13.1, Arch Linux et FreeBSD 9.1
+        \end{description}
+
+    \paragraph{}
+        Pour son utilisation, cette application nécessite un navigateur web
+        récent. Nous l'avons testée avec les navigateurs Chrome
+        (TODO : VERSION !!)
+        , chromium 34.0 et firefox
+        (TODO : VERSION !!)
+
+\pagebreak
+\section{Outils}
+    \paragraph{}
+        Ce logiciels fait usage des outils suivants
+        \begin{description}
+            \item[Code igniter 2.1.4]\hfill \\
+                Framework PHP
+            \item[Foundation 5]\hfill \\
+                Framework CSS
+            \item[jQuery 2.0.3]\hfill \\
+                Dépendance de Foundation 5 que nous utilisons également
+            \item[Modernizr 2.6.2]\hfill \\
+                Dépendance de Foundation 5
+            \item[FastClick 0.6.9]\hfill \\
+                Dépendance de Foundation 5
+            \item[placeholder.js 3.0.2]\hfill \\
+                Dépendance de Foundation 5
+            \item[bPopup 0.9.4]\hfill \\
+                Permet l'utilisations de popups peu encombrants en javascript
+            \item[jqplot 1.0.8]\hfill \\
+                Permet de tracer des graphiques en javascript
+            \item[le plugin jquery jDateTimePicker]\hfill \\
+                Permet d'afficher des selecteurs de date et heure avec masque de saisie
+        \end{description}

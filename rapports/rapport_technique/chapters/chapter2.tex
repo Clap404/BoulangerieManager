@@ -1,0 +1,83 @@
+\chapter{Aperçu du projet}
+\section{arborescence}
+    \paragraph{}
+        L'arborescence du projet se compose des répertoire user\_guide, system,
+        uploads, assets et application.
+        Le répertoire user\_guide contient le manuel d'utilisation du framework
+        PHP Code Igniter.
+        Le répertoire system contient les fichiers internes au framework,
+        permettant de le faire fonctionner, par exemple des drivers de bases
+        de données, des librairies, etc.
+        Le répertoire uploads est un dossier contenant les fichier images
+        temporaires téléversées par l'utilisateur.
+        Sous un système de type UNIX, il est nécessaire que l'utilisateur dont
+        PHP invoque l'identité pour évaluer le code source qui lui est
+        transmis ait les droits d'écriture sur ce répertoire pour garantir le
+        bon fonctionnement du système.
+        Le répertoire assets est composé de fichier statiques qui seront 
+        servis par le serveur web, tel que les images, les fichiers javascript,
+        et les fichiers css.
+        Enfin le répertoire application est le répertoire contenant la
+        configuration du projet, le code source PHP ainsi que la base de
+        données SQLite.
+
+    \paragraph{}
+        Ce répertoire est lui même composé, entre autres des répertoires 
+        config, sqlite3, models, controllers et views.
+        Les autres répertoire présents dans application sont d'un intérêt moins
+        vital dans le cadre de ce rapport, vu qu'il s'agit de fichiers internes
+        à Code Igniter
+
+    \paragraph{}
+        Le répertoire config abrite les fichiers de configuration permettant de
+        gérer les options du projet.
+        L'identification à la base de données, par exemple y est faite.
+        Le répertoire sqlite3 contient la base de donnée ainsi que le script de
+        création de celle-ci.
+        Il est à noter que ce répertoire et le fichier base de données 
+        doivent, sous les systèmes de type UNIX posséder de droits identiques 
+        à ceux du répertoire uploads suscité.
+        Le répertoire models contient les classes de type modèle, permettant
+        de faire le lien entre les données et le reste de l'application.
+        Le répertoire controllers contient les classes de type contrôleur qui
+        contiennent la logique applicative du logiciel.
+        Enfin le répertoire views contient les classes de type vue qui
+        affichent les données passées par le contrôleur dans le navigateur de
+        l'utilisateur.
+
+
+\pagebreak
+\section{visualisation de l'arborescence}
+    \dirtree{%
+    .1 /.
+    .1 user\_guide.
+        .2 \ldots.
+    .1 system.
+        .2 \ldots.
+    .1 uploads.
+    .1 assets.
+        .2 js.
+            .3 stocks.
+            .3 vendor.
+            .3 foundation.
+        .2 css.
+        .2 images.
+            .3 matprem.
+            .3 produit.
+    .1 application.
+        .2 config.
+        .2 models.
+            .3 stocks.
+            .3 commerce.
+        .2 controllers.
+            .3 stocks.
+            .3 commerce.
+        .2 views.
+            .3 stocks.
+            .3 templates.
+            .3 fournisseurs.
+            .3 commerce.
+            .3 clients.
+        .2 sqlite3.
+        .2 \ldots.
+    }

@@ -1,0 +1,115 @@
+\documentclass[12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[a4paper]{geometry}
+\usepackage{eurosym}
+\usepackage{enumitem}
+\usepackage{lipsum}
+\usepackage{hyperref}
+\usepackage{afterpage}
+\usepackage{shorttoc}
+\usepackage{textcomp}
+\usepackage{eurosym}
+\usepackage{fullpage}
+
+\usepackage{dirtree} %pour le directory tree
+
+
+\newcommand*{\captionsource}[2]{%
+    \caption[{#1}]{%
+            #1%
+        \\\hspace{\linewidth}%
+        \textbf{Source : } #2%
+    }%
+}
+
+% Enlève les contours des liens
+\hypersetup{
+    linkbordercolor={1 1 1},
+    citebordercolor={1 1 1},
+    urlbordercolor={1 1 1},
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+% Redéfinis les marges des tableaux
+\let\oldtabular=\tabular
+\def\tabular{\small\oldtabular}
+\renewcommand{\arraystretch}{1.5}
+
+
+\begin{document}
+{\newgeometry{left=1cm,right=1cm,bottom=3cm,top=1cm}
+    \begin{titlepage}
+
+    \vbox to 70pt{\hfill\includegraphics[height=3cm]{images/logo-iut.eps}}\
+    \begin{center}
+
+    \textsc{\LARGE IUT Belfort Montbéliard}\\[0.7cm]
+    \textsc{\LARGE Département Informatique}\\[1.0cm]
+    \textsc{\Large Bases De Données}\\[0.5cm]
+    \textsc{\Large Semestre 3}\\[5cm]
+
+
+    % Title
+    {\huge \bfseries Logiciel de gestion de boulangerie}\\[0.5cm]
+    {\huge \bfseries Rapport Technique}\\[5cm]
+
+    % Author and supervisor
+    \begin{large}
+    Jérémy \textsc{Autran}\\[0.3em]
+    Florian \textsc{Barrois}\\[0.3em]
+    François-Xavier \textsc{Béligat}\\[0.3em]
+    Benoît \textsc{Houdayer}\\[0.3em]
+    Anthony \textsc{Ruhier}\\[0.3em]
+    Maxime \textsc{Chenot}\\[0.3em]
+
+    \end{large}
+
+    \vfill
+
+    % Bottom of the page
+    {\large 08 Janvier 2014}
+
+    \end{center}
+    \end{titlepage}
+    }
+
+    % Hack pour forcer le saut de page
+    {\clearpage\mbox{}\thispagestyle{empty}\clearpage}
+    \setcounter{page}{1}
+    %\include{chapters/remerciements}
+    {\large{\shorttableofcontents{Sommaire}{1}}}
+
+
+    %%%% Includes des chapitres :
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \include{chapters/introduction}
+    %=> Pré-requis (logiciels + materiels)
+    \include{chapters/chapter1}
+    %=> Arborescence des fichiers
+    \include{chapters/chapter2}
+    %=> Description sommaire de chaque fichier (entrées, sorties)
+    \include{chapters/chapter3}
+    \include{chapters/conclusion}
+
+
+    %%% Table des matières
+
+    \tableofcontents
+    \addcontentsline{toc}{chapter}{Table des matières}
+
+    %%% Exemple pour les annexes
+    %\appendix
+    %\include{annexes/annexe1}
+    %\include{annexes/annexe2}
+
+\end{document}
