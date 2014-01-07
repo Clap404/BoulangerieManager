@@ -1,3 +1,6 @@
+<script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
+<script defer src="<?= base_url("/assets/js/popup_form.js") ?>"></script>
+
 <h2><?=$title?></h2>
 <div class="row">
     <div class="small-6 large-4 columns">
@@ -25,18 +28,22 @@
 <div class="fournisseur">
   
 <?php
-    $this->table->set_heading('Numéro', 'Description');
+    $this->table->set_heading('Numéro', 'Description', "");
 
     foreach ($telephones as $value) {
         $this->table->add_row(
             $value->numero_telephone,
-            $value->description_telephone
+            $value->description_telephone,
+            "<button class='smallbutton' rmurl='".$rm_url["telephone"].$value->id_telephone."' >X</button>"
         );
     }
 
     echo $this->table->generate(); 
 ?>
 
+</div>
+<div id="addmatprem">
+    <button class="button radius round" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro</button>
 </div>
     </div>
     <div class="small-2 large-4 columns">
@@ -50,7 +57,7 @@
             $value->id_matiere_premiere,
             $value->nom_matiere_premiere,
             $value->prix,
-            "<button class='smallbutton' rmurl='".$rm_url.$value->id_matiere_premiere."' >X</button>"
+            "<button class='smallbutton' rmurl='".$rm_url["matprem"].$value->id_matiere_premiere."' >X</button>"
         );
     }
 
@@ -60,7 +67,7 @@
 </div>
 
 <div id="addmatprem">
-    <button class="button radius round" onclick="popupFormDiv('div.pop_up', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
+    <button class="button radius round" onclick="popupFormDiv('#matprem', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
 </div>
 
 </div>
@@ -75,3 +82,4 @@
         }
     };
 </script>
+

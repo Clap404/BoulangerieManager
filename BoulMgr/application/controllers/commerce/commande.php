@@ -13,7 +13,7 @@ class Commande extends CI_Controller {
     }
 
     function index() {
-        $data['title'] = "commande";
+        $data['title'] = "Commandes";
         $data['commandes'] = $this->commandes->liste_commandes();
 
         $this->load->view('templates/header', $data);

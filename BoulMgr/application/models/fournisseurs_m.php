@@ -41,7 +41,7 @@ class Fournisseurs_m extends CI_Model {
     }
 
     function telephones_fournisseur($id_fournisseur){
-        $sql = "SELECT numero_telephone, description_telephone
+        $sql = "SELECT numero_telephone, description_telephone, id_telephone
                 FROM telephone
                     natural join fournisseur_joignable_telephone
                     natural join fournisseur
@@ -104,10 +104,53 @@ class Fournisseurs_m extends CI_Model {
             return 0;
     }
 
+    // function add_joignable_($id_fournisseur, $telephone) {
+
+    //     $sql = "SELECT COUNT(*) AS count FROM telephone WHERE numero_telephone = ?;";
+    //     $query = $this->db->query($sql, array($numero_telephone));
+    //     $telephone_exists = ( $query->result_array()[0]["count"] >= 1 );
+
+    //     $id_telephone = "" ;
+
+    //     if($telephone_exists){
+    //         $sql = "SELECT id_telephone FROM telephone WHERE numero_telephone = ?;";
+    //         $query = $this->db->query($sql, array($telephone));
+    //         $id_telephone = $query->result_array()[0]["id_telephone"];
+    //     }
+    //     else {
+    //         $sql = "INSERT INTO telephone VALUES( NULL, ?);";
+    //         $this->db->query($sql, array($telephone));
+    //         $id_telephone = $this->db->insert_id();
+    //     }
+
+    //     $sql = "INSERT INTO fournisseur_joignable_telephone VALUES( ?, ?);";
+    //     $this->db->query($sql, array($id_fournisseur, $id_telephone));
+
+    //     return 1;
+    // }
+
     function rm_matprem($id_matprem, $id_fournisseur) {
         $sql = "DELETE FROM matiere_premiere_vendue_par_fournisseur
             WHERE id_fournisseur = ?
             AND id_matiere_premiere = ? ;";
         return $this->db->query($sql, array( $id_fournisseur, $id_matprem));
+    }
+
+    function rm_joignable($id_telephone, $id_fournisseur) {
+
+        $sql = "SELECT COUNT(*) as count FROM fournisseur_joignable_telephone
+            WHERE id_fournisseur = ? ;";
+        $query = $this->db->query($sql, array($id_fournisseur));
+
+        if ($query->result_array()[0]["count"] > 1 ){
+
+            $sql = "DELETE FROM fournisseur_joignable_telephone
+                WHERE id_fournisseur = ?
+                AND id_telephone = ? ;";
+            $this->db->query($sql, array($id_fournisseur, $id_telephone));
+
+            return 1;
+        }
+        return 0;
     }
 }

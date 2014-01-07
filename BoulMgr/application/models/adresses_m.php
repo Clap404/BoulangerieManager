@@ -132,4 +132,14 @@ class Adresses_m extends CI_Model {
         return $this->db->query($sql, array($telephone, $description_telephone));
     }
 
+    function rm_if_orphaned_telephone($telephone) {
+        $sql = "DELETE from telephone
+            where (
+                select count(*) from fournisseur_joignable_telephone where id_telephone = ?) = 0
+            and (
+                select count(*) from client_joignable_telephone where id_telephone = ?) = 0
+            and telephone.id_telephone = ?
+            ;";
+        return $this->db->query($sql, array($telephone, $telephone, $telephone));
+    }
 }
