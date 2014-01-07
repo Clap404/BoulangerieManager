@@ -29,7 +29,6 @@ drop table if exists vente_comprend_produit; /* OK */
 create table telephone(
     id_telephone
         integer primary key autoincrement not null,
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     numero_telephone
         text not null,
     description_telephone
@@ -43,12 +42,8 @@ create table adresse(
         integer not null,
     nom_voie_adresse
         text not null,
-
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     description_adresse
         text,
-
-
     id_ville
         integer not null
         references ville(id_ville)
@@ -73,7 +68,6 @@ create table produit(
 create table commande(
     id_commande
         integer primary key autoincrement not null,
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     prix_total
         real
         default 0,
@@ -91,7 +85,6 @@ create table commande(
         on delete cascade on update cascade
 );
 
-/* TABLE A AJOUTER DANS LE MCD */
 create table commande_matiere_premiere(
     id_commande_matiere_premiere
         integer primary key autoincrement not null,
@@ -151,7 +144,6 @@ create table vente(
         integer primary key autoincrement not null,
     date_vente
         text not null,
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     prix_vente
         real
         default 0,
@@ -166,7 +158,6 @@ create table unite(
         integer primary key autoincrement not null,
     nom_unite
         text not null,
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     abbreviation_unite
         text not null
 );
@@ -272,7 +263,6 @@ create table vente_comprend_produit(
     id_vente
         integer not null
         references vente(id_vente),
-    /* A AJOUTER DANS LE MCD OU SUPPRIMER */
     quantite_produit_vente
         integer not null,
     primary key (id_produit,id_vente)
