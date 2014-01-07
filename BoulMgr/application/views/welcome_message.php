@@ -1,5 +1,5 @@
 <div id="container">
-	<h1>Bienvenue à la boulanger</h1>
+  <h1>Bienvenue à la boulangerie</h1>
   <h2>Tableau de bord</h2>
 
   <div class="row">
