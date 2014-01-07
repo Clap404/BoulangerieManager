@@ -392,7 +392,7 @@ function fillPopupDetails(data)
 
     popupContent += "<span id='error_popup'></span>";
 
-    popupContent += "<div style='float: right; margin-right: 10%;'>" +
+    popupContent += "<div id='incon1'>" +
                         "<button id='details_button_popup' onclick='self.location.href=\"" + base_url + "index.php/stocks/matprem/detail/" + matprem['id_matiere_premiere'] + "\";'>Détails</button> ";
     if(en_vente)
         popupContent += "<button id='commander_button_popup' title='Commander au fournisseur le moins cher' onclick='switch2Command(\"" + fournisseur['id_fournisseur'] + "\")'>Commander</button><br> ";
@@ -421,8 +421,8 @@ function fillPopupDetails(data)
         popupContent += "<b>Fourni par : </b>" + fournisseur["nom_fournisseur"] + "</p>";
 
         popupContent += "<div id='div_command' style='display: none;'>" +
-                            "<b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input><br>" +
-                            "<b>Prix total : </b><span id='prix_total_command'>0.00€</span>" +
+                            "<p><b>Quantité à commander (en " + matprem["abbreviation_unite"] + ") : </b><input id='qte_command'></input></p><br>" +
+                            "<p><b>Prix total : </b><span id='prix_total_command'>0.00€</span></p>" +
                         "</div>";
     }
 
