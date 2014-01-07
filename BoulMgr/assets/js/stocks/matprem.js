@@ -388,7 +388,7 @@ function fillPopupDetails(data)
         var fournisseur = data["fournisseur"];
 
     var popupContent = "<span id='popup_id' style='display: none;'>" + matprem["id_matiere_premiere"] + "</span>";
-    popupContent += "<h3><span id=name_popup>" + matprem["nom_matiere_premiere"] + "</span><input id=modif_name_input_popup style='display:none;' onkeydown='if (event.keyCode == 13) document.getElementById(\"save_button_popup\").click()'></input></h3>"
+    popupContent += "<h3 id='matpremname'><span id=name_popup>" + matprem["nom_matiere_premiere"] + "</span><input id=modif_name_input_popup style='display:none;' onkeydown='if (event.keyCode == 13) document.getElementById(\"save_button_popup\").click()'></input></h3>"
 
     popupContent += "<span id='error_popup'></span>";
 
