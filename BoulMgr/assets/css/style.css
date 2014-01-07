@@ -1,0 +1,284 @@
+body {
+    min-width:785px;
+}
+
+#content {
+    min-height: 774px;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+footer {
+    margin-top: 50px;
+    background: #333333;
+    color: #777777;
+    padding: 5px;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 0px;
+}
+
+h1, h2, h3 {
+    text-align : center;
+    display : block;
+}
+
+h2{
+    margin-bottom: 100px;
+}
+
+.product-name {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.unit-price:after, .subtotal-price:after, .total-price:after {
+    content :"\20AC";
+}
+
+button {
+    margin-top: 5px;
+}
+
+img:hover {
+    cursor : pointer;
+    cursor : hand;
+}
+
+.product-active {
+    background-color : #2fc46b;
+}
+
+.product-depleted {
+    background-color : #ff623d;
+}
+
+.product, .product-active, .product-depleted {
+    text-align: center;
+    display : inline-block;
+    width : 200px;
+    text-decoration: none;
+    margin-bottom: 2px;
+    border: 1px solid black;
+}
+
+.summary {
+    margin-top: 81px;
+}
+
+#dim {
+    width: 334px;
+}
+
+.product-name {
+    min-height: 74px;
+}
+
+.fournisseur table {
+    width: 100%;
+}
+
+
+table {
+    margin: auto;
+}
+
+p, code{
+    text-align: center;
+}
+#tiquet, #addfourn, #addprod, #addmatprem, #buttontitle {
+    margin: auto;
+    text-align: center;
+}
+
+#addfourn {
+    margin-top: 10px;
+}
+
+.cart {
+    width: 342px;
+}
+
+div.switch.round {
+    width: 60px;
+    margin: auto;
+}
+
+#affichage {
+    border: none;
+}
+
+#popup_add_matprem {
+    border: none;
+}
+
+#popup_add_matprem tr {
+    background: none;
+}
+
+#nom_add_matiere_premiere, #unite_input {
+    width: 210px;
+    height: 40px;
+    /*margin-left: 180px;
+    margin-bottom: 10px;*/
+}
+
+#nom_add_matiere_premiere::-webkit-input-placeholder { font-size: 120%;  }
+#nom_add_matiere_premiere::-moz-placeholder { font-size: 120%; }
+#nom_add_matiere_premiere:-ms-input-placeholder { font-size: 120%; }
+
+#unite_input::-webkit-input-placeholder { font-size: 120%; }
+#unite_input::-moz-placeholder { font-size: 120%; }
+#unite_input:-ms-input-placeholder { font-size: 120%; }
+
+#addproduct table tr{
+    background: none;
+}
+
+#submitaddproduct{
+    margin: 0;
+    padding: 0 45%;
+}
+
+.matpremHiddenitem.undispo {
+    display: none;
+    background-color: #F7AB53;
+}
+
+.undispo {
+    background-color: #F7AB53;
+}
+
+.matpremHiddenItem, #base_url {
+    display: none;
+}
+
+
+.smallbutton {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+}
+
+#prod{
+    width: 376px;
+    margin: auto;
+}
+
+#prod button {
+    margin-top: 10px;
+}
+
+#confirm {
+    width: 100%;
+    margin: auto;
+    padding-left: 110px;
+    /*padding: 60px 120px 0 120px;*/
+}
+
+#confirm button {
+    text-align: center;
+    margin: 34px;
+}
+#pop_up h3 {
+    margin-top: 50px;
+}
+
+
+
+
+#pop_up {
+    display: none; width: 600px; height: 400px; padding: 20px; background-color: white;
+}
+
+#detailmatprem {
+    width: 1100px;
+    margin: auto;
+}
+
+.tablematprem {
+    margin-bottom: 30px;
+}
+
+caption {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#incon1 {
+    float: right;
+    margin-right: 10%;
+}
+
+#pop_up p.matpremtext{
+    padding-left: 240px;
+    text-align: left;
+}
+
+#commandes {
+    min-width: 700px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+#commandfin {
+    margin-top: 30px;
+}
+
+.profil {
+    display: inline-block;
+}
+
+#profils {
+    width: 80%;
+    min-width: 800px;
+    margin: auto;
+}
+
+#profilbutton a#modif{
+    padding: 40px;
+}
+
+#invendus {
+    margin-top: 50px;
+}
+
+#commandepopup {
+    margin-top: 30px;
+    padding: 0;
+    text-align: center;
+}
+
+#pop_up p.commandtext {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 120px;
+}
+
+#save_command {
+    margin-left: 220px;
+    margin-top: 40px;
+}
+
+.clientbutton, .fournbutton {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#client td:last-child, #fournisseur td:last-child {
+    text-align: right;
+}
+
+#client h2, #fournisseur h2 {
+    margin-bottom: 10px;
+}
+
+#buttontitle {
+    margin-bottom: 30px;
+}

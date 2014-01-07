@@ -7,6 +7,7 @@
         <link rel="icon" href="<?= base_url("/assets/images/boulangerie_icon.jpg") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/normalize.css") ?>">
         <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/foundation.css") ?>">
+        <link rel=stylesheet type="text/css" href="<?= base_url("/assets/css/style.css") ?>">
 
     </head>
 

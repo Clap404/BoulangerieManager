@@ -1,8 +1,8 @@
 <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
 <script defer src="<?= base_url("/assets/js/popup_form.js") ?>"></script>
-
+<div id="fournisseur">
 <h2><?=$title?></h2>
-<div id="addmatprem">
+<div id="buttontitle">
     <button class="button round radius" onclick="popupFormDiv('#modifnom', null, 0.6, 'fixed' )" >Renommer</button>
 </div>
 <div class="row">
@@ -79,7 +79,7 @@
 
 </div>
     </div>
-
+</div>
 
 <script type="text/javascript">
     //ajoute les croix de supression et les callbacks
