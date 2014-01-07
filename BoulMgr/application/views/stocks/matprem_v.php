@@ -57,12 +57,12 @@ if(count($matprem) != 0)
         ?>
                 <td>
                     <b><a id="name_<?= $idMatprem ?>" onclick="popupDetailsButton('<?= $idMatprem ?>');"><?= $result['nom_matiere_premiere'] ?></a>
-                    <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()"></input></b>
+                    <input id="modif_name_input_<?= $idMatprem ?>" style="display:none" onkeydown="if (event.keyCode == 13) document.getElementById('save_button_<?= $idMatprem ?>').click()" oninput="checkSaveModif(<?= $idMatprem ?>);"></input></b>
                 </td>
                 <td><?= $dispo." ".$result["abbreviation_unite"] ?></td>
                 <td>
                     <button class="smallbutton" id="modif_button_<?= $idMatprem ?>" onclick="switch2Modify('<?= $idMatprem ?>');">Modifier</button>
-                    <button class="smallbutton" style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif('<?= $idMatprem ?>');">Sauvegarder</button>
+                    <button class="smallbutton" style="display:none" id="save_button_<?= $idMatprem ?>" onclick="saveModif(<?= $idMatprem ?>);">Sauvegarder</button>
                     <button class="smallbutton" style="display:none" id="cancel_button_<?= $idMatprem ?>" onclick="back2Normal('<?= $idMatprem ?>');">Annuler</button>
                 </td>
             </tr>

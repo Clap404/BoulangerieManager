@@ -26,7 +26,6 @@ function back2Normal(id)
 
 function switch2Modify(id)
 {
-    // TODO Permettre le changement d'image dans le popup
     var name = document.getElementById("name_" + id).innerHTML;
     document.getElementById("modif_name_input_" + id).value = name;
 
@@ -45,7 +44,8 @@ function saveModif(id)
     data["nom_matiere_premiere"] = document.getElementById("modif_name_input_" + id).value;
 
     var errorMessage = document.getElementById("error");
-    sendModif(data, errorMessage, id);
+    if(checkSaveModif(id))
+        sendModif(data, errorMessage, id);
 }
 
 function saveModifPopup(id)
@@ -53,6 +53,7 @@ function saveModifPopup(id)
     var data = {};
     data["id_matiere_premiere"] = id;
     data["nom_matiere_premiere"] = document.getElementById("modif_name_input_popup").value;
+    data["abbreviation_unite"] = document.getElementById("abbreviation_unite_input").value;
 
     var errorMessage = document.getElementById("error_popup");
     sendModif(data, errorMessage, "popup");
@@ -206,8 +207,16 @@ function sendModif(data, errorMessage, balID)
             document.getElementById("name_" + balID).innerHTML = data["nom_matiere_premiere"];
             back2Normal(balID);
         }
+        else if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText == -1)
+        {
+            console.log("Response : " + xhr.responseText);
+            errorMessage.innerHTML = "Erreur, le nom existe déjà";
+        }
         else
+        {
+            console.log("Response : " + xhr.responseText);
             errorMessage.innerHTML = stringError;
+        }
     };
 
     xhr.send(JSON.stringify(data));
@@ -267,11 +276,19 @@ function switchButtonList(buttonState)
 
 function switch2ModifyPopup()
 {
+    getListUnites();
     var name = document.getElementById("name_popup");
-    document.getElementById("modif_name_input_popup").value = name.innerHTML;
+    var name_input = document.getElementById("modif_name_input_popup");
+    name_input.value = name.innerHTML;
 
     name.style.display = "none";
-    document.getElementById("modif_name_input_popup").style.display = "inline";
+    name_input.style.display = "inline";
+
+    var abbrev_unite = document.getElementById("abbreviation_unite_popup");
+    var unite_input = document.getElementById("abbreviation_unite_input");
+    unite_input.value = abbrev_unite.innerHTML;
+    abbrev_unite.style.display = "none";
+    unite_input.style.display = "inline";
 
     document.getElementById("details_button_popup").style.display = "none";
     document.getElementById("commander_button_popup").style.display = "none";
@@ -290,6 +307,17 @@ function switch2ModifyPopup()
     });
     image_preview.style.display = "inline";
     document.getElementById("image_popup").style.display = "none";
+
+    var onkeydownFunc = function(event){
+        if (event.keyCode == 13)
+            document.getElementById("save_button_popup").click();
+    }
+    var oninputFunc = function(){checkSaveModif();};
+
+    name_input.onkeydown = onkeydownFunc;
+
+    name_input.oninput = oninputFunc;
+    unite_input.oninput = oninputFunc;
 }
 
 function switch2Command(id_fournisseur)
@@ -314,7 +342,7 @@ function switch2Command(id_fournisseur)
     document.getElementById("qte_command").focus();
 }
 
-function checkSaveModif()
+function checkSaveCommand()
 {
     var button = document.getElementById("save_button_popup");
     var qte = document.getElementById("qte_command");
@@ -322,6 +350,26 @@ function checkSaveModif()
     var check = parseFloat(qte.value) <= 0 || isNaN(parseFloat(qte.value));
     button.disabled = check;
     return !check;
+}
+
+function checkSaveModif(id)
+{
+    if(typeof id === "undefined")
+        id = "popup"
+    var button = document.getElementById("save_button_" + id);
+    var name = document.getElementById("modif_name_input_" + id);
+
+
+    var check = ($.trim(name.value).length && isNaN(parseInt(name.value)));
+
+    if(id === "popup")
+    {
+        var unite = document.getElementById("abbreviation_unite_input");
+        var check = check && ($.trim(unite.value).length && isNaN(parseInt(unite.value)));
+    }
+
+    button.disabled = !check;
+    return check;
 }
 
 function checkSaveAddMatprem()
@@ -353,7 +401,7 @@ function refreshTotalPrice()
     totalPrice.innerHTML = parseFloat(price.innerHTML) * parseFloat(qte.value) || 0;
     totalPrice.innerHTML = parseFloat(totalPrice.innerHTML).toFixed(2);
     totalPrice.innerHTML += "€";
-    checkSaveModif();
+    checkSaveCommand();
 }
 
 function listUnites(list_unites_json)
@@ -364,8 +412,8 @@ function listUnites(list_unites_json)
     if(list_unites === [])
         return;
 
-    var html_list_unites = document.createElement("datalist");
-    html_list_unites.id="list_unite";
+    var html_list_unites = document.getElementById("list_unite");
+    html_list_unites.innerHTML = "";
     var option;
 
     for(i in list_unites)
@@ -388,7 +436,7 @@ function fillPopupDetails(data)
         var fournisseur = data["fournisseur"];
 
     var popupContent = "<span id='popup_id' style='display: none;'>" + matprem["id_matiere_premiere"] + "</span>";
-    popupContent += "<h3 id='matpremname'><span id=name_popup>" + matprem["nom_matiere_premiere"] + "</span><input id=modif_name_input_popup style='display:none;' onkeydown='if (event.keyCode == 13) document.getElementById(\"save_button_popup\").click()'></input></h3>"
+    popupContent += "<h3 id='matpremname'><span id=name_popup>" + matprem["nom_matiere_premiere"] + "</span><input id=modif_name_input_popup style='display:none;'></input></h3>"
 
     popupContent += "<span id='error_popup'></span>";
 
@@ -412,7 +460,7 @@ function fillPopupDetails(data)
                             '<td colspan="2"><img id="image_popup" src="' + image_addr + '"/>' +
                             '<img id="image_preview" src="' + image_addr + '" style="width: 128px; height: 128px; display: none;"/></td>' +
                     '</tr>';
-    popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' ' + matprem["abbreviation_unite"] + '</td></tr>';
+    popupContent += '<tr><td>' + matprem["disponibilite_matiere_premiere"] + ' <span id="abbreviation_unite_popup">' + matprem["abbreviation_unite"] + "</span><input list='list_unite' type='text' id='abbreviation_unite_input'style='display:none; width: 50px; height: 33px;' placeholder='Unité'></input></td></tr>";
     popupContent += '</table>';
 
     if(en_vente)
@@ -425,6 +473,8 @@ function fillPopupDetails(data)
                             "<p class='matpremtext'><b>Prix total : </b><span id='prix_total_command'>0.00€</span></p>" +
                         "</div>";
     }
+
+    popupContent += "<datalist id='list_unite'></datalist>";
 
     popup.innerHTML = popupContent;
 }
@@ -453,6 +503,8 @@ function fillPopupAdd()
                         "<button disabled onclick='saveAddMatprem();' id='save_button_popup'>Ajouter</button></td><td> " +
                         "<button id='cancel_button_popup' onclick='closePopup();'>Annuler</button></td></tr>" +
                     "</table>";
+
+    popupContent += "<datalist id='list_unite'></datalist>";
 
     popup.innerHTML = popupContent;
 }
@@ -527,7 +579,6 @@ function popupAddButton()
     var oninputFunc = function(){checkSaveAddMatprem();};
 
     name.onkeydown = onkeydownFunc;
-    unite.onkeydown = onkeydownFunc;
 
     name.oninput = oninputFunc;
     unite.oninput = oninputFunc;
