@@ -1,3 +1,4 @@
+<div id="contact">
 <h2>Contact</h2>
 <b>Auteurs :</b>
 <ul>
@@ -9,9 +10,9 @@
     <li><a href="https://github.com/Clap404">Benoît Houdayer <i>(S3A1)</i></a></li>
     <li><a href="https://github.com/Anthony25">Anthony Ruhier <i>(S3A1)</i></a></li>
 </ul>
-<b>Adresse Github du projet :</b> <a href="https://github.com/Clap404/BoulangerieManager">https://github.com/Clap404/BoulangerieManager</a><br>
-Pour toute question ou rapport de bug, veuillez nous contacter sur Github ou sur nos adresses e-mail de l'IUT (non publiées ici pour éviter tout spam).
-
+<p class="contact"><b>Adresse Github du projet :</b> <a href="https://github.com/Clap404/BoulangerieManager">https://github.com/Clap404/BoulangerieManager</a></p>
+<p class="contact">Pour toute question ou rapport de bug, veuillez nous contacter sur Github ou sur nos adresses e-mail de l'IUT (non publiées ici pour éviter tout spam).</p>
+</div>
 <?php
 /* End of file contact_v.php */
 /* Location: ./application/view/contact_v.php */

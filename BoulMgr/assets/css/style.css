@@ -298,3 +298,13 @@ dl {
     text-align: center;
     font-weight: bolder;
 }
+
+#contact {
+    width: 600px;
+    margin: auto;
+    text-align: justify;
+}
+
+p.contact {
+    text-align: justify;
+}
