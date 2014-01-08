@@ -10,7 +10,6 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{perpage}
-\usepackage{etoolbox}
 \usepackage{url}
 
 % Redéfinis les marges des tableaux
@@ -24,11 +23,6 @@
 % Permet de réinitialiser les footnote à chaque frame. Nécéssite 2 compilations.
 \MakePerPage{footnote}
 
-\makeatletter
-\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{15\p@}}}{}{}
-\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{5\p@}}}{}{}
-\makeatother
-
 \setlength{\TPHorizModule}{0.01\textwidth}
 \setlength{\TPVertModule}{0.01\textheight}
 
@@ -37,6 +31,7 @@
 \title[B.D.D - Boulangerie]{Logiciel de gestion de boulangerie}
 \author[J.A \and F.B \and F-X.B \and M.C \and A.C \and
 B.H \and A.R]{
+    \fontsize{9}{11}\selectfont
     Jérémy \textsc{Autran}\\
     \and
     Florian \textsc{Barrois}\\
@@ -94,19 +89,15 @@ B.H \and A.R]{
 {
 \begin{frame}
 	\frametitle{Sommaire}
-    \begin{multicols}{2}
-        \tableofcontents
-    \end{multicols}
+    \tableofcontents[hideallsubsections]
 \end{frame}
 }
 
 \AtBeginSection[]
 {
 	\begin{frame}
-    \begin{multicols}{2}
-		\frametitle{Sommaire}
-		\tableofcontents[currentsection]
-    \end{multicols}
+    \frametitle{Sommaire}
+    \tableofcontents[currentsection,hideallsubsections]
 	\end{frame}
 }
 
