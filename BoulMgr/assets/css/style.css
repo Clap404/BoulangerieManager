@@ -318,3 +318,15 @@ p.contact {
 h3#matpremname {
     margin-top: 0;
 }
+
+#bigmenu {
+    margin: 30px auto;
+}
+
+#bigmenu thead {
+    background: none;
+}
+
+#bigmenu a {
+    font-size: 150%;
+}
