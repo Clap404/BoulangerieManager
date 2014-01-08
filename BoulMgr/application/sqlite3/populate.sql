@@ -290,24 +290,27 @@ INSERT INTO produit VALUES
 
 -- production --
 INSERT INTO produit_est_produit VALUES
-    (1, datetime("now", "-100 day"), 5),
-    (2, datetime("now", "-10 day"),4),
-    (2, datetime("now", "-22 day"),2),
-    (2, datetime("now", "-26 day"),1),
-    (3, datetime("now", "-23 day"),2),
-    (3, datetime("now", "-22 day"),3),
-    (4, datetime("now", "-49 day"),4),
+    (1, datetime("now", "-120 day"), 50),
+    (1, datetime("now", "-110 day"), 80),
+    (1, datetime("now", "-80 day"), 10),
+    (2, datetime("now", "-90 day"),4),
+    (2, datetime("now", "-62 day"),2),
+    (2, datetime("now", "-42 day"),2),
+    (2, datetime("now", "-2 day"),50),
+    (3, datetime("now", "-23 day"),20),
+    (3, datetime("now", "-22 day"),30),
     (5, datetime("now", "-80 day"),1),
+    (4, datetime("now", "-49 day"),4),
     (3, datetime("now", "-2 day"),12),
     (5, datetime("now", "-2 day"),7),
     (6, datetime("now", "-2 day"),9),
     --production d'aujourd'hui --
-    (3, datetime("now"), 5),
-    (2, datetime("now"), 7),
+    (3, datetime("now", "-1 day"), 40),
+    (2, datetime("now", "-1 day"), 37),
     -- pas de p3 --
-    (4, datetime("now"), 13),
-    (5, datetime("now"), 17),
-    (6, datetime("now"), 19);
+    (4, datetime("now", "-1 day"), 29),
+    (5, datetime("now", "-1 day"), 19),
+    (6, datetime("now", "-1 day"), 90);
 
 -- Composition des produits --
 INSERT INTO produit_est_compose_de_matiere_premiere VALUES
@@ -321,12 +324,18 @@ INSERT INTO produit_est_compose_de_matiere_premiere VALUES
 
 -- Commandes Matières premières --
 INSERT INTO commande_matiere_premiere VALUES
-    (null, datetime("now", "-100 day"), 50, 1.53, 1, 1),
-    (null, datetime("now", "-10 day"), 13, 2.4, 2, 1),
-    (null, datetime("now", "-20 day"), 15, 4, 4, 2),
-    (null, datetime("now", "-32 day"), 35, 2.21, 5, 3),
-    (null, datetime("now"), 20, 1.02, 4, 2),
-    (null, datetime("now"), 50, 3.0, 3, 1);
+    (null, datetime("now", "-100 day"), 1000, 1.53, 1, 1),
+    (null, datetime("now", "-10 day"), 500, 2.4, 4, 1),
+    (null, datetime("now", "-20 day"), 800, 4, 4, 2),
+    (null, datetime("now", "-32 day"), 600, 2.21, 5, 3),
+    (null, datetime("now", "-142 day"), 1000, 1.53, 1, 1),
+    (null, datetime("now", "-11 day"), 500, 2.4, 3, 1),
+    (null, datetime("now", "-22 day"), 800, 4, 4, 2),
+    (null, datetime("now", "-34 day"), 600, 2.21, 5, 3),
+    (null, datetime("now"), 204, 1.02, 2, 2),
+    (null, datetime("now"), 505, 3.0, 1, 1),
+    (null, datetime("now"), 290, 1.02, 4, 2),
+    (null, datetime("now"), 500, 3.0, 3, 1);
 
 -- Vendu par --
 INSERT INTO matiere_premiere_vendue_par_fournisseur VALUES
@@ -353,22 +362,123 @@ INSERT INTO client_habite_adresse VALUES
 
 -- ventes et produits associés--
 BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-200 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (1, 1, 186); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (2, 1, 181); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-190 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (3, 2, 120); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 2, 17); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-180 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (4, 3, 150); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 3, 24); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-176 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 4, 400); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 4, 24); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-145 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (1, 5, 80); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (6, 5, 27); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-130 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (4, 6, 130); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (2, 6, 170); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-120 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (3, 7, 100); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 7, 150); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-110 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (1, 8, 90); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 8, 50); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-100 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (5, 9, 90); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (4, 9, 50); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-90 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (1, 10, 120); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 10, 17); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-80 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (4, 11, 150); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 11, 24); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-76 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 12, 400); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 12, 24); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-45 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (1, 13, 80); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (6, 13, 27); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-30 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (4, 14, 130); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (2, 14, 170); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-20 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (3, 15, 100); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 15, 150); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now", "-10 day"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (2, 1, 2); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (1, 16, 90); /* reste 2 p2 il y a 10 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 16, 50); /* reste 2 p2 il y a 10 jours */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-4 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 17, 2); /* reste 2 p2 il y a 10 jours */
 COMMIT;
 
 BEGIN TRANSACTION;
 INSERT INTO vente VALUES (null, datetime("now","-2 day"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (3, 2, 5); /* Reste 7 p3 il y a 2 jours */
-INSERT INTO vente_comprend_produit VALUES (5, 2, 5); /* Reste 2 p5 il y a 2 jours */
-INSERT INTO vente_comprend_produit VALUES (6, 2, 9); /* Reste 0 p6 il y a 2 jours */
+INSERT INTO vente_comprend_produit VALUES (3, 18, 5); /* Reste 7 p3 il y a 2 jours */
+INSERT INTO vente_comprend_produit VALUES (5, 18, 5); /* Reste 2 p5 il y a 2 jours */
+INSERT INTO vente_comprend_produit VALUES (6, 18, 9); /* Reste 0 p6 il y a 2 jours */
 COMMIT;
 
 BEGIN TRANSACTION;
-INSERT INTO vente VALUES (null, datetime("now"), 0, null);
-INSERT INTO vente_comprend_produit VALUES (2, 3, 7); /* Reste 0 p2 */
-INSERT INTO vente_comprend_produit VALUES (4, 3, 5); /* Reste 12 p4 */
-INSERT INTO vente_comprend_produit VALUES (6, 3, 4); /* Reste 15 p6 */
+INSERT INTO vente VALUES (null, datetime("now", "-8 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 20, 20); /* Reste 0 p2 */
+INSERT INTO vente_comprend_produit VALUES (4, 20, 15); /* Reste 12 p4 */
+INSERT INTO vente_comprend_produit VALUES (6, 20, 14); /* Reste 15 p6 */
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO vente VALUES (null, datetime("now", "-3 day"), 0, null);
+INSERT INTO vente_comprend_produit VALUES (2, 21, 25); /* reste 2 p2 il y a 10 jours */
 COMMIT;
 
 -- Commandes et produits associés--
@@ -381,7 +491,7 @@ COMMIT;
 
 BEGIN TRANSACTION;
 INSERT INTO commande VALUES
-    (null, 0, datetime("now", "-2 day"), datetime("now"), 3,  3);
+    (null, 0, datetime("now", "-2 day"), datetime("now", "1 day"), 3,  3);
 INSERT INTO commande_contient_produit VALUES (2, 4, 5); /* Reste 7 p4 */
 INSERT INTO commande_contient_produit VALUES (2, 5, 10); /* Reste 7 p5 */
 COMMIT;
