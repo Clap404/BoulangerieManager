@@ -14,7 +14,7 @@
 
     ?>
 
-    <h4>Non du client</h4>
+    <h4>Nom du client</h4>
     <!-- nom du client -->
     <input id="prenom_client" type="text" placeholder="prénom du client" style="width:45%; display:inline-block;" />
     <input id="nom_client" type="text" placeholder="nom du client" style="width:45%; display:inline-block;" />
