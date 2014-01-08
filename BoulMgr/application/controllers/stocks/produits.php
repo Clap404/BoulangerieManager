@@ -30,6 +30,8 @@ class Produits extends CI_Controller {
         $this->form_validation->set_rules('prix', 'prix', 'required');
         $this->form_validation->set_rules('temps', 'temps', 'required');
 
+        $this->form_validation->set_message("required", "Le champ \"%s\" est obligatoire.");
+
         if($this->form_validation->run() === FALSE) {
             $data['title'] = 'Ajout Produit';
             $this->load->view('templates/header', $data);
