@@ -321,10 +321,15 @@ h3#matpremname {
 
 #bigmenu {
     margin: 30px auto;
+    border: none;
 }
 
-#bigmenu thead {
+#bigmenu thead, #menu tr {
     background: none;
+}
+
+#menu {
+    border: none;
 }
 
 #bigmenu a {
