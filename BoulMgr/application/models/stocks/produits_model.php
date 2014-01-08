@@ -192,7 +192,7 @@ class Produits_model extends CI_Model {
 
     function somme_vente_produit_semaine(){
         $date_deb = strtotime("-1 week");
-        $date_deb = date('Y/m/d', $date_deb);
+        $date_deb = date('Y-m-d', $date_deb);
         $sql= " select nom_produit, sum(total_produit_vente) as somme_produit
                 from
                 (  select id_produit, nom_produit,
@@ -200,7 +200,7 @@ class Produits_model extends CI_Model {
                 FROM vente_comprend_produit
                 NATURAL JOIN produit
                 NATURAL JOIN vente
-                where date_vente > '".$date_deb."'
+                where date(date_vente) > '".$date_deb."'
                 )
                 group by id_produit;";
         $query = $this->db->query($sql);
