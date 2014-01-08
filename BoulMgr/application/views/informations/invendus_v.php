@@ -43,7 +43,7 @@ if(count($invendus) != 0)
     <table id='invendus'><thead>
         <tr>
             <th>Produits</th>
-            <th>Invendus</th>
+            <th>Invendus (en unités)</th>
             <th>Date Production</th>
         </tr></thead>
     <?php
@@ -61,22 +61,23 @@ if(count($invendus) != 0)
         }
     }
     echo('</table>');
-}
-
-else
-{
-    echo('Aucune matière première existante.');
-}
-
 ?>
         </div>
     </dd>
 </dl>
+<?php
+}
+
+else
+{
+    echo('Aucune invendu existant.');
+}
+
+?>
     <span id="base_url" style="display:none"><?= base_url() ?></span>
     <span id="json_total" style="display:none"><?= json_encode($total) ?></span>
     <span id="json_invendus" style="display:none"><?= json_encode($invendus) ?></span>
     <link rel="stylesheet" type="text/css" href="<?= base_url("/assets/js/jqplot/jquery.jqplot.css") ?>" />
-    <script defer src="<?= base_url("/assets/js/bpopup.min.js") ?>"></script>
     <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/jquery.jqplot.min.js") ?>"></script>
     <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/excanvas.js") ?>"></script>
     <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js") ?>"></script>

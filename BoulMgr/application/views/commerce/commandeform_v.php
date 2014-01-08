@@ -16,7 +16,7 @@
           <button onclick="addQtyToProduct(1, <?=$produit['id_produit']?>);"
             class="plus">+
           </button>
-          <input class="qty" type="text" value="0" onchange="populateTable();"
+          <input class="qty" type="text" value="0" onchange="checkIfNewActive();"
             maxlength="3"
           />
           <button onclick="addQtyToProduct(-999, <?=$produit['id_produit']?>);"

@@ -213,9 +213,11 @@ caption {
 }
 
 #pop_up p.matpremtext{
-    padding-left: 240px;
+    padding-left: 140px;
     text-align: left;
+    margin-bottom: 3px;
 }
+
 
 #commandes {
     min-width: 700px;
@@ -279,12 +281,12 @@ caption {
     margin-bottom: 30px;
 }
 
-#days {
+#days, #menu {
     margin-top: 40px;
     border: none;
 }
 
-table#days thead {
+table#days thead, table#menu thead {
     background: none;
 }
 

@@ -78,7 +78,7 @@ class Produits_model extends CI_Model {
         $this->db->where('id_produit', $id_produit);
         $this->db->where('date_production', $date_prod);
         $query = $this->db->get('produit_est_produit');
-        return $query->result_array();   
+        return $query->result_array();
     }
 
     function update_production($donnees, $qte_base) {
@@ -87,7 +87,7 @@ class Produits_model extends CI_Model {
         $this->db->where('id_produit',$donnees['id_produit']);
         $this->db->where('date_production', $donnees['date_production']);
         $this->db->update('produit_est_produit', array('quantite_produit_produit' => $nqte));
-    }   
+    }
 
     function trending() {
         //retourne les 3 plus gros produits du jour de la semaine
@@ -171,6 +171,38 @@ class Produits_model extends CI_Model {
                     GROUP BY p1.id_produit)
                     WHERE (prod_ajd - (comm_ajd + vendu_ajd)) > 0;";
 
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function somme_vente_produit_annee(){
+        $sql= " select nom_produit, sum(total_produit_vente) as somme_produit
+                from
+                (  select id_produit, nom_produit,
+                (quantite_produit_vente * prix_produit) as total_produit_vente
+                FROM vente_comprend_produit
+                NATURAL JOIN produit
+                NATURAL JOIN vente
+                where date(date_vente) > '2014-01-01'
+                )
+                group by id_produit;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function somme_vente_produit_semaine(){
+        $date_deb = strtotime("-1 week");
+        $date_deb = date('Y/m/d', $date_deb);
+        $sql= " select nom_produit, sum(total_produit_vente) as somme_produit
+                from
+                (  select id_produit, nom_produit,
+                (quantite_produit_vente * prix_produit) as total_produit_vente
+                FROM vente_comprend_produit
+                NATURAL JOIN produit
+                NATURAL JOIN vente
+                where date_vente > '".$date_deb."'
+                )
+                group by id_produit;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
