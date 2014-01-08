@@ -6,7 +6,7 @@
     <button class="button round radius" onclick="popupFormDiv('#modifnom', null, 0.6, 'fixed' )" >Renommer</button>
 </div>
 <div class="row">
-    <div class="small-6 large-4 columns">
+    <div class="small-6 large-6 columns">
 <h3>adresses</h3>
 <div class="fournisseur">
 <?php
@@ -30,7 +30,7 @@
 </div>
     </div>
 
-    <div class="small-4 large-4 columns">
+    <div class="small-6 large-6 columns">
 <h3>numéros de téléphone</h3>
 <div class="fournisseur">
   
@@ -53,8 +53,9 @@
     <button class="button radius round fournbutton" onclick="popupFormDiv('#telephone', null, 0.6, 'fixed' )" >Ajouter un numéro</button>
 </div>
     </div>
-    <div class="small-2 large-4 columns">
+    </div>'
 <h3>produits vendus</h3>
+<div id="fournisseurs">
 <div class="fournisseur">
 <?php
     $this->table->set_heading('id', 'Matiere Premiere', 'prix fournisseur', '');
@@ -76,7 +77,6 @@
 <div id="addmatprem">
     <button class="button radius round fournbutton" onclick="popupFormDiv('#matprem', null, 0.6, 'fixed' )" >Ajouter/Modifier un article</button>
 </div>
-
 </div>
     </div>
 </div>

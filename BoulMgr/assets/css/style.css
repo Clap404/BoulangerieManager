@@ -219,10 +219,14 @@ caption {
 }
 
 
-#commandes {
+#commandes, #fournisseurs {
     min-width: 700px;
     max-width: 1000px;
     margin: auto;
+}
+
+#fournisseur{
+    min-width: 1050px;
 }
 
 #commandfin {
