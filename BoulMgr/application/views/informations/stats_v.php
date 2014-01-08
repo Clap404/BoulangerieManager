@@ -1,12 +1,15 @@
 <h2>Statistiques</h2>
 
+<table id='bigmenu'><thead>
+    <tr>
+        <th><a href="#" onclick="switch2Repart();">Répartition des ventes</a></th>
+        <th><a href="#" onclick="switch2Hist();">Historique des ventes</a></th>
+    </tr>
+</thead></table>
+
 <div id="chartdiv" style="height:400px;width:900px; margin-left: auto; margin-right: auto;"></div>
 
 <table id='menu'><thead>
-    <tr>
-        <th><a href="#" onclick="drawPie(infos_per_week, 'Répartition des ventes ces 7 derniers jours');">Depuis une semaine</a></th>
-        <th><a href="#" onclick="drawPie(infos_per_year, 'Répartition des ventes cette année');">Année courante</a></th>
-    </tr>
 </thead></table>
 
 <dl class="accordion" data-accordion>
@@ -33,6 +36,7 @@
     </dd>
 </dl>
 
+<span id="base_url" style="display:none"><?= base_url() ?></span>
 <span id="json_per_year" style="display: none;"><?= json_encode($total) ?></span>
 <span id="json_per_week" style="display: none;"><?= json_encode($total2) ?></span>
 <span id="json_total_per_year" style="display: none;"><?= json_encode($grand_total2) ?></span>
@@ -43,4 +47,9 @@
 <script defer language="javascript" type="text/javascript" src="<?= base_url("/assets/js/jqplot/excanvas.js") ?>"></script>
 <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.pieRenderer.min.js") ?>"></script>
 <script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.donutRenderer.min.js") ?>"></script>
+<script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.highlighter.min.js") ?>"></script>
+<script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.cursor.min.js") ?>"></script>
+<script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js") ?>"></script>
+<script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.categoryAxisRenderer.min.js") ?>"></script>
+<script defer type="text/javascript" src="<?= base_url("/assets/js/jqplot/plugins/jqplot.pointLabels.min.js") ?>"></script>
 <script defer src="<?= base_url("/assets/js/informations/stats.js") ?>"></script>

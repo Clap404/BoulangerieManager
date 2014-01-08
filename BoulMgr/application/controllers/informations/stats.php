@@ -39,4 +39,24 @@ class Stats extends CI_Controller {
         $this->load->view('informations/stats_v', $data);
         $this->load->view('templates/footer');
     }
+
+    function history($year)
+    {
+        $data['historique'] = $this->model_produits->historique_vente_produits($year);
+
+        if($data['historique'] == [])
+            $data['historique'] = [array()];
+
+        echo(json_encode($data['historique']));
+    }
+
+    function total_vente_per_year()
+    {
+        $data['total_vente_per_year'] = $this->model_produits->total_vente_per_year();
+
+        if($data['total_vente_per_year'] == [])
+            $data['total_vente_per_year'] = [array()];
+
+        echo(json_encode($data['total_vente_per_year']));
+    }
 }

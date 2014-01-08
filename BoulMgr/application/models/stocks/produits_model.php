@@ -206,6 +206,38 @@ class Produits_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+
+    function historique_vente_produits($year_beg){
+        $sql= "select sum(total_produit_vente) as somme_produit, date(date_vente) as jour_vente
+                from
+                (  select id_produit, nom_produit,
+                (quantite_produit_vente * prix_produit) as total_produit_vente, date_vente
+                FROM vente_comprend_produit
+                NATURAL JOIN produit
+                NATURAL JOIN vente
+                where date(date_vente) >= '".$year_beg."-01-01'
+                AND date(date_vente) <= '".$year_beg."-12-31'
+                )
+                group by jour_vente
+                order by jour_vente;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function total_vente_per_year(){
+        $sql= "select sum(total_produit_vente) as somme_produit, strftime('%Y', date_vente) as year_vente
+                from
+                (  select id_produit, nom_produit,
+                (quantite_produit_vente * prix_produit) as total_produit_vente, date_vente
+                FROM vente_comprend_produit
+                NATURAL JOIN produit
+                NATURAL JOIN vente
+                )
+                group by year_vente
+                order by year_vente;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
 }
 
 ?>
