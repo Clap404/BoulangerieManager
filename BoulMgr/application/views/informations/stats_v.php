@@ -4,7 +4,7 @@
 
 <table id='menu'><thead>
     <tr>
-        <th><a href="#" onclick="drawPie(infos_per_week, 'Répartition des ventes cette semaine');">Semaine</a></th>
+        <th><a href="#" onclick="drawPie(infos_per_week, 'Répartition des ventes ces 7 derniers jours');">Depuis une semaine</a></th>
         <th><a href="#" onclick="drawPie(infos_per_year, 'Répartition des ventes cette année');">Année courante</a></th>
     </tr>
 </thead></table>
@@ -14,17 +14,20 @@
         <a href="#panel1">Tableau des ventes de la semaine</a>
         <div id="panel1" class="content">
 <?php
-	$this->table->set_heading("Produit", "Total des ventes (en unités)", "% des ventes");
-	foreach ($total2 as $line)
-	{
-		$this->table->add_row(
-		$line["nom_produit"],
-		$line["somme_produit"],
-		((number_format($line["somme_produit"]/$grand_total2,2))*100)." %");
-	}
+	$this->table->set_heading("Produit", "Total des ventes", "% des ventes");
+    if($grand_total2 != 0)
+    {
+        foreach ($total2 as $line)
+        {
+            $this->table->add_row(
+            $line["nom_produit"],
+            $line["somme_produit"]." €",
+            ((number_format($line["somme_produit"]/$grand_total2,2))*100)." %");
+        }
 
-	$this->table->add_row("Total", $grand_total2, "100 %");
-	echo $this->table->generate();
+        $this->table->add_row("Total", $grand_total2, "100 %");
+    }
+        echo $this->table->generate();
 ?>
         </div>
     </dd>

@@ -29,6 +29,12 @@ class Stats extends CI_Controller {
         }
         $data['grand_total2'] = $total2;
 
+        if($data['total'] == [])
+            $data['total'] = [array("nom_produit" => "Aucun produit vendu", "somme_produit" => 1)];
+
+        if($data['total2'] == [])
+            $data['total2'] = [array("nom_produit" => "Aucun produit vendu", "somme_produit" => 1)];
+
         $this->load->view('templates/header', $data);
         $this->load->view('informations/stats_v', $data);
         $this->load->view('templates/footer');
