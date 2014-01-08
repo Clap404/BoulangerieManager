@@ -1,0 +1,122 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage{fix-cm}
+\usepackage{textpos}
+\usepackage{eurosym}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{perpage}
+\usepackage{etoolbox}
+\usepackage{url}
+
+% Redéfinis les marges des tableaux
+\let\oldtabular=\tabular
+\def\tabular{\small\oldtabular}
+\renewcommand{\arraystretch}{1.5}
+
+\usetheme{Warsaw}
+\usecolortheme{orchid}
+
+% Permet de réinitialiser les footnote à chaque frame. Nécéssite 2 compilations.
+\MakePerPage{footnote}
+
+\makeatletter
+\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{15\p@}}}{}{}
+\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{5\p@}}}{}{}
+\makeatother
+
+\setlength{\TPHorizModule}{0.01\textwidth}
+\setlength{\TPVertModule}{0.01\textheight}
+
+\setbeamertemplate{navigation symbols}{}
+
+\title[B.D.D - Boulangerie]{Logiciel de gestion de boulangerie}
+\author[J.A \and F.B \and F-X.B \and M.C \and A.C \and
+B.H \and A.R]{
+    Jérémy \textsc{Autran}\\
+    \and
+    Florian \textsc{Barrois}\\
+    \and
+    François-Xavier \textsc{Béligat}\\
+    \and
+    Maxime \textsc{Chenot}\\
+    \and
+    Arnaud \textsc{Colin}\\
+    \and
+    Benoît \textsc{Houdayer}\\
+    \and
+    Anthony \textsc{Ruhier}
+}
+\institute[B.D.D]{B.D.D\\\ \\IUT Belfort Montbéliard}
+\date{9 janvier 2014}
+
+\begin{document}
+
+% Permet de masquer le comptage de slides
+\bgroup
+\makeatletter
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}
+%    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\begin{frame}[noframenumbering]
+ 	\frametitle{}
+	\titlepage
+\end{frame}
+\egroup
+
+\logo{\includegraphics[height=1cm]{images/logo-iut.eps}}
+
+
+% Ajout du compteur de slides
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill%
+      \insertframenumber\,/\,\inserttotalframenumber}
+
+\setcounter{framenumber}{0}
+
+{
+\begin{frame}
+	\frametitle{Sommaire}
+    \begin{multicols}{2}
+        \tableofcontents
+    \end{multicols}
+\end{frame}
+}
+
+\AtBeginSection[]
+{
+	\begin{frame}
+    \begin{multicols}{2}
+		\frametitle{Sommaire}
+		\tableofcontents[currentsection]
+    \end{multicols}
+	\end{frame}
+}
+
+
+%%%% Includes des sections :
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\include{sections/section1}
+%\include{sections/section2}
+%\include{sections/section3}
+%\include{sections/section4}
+
+\end{document}
