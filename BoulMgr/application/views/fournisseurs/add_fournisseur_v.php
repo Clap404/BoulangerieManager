@@ -14,7 +14,7 @@
 
     ?>
 
-    <h4>Non du fournisseur</h4>
+    <h4>Nom du fournisseur</h4>
     <!-- nom du fournisseur -->
     <input id="nom_fournisseur" type="text" placeholder="nom du fournisseur" />
 
