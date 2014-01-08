@@ -13,35 +13,35 @@
         \begin{description}
             \item[adresses\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                adresses (ville, code postal, type de voie, ...) avec les
+                adresses (ville, code postal, type de voie, ...) et les
                 différents contrôleurs impliqués : client et fournisseurs.
             \item[clients\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                clients (nom, prénom, ...) avec le contrôleur dédié aux client
+                clients (nom, prénom, ...) et le contrôleur dédié aux clients
                 .
             \item[fournisseurs\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
                 fournisseurs (prix des fournitures, matières premières
-                proposées) avec le contrôleur dédié aux fournisseurs.
+                proposées) et le contrôleur dédié aux fournisseurs.
             \item[stats\_m.php]\hfill \\
                 Cette classe permet de récupérer de la base de données des
                 données permettant de calculer des statistiques faisant appel
                 à un trop grand nombre de tables pour appartenir aux autres
                 modèles.
             \item[commande\_m.php]\hfill \\
-                Cette classe permet de récupérer des informations le lien
-                entre les données des commandes avec le contrôleur dédié aux
-                commandes. contrôleurs.
+                Cette classe permet de faire le lien
+                entre les données des commandes et le contrôleur dédié aux
+                commandes.
             \item[vente\_m.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                ventes avec le contrôleurs dédié aux ventes.
+                ventes et le contrôleur dédié aux ventes.
             \item[matprem\_model.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                matières premières avec le contrôleur dédié aux matières
+                matières premières et le contrôleur dédié aux matières
                 premières.
             \item[produits\_model.php]\hfill \\
                 Cette classe permet de faire le lien entre les données des
-                produits avec le contrôleur dédié aux produits.
+                produits et le contrôleur dédié aux produits.
         \end{description}
 
 
@@ -100,7 +100,7 @@
             \item[informations/invendus\_v.php]\hfill \\
                 Cette vue permet d'afficher les statistiques particulières
                 concernant les produits invendus de l'utilisateur. La
-                singularité de cette vue est motivée par l'importance de ces
+                singularité de cette vue est motivée par l'importance de ses
                 statistiques pour la profession à laquelle ce logiciel est
                 destiné.
             \item[informations/stats\_v.php]\hfill \\
@@ -140,8 +140,7 @@
                 avec l'utilisateur.
             \item[adresses.php]\hfill \\
                 Ce contrôleur contient la logique permettant de manipuler les
-                adresses des clients et fournisseurs, et de choisir la vue
-                appropriée pour les afficher.
+                adresses des clients et fournisseurs.
             \item[informations/stats.php]\hfill \\
                 Ce contrôleur contient la logique permettant de mettre au
                 points les statistiques générales, et de les afficher en
@@ -149,7 +148,7 @@
             \item[informations/invendus.php]\hfill \\
                 Ce contrôleur contient la logique permettant de mettre au
                 point les statistiques concernant les invendus et de les 
-                afficher en randant la vue informations/stats\_v.php.
+                afficher en rendant la vue informations/stats\_v.php.
             \item[stocks/produits.php]\hfill \\
                 Ce contrôleur contient la logique permettant de manipuler les
                 données liées aux produits, et de choisir la vue appropriée
@@ -236,10 +235,9 @@
         \begin{description}
             \item[popup\_form.js]\hfill \\
                 Ce script permet d'ouvrir un popup servant de formulaire pour
-                différents composant de l'application
+                différents composant de l'application.
             \item[popup\_confirm.js]\hfill \\
-
-
+                Ce script facilite la création de popups de confirmation.
             \item[vente.js]\hfill \\
                 Ce script permet de rendre la saisie des ventes par 
                 l'utilisateur plus agréable et interactive.
